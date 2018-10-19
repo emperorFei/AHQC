@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/conf">
+        <file alias="global.ini">configs/global.ini</file>
+        <file alias="ItemCols.xml">configs/ItemCols.xml</file>
+    </qresource>
+</RCC>
