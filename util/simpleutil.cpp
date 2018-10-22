@@ -109,3 +109,29 @@ QList<QString> AHQC::FileNameUtil::getAMFileNamesFormFocusedHours(QList<QDateTim
     return amFileNames;
 
 }
+QDate AHQC::FileNameUtil::getDayFormAMFileFullName(const QString &AMFileFullName){
+    QString amFileName = AMFileFullName;
+    amFileName = amFileName.replace(amFileFolderPath,"");
+    return QDate::fromString( AHQC::TimeUtil::sdf4SMOFile);
+}
+
+//template<class T,int N>
+//QString AHQC::PrintUtil::printEmbeddedArray(const T (&list)[N]){
+//    int i = 0;
+//    QString temp("");
+//    for(T t:list){
+//        temp += i+": "+list[i];
+//        i++;
+//    }
+//    return temp;
+//}
+
+//template<class T>
+//QString AHQC::PrintUtil::printList(const QList<T> &list){
+//    QString temp("");
+//    for(T t:list){
+//        temp = temp + t;
+//        temp = temp+" ";
+//    }
+//    return temp;
+//}

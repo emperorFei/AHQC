@@ -112,14 +112,49 @@ void SimpleTest::testGetAMFileNamesFormFocusedHours_data(){
     QTest::newRow("Hours")   << "00";
 }
 
+//template<>
+//GlobalSetting* singleton<GlobalSetting>::GetInstance();
 void SimpleTest::testGlobalSettingInit(){
+
     QFETCH(QString,GlobalSettingShouldBe);
+    //int* global = singleton<int>::GetInstance();
     GlobalSetting * global = singleton<GlobalSetting>::GetInstance();
     //GlobalSetting * global = GlobalSetting::getInstance();
+    //QCOMPARE(QString::number(*global),GlobalSettingShouldBe);
     QCOMPARE(global->toString(),GlobalSettingShouldBe);
-    QString qsb1;
+    int i = 0;//debug before flow end;
 }
 void SimpleTest::testGlobalSettingInit_data(){
     QTest::addColumn<QString>("GlobalSettingShouldBe");
     QTest::newRow("GlobalSetting")   << "00";
+}
+
+
+void SimpleTest::testReadAMFile(){
+    QFETCH(QString,AMDataShouldBe);
+    DayBoundScheme dbScheme;
+    TimeRange focusedTimeRange = AHQC::TimeUtil::getFocusedTimeRange(&dbScheme);
+    QList<QDateTime> focusedHours = AHQC::TimeUtil::getFocusedHours(focusedTimeRange);
+    QList<QString> amFileNames = AHQC::FileNameUtil::getAMFileNamesFormFocusedHours(focusedHours);
+    QString line("beforeInit");
+    QList<AWSMinuteData> awsMinuteDatas;
+    for(QString amFileName:amFileNames){
+        QFile amFile(amFileName);
+        if(amFile.open(QIODevice::ReadOnly|QIODevice::Text)){
+            QTextStream amIn(&amFile);
+            QDate awsDay = QDate::fromString(AHQC::TimeUtil::sdf4SMOFile,amFileName.replace(AHQC::FileNameUtil::amFileFolderPath,""));
+            while(!amIn.atEnd()){
+                line = amIn.readLine();
+                AWSMinuteData awsMinuteData(awsDay,line);
+                awsMinuteDatas.append(awsMinuteData);
+            }
+        }
+    }
+
+    QCOMPARE(awsMinuteDatas.first().toString(),AMDataShouldBe);
+    QString qsb1;
+}
+void SimpleTest::testReadAMFile_data(){
+    QTest::addColumn<QString>("AMDataShouldBe");
+    QTest::newRow("AMData")   << "00";
 }

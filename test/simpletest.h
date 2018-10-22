@@ -9,6 +9,7 @@
 #include "QDebug"
 #include "solvecncodeproblem.h"
 #include "globalseeting.h"
+#include "awsminutedata.h"
 
 class SimpleTest : public QObject
 {
@@ -41,6 +42,9 @@ private slots:
 
     void testGlobalSettingInit();
     void testGlobalSettingInit_data();
+
+    void testReadAMFile();
+    void testReadAMFile_data();
 };
 
 #endif // SIMPLETEST_H

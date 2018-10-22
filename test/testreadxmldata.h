@@ -4,6 +4,7 @@
 #include <QtTest/QtTest>
 #include <QObject>
 #include "xmlProcessor/myxmlprocessor.h"
+#include <QDebug>
 
 class TestReadXmlData : public QObject
 {
