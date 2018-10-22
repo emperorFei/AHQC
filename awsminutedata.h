@@ -3,15 +3,21 @@
 #include <QString>
 #include <QDateTime>
 #include <QDate>
+#include <QDebug>
 #include "simpleobject.h"
-
+#include "util/simpleutil.h"
+#include "globalseeting.h"
 class AWSMinuteData
 {
+
+friend QDebug& operator<<(QDebug &debug, const AWSMinuteData &obj);
+friend QString operator+(const QString &string,const AWSMinuteData &obj);
+friend QString operator+(const AWSMinuteData &obj,const QString &string);
 public:
     AWSMinuteData();
     ~AWSMinuteData();
-    AWSMinuteData(QDate &awsDay,QString &line);
-
+    AWSMinuteData(const QDate &awsDay, const QString &line);
+    QString toString();
 
 
     QDate getObserveDay() const;
@@ -58,9 +64,9 @@ private:
     static const int validateIndexs[];
     static const int nestenIndex[];
 
-    void initData(QString &line);
+    void initData(const QString &line);
     void validateData();
     void nestenData();
 };
-
+template QString AHQC::PrintUtil::printList<AWSMinuteData>(const  QList<AWSMinuteData>  &list);
 #endif // AWSMINUTEDATA_H

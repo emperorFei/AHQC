@@ -8,12 +8,14 @@ QList<ColInfo>* MyXMLProcessor::readColsXml(QString &fileName){
     QList<ColInfo>* colsInfo = new QList<ColInfo>();
     QFile colsInfoFile(fileName);
     if(!colsInfoFile.exists()){
-        qDebug() << "cols配置文件位置错误" ;
-    }else{
+        qDebug() << "cols配置文件位置错误2333" ;
+    }
+    //else{
 
         tinyxml2::XMLDocument colsInfoDoc;
         const char * fileName_cstr = fileName.toStdString().c_str();
-        fileName_cstr = "F:/GitRepository/AHQC/configs/ItemCols.xml";
+        fileName_cstr = "F:/GitRepository/OFFICE_AHQC/configs/ItemCols.xml";
+//        fileName_cstr = "F:/ItemCols.xml";
 
         colsInfoDoc.LoadFile(fileName_cstr);
 
@@ -35,7 +37,7 @@ QList<ColInfo>* MyXMLProcessor::readColsXml(QString &fileName){
         }
 
 
-    }
+    //}
 
     return colsInfo;
 }

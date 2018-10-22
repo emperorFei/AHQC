@@ -13,15 +13,23 @@ template<class T> class singleton;
 class GlobalSetting : public QObject
 {
     Q_OBJECT
-friend singleton<GlobalSetting>;
+friend class singleton<GlobalSetting>;
+//friend singleton<GlobalSetting>;
 
 public:
     ~GlobalSetting();
     QString toString();
     static GlobalSetting * getInstance();
+
+    QList<ColInfo> *getColInfos() const;
+
+    QString getColInfoFileName() const;
+
 private:
     explicit GlobalSetting(QObject *parent = nullptr);
-    static void init();
+    GlobalSetting& operator =(const GlobalSetting&) = delete;
+    GlobalSetting(const GlobalSetting&) = delete;
+    void init();
     QList<ColInfo>* colInfos;
     QString colInfoFileName;
     bool inited;
@@ -31,4 +39,17 @@ signals:
 public slots:
 };
 
+template<>
+class singleton<GlobalSetting>{
+protected:
+   singleton();
+private:
+   singleton(const singleton&) = delete;
+   singleton& operator=(const singleton&) = delete;
+   //(const singleton&){}
+   static GlobalSetting* m_instance ;
+   static QMutex mutex;
+public:
+   static GlobalSetting* GetInstance();
+};
 #endif // GLOABLSEETING_H

@@ -6,12 +6,14 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
     TestReadXmlData tReadXml;
     SimpleTest SimpleTest;
 
     QTest::qExec(&tReadXml);
-    //QTest::qExec(&SimpleTest);
+    QTest::qExec(&SimpleTest);
+    ui->setupUi(this);
+
+
 
 }
 
