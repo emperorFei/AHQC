@@ -9,6 +9,7 @@ QT  += sql
 QT  += xml
 QT  += testlib
 
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = AHQ
@@ -42,7 +43,12 @@ SOURCES += \
     focusScheme/obscheme.cpp \
     awsminutedata.cpp \
     singleton.cpp \
-    globalseeting.cpp
+    globalseeting.cpp \
+    util/sqlfileexecutor.cpp \
+    dbcenter.cpp \
+    awsminutedaomysqlimp.cpp \
+    awsminutedbserver.cpp \
+    ahdata.cpp
 
 
 HEADERS += \
@@ -60,7 +66,12 @@ HEADERS += \
     solvecncodeproblem.h \
     awsminutedata.h \
     singleton.h \
-    globalseeting.h
+    globalseeting.h \
+    util/sqlfileexecutor.h \
+    dbcenter.h \
+    awsminutedaomysqlimp.h \
+    awsminutedbserver.h \
+    ahdata.h
 
 
 FORMS += \

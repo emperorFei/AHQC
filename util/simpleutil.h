@@ -8,6 +8,7 @@
 #include <QDebug>
 namespace AHQC {
     extern QString stationNo;
+
     namespace TimeUtil {
 //        class ShiftsScheme;
 //        class dayBoundScheme;
@@ -29,6 +30,10 @@ namespace AHQC {
         QList<QDateTime> getFocusedHours(TimeRange focusedTimeRange);
         QDateTime nextHour(QDateTime dateTime);
         QDateTime prevoiusOnHour(QDateTime dateTime);
+
+        TimeRange getTimeRange(const QDateTime &onTime, int hours);
+        TimeRange getTimeRange4Sum(const QDateTime &onTime, int hours);
+
         //QList<QDateTime> getAWSTimepoints(QDateTime );
     }
     namespace FileNameUtil {
@@ -45,7 +50,7 @@ namespace AHQC {
     }
     namespace PrintUtil {
 
-        export template<class T,int N>
+        template<class T,int N>
         QString printEmbeddedArray(const T (&list)[N]){
             int i = 0;
             QString temp("");
@@ -56,7 +61,7 @@ namespace AHQC {
             return temp;
         }
 
-       export template<class T>
+       template<class T>
         QString printList(QList<T> const  &list){
             QString temp("");
             for(T t:list){

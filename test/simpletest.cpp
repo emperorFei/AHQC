@@ -142,19 +142,80 @@ void SimpleTest::testReadAMFile(){
         QFile amFile(amFileName);
         if(amFile.open(QIODevice::ReadOnly|QIODevice::Text)){
             QTextStream amIn(&amFile);
-            QDate awsDay = QDate::fromString(AHQC::TimeUtil::sdf4SMOFile,amFileName.replace(AHQC::FileNameUtil::amFileFolderPath,""));
-            while(!amIn.atEnd()){
+            QDate awsDay = QDate::fromString(amFileName.replace(AHQC::FileNameUtil::amFileFolderPath,""),AHQC::TimeUtil::sdf4SMOFile);
+
+            if(!amIn.atEnd()){
                 line = amIn.readLine();
-                AWSMinuteData awsMinuteData(awsDay,line);
-                awsMinuteDatas.append(awsMinuteData);
+                while(!amIn.atEnd()){
+                    line = amIn.readLine();
+                    if(line.compare("") != 0 && line.at(0) != '-'){
+                        AWSMinuteData awsMinuteData(awsDay,line);
+                        awsMinuteDatas.append(awsMinuteData);
+                    }
+                }
             }
+            amFile.close();
         }
     }
-
-    QCOMPARE(awsMinuteDatas.first().toString(),AMDataShouldBe);
+    qDebug() << awsMinuteDatas.first().toString();
+    if(awsMinuteDatas.length()!=0){
+        QCOMPARE(awsMinuteDatas.first().toString(),AMDataShouldBe);
+    }
     QString qsb1;
 }
 void SimpleTest::testReadAMFile_data(){
     QTest::addColumn<QString>("AMDataShouldBe");
     QTest::newRow("AMData")   << "00";
 }
+
+void SimpleTest::testReadNull(){
+
+    QMap<QString,int> map;
+    QList<QString> list;
+    int mapLen = map.size();
+    int listLen = list.length();
+    int cc = 20;
+
+    map.insert("da",10);
+    list.append("asc");
+    QFETCH(QString,LineShouldBe);
+
+    QFile amFile("D:/testReadNull.txt");
+    if(amFile.open(QIODevice::ReadOnly|QIODevice::Text)){
+         QTextStream amIn(&amFile);
+         QString line1 = amIn.readLine();
+         int i2 = 10;
+         QString line2 = amIn.readLine();
+         int i3 = 10;
+         QString line3 = amIn.readLine();
+         int i4 = 10;
+    }
+    //GlobalSetting * global = GlobalSetting::getInstance();
+    //QCOMPARE(QString::number(*global),GlobalSettingShouldBe);
+    QCOMPARE("aaaa",LineShouldBe);
+    int i = 0;//debug before flow end;
+}
+
+void SimpleTest::testReadNull_data(){
+    QTest::addColumn<QString>("LineShouldBe");
+    QTest::newRow("line")   << "00";
+}
+
+
+//void SimpleTest::testExecuteSqlScript(){
+
+//    QFETCH(QString,ExecuteSqlScript);
+
+
+//    QString scriptFileName = "F:/GitRepository/AHQC/configs/createMySqlTable.sql";
+//    QSqlDatabase *conn = DBCenter::getDBByAccountType(DBCenter::AccountType::ADMIN);
+//    SqlFileExecutor sqlFileExecutor;
+//    sqlFileExecutor.execute(conn,scriptFileName);
+//    DBCenter::cleanCreatedConns();
+//    QCOMPARE("estExecuteSqlScript result",ExecuteSqlScript);
+//    int i = 0;//debug before flow end;
+//}
+//void SimpleTest::testExecuteSqlScript_data(){
+//    QTest::addColumn<QString>("ExecuteSqlScript");
+//    QTest::newRow("testExecuteSqlScript")   << "00";
+//}

@@ -5,46 +5,55 @@
 			<name>WD2</name>
 			<beginIndex>4</beginIndex>
 			<endIndex>8</endIndex>
+                        <length>4</length>
 		</Item>
 		<Item>
 			<name>WS2</name>
 			<beginIndex>8</beginIndex>
 			<endIndex>12</endIndex>
+                        <length>4</length>
 		</Item>
 		<Item>
 			<name>WD10</name>
 			<beginIndex>12</beginIndex>
 			<endIndex>16</endIndex>
+                        <length>4</length>
 		</Item>
 		<Item>
 			<name>WS10</name>
 			<beginIndex>16</beginIndex>
 			<endIndex>20</endIndex>
+                        <length>4</length>
 		</Item>
 		<Item>
 			<name>WD</name>
 			<beginIndex>20</beginIndex>
 			<endIndex>24</endIndex>
+                        <length>4</length>
 		</Item>
 		<Item>
 			<name>WS</name>
 			<beginIndex>24</beginIndex>
 			<endIndex>28</endIndex>
+                        <length>4</length>
 		</Item>
 		<Item>
 			<name>WS2F</name>
 			<beginIndex>28</beginIndex>
 			<endIndex>32</endIndex>
+                        <length>4</length>
 		</Item>
 		<Item>
 			<name>WD10F</name>
 			<beginIndex>32</beginIndex>
 			<endIndex>36</endIndex>
+                        <length>4</length>
 		</Item>
 		<Item>
 			<name>WDF</name>
 			<beginIndex>36</beginIndex>
 			<endIndex>40</endIndex>
+                        <length>4</length>
 		</Item>
 	</factor>
 	<factor name = "rain">
@@ -52,31 +61,37 @@
 			<name>minuR</name>
 			<beginIndex>40</beginIndex>
 			<endIndex>44</endIndex>
+                        <length>4</length>
 		</Item>
 		<Item>
 			<name>hourR</name>
 			<beginIndex>44</beginIndex>
 			<endIndex>48</endIndex>
+                        <length>4</length>
 		</Item>
 		<Item>
 			<name>minuR2</name>
 			<beginIndex>48</beginIndex>
 			<endIndex>52</endIndex>
+                        <length>4</length>
 		</Item>
 		<Item>
 			<name>hourR2</name>
 			<beginIndex>52</beginIndex>
 			<endIndex>56</endIndex>
+                        <length>4</length>
 		</Item>
 		<Item>
 			<name>minuRW</name>
 			<beginIndex>56</beginIndex>
 			<endIndex>60</endIndex>
+                        <length>4</length>
 		</Item>
 		<Item>
 			<name>hourRW</name>
 			<beginIndex>60</beginIndex>
 			<endIndex>64</endIndex>
+                        <length>4</length>
 		</Item>				
 	</factor>
 	<factor name = "airTemperature">
@@ -84,16 +99,19 @@
 			<name>tempis</name>
 			<beginIndex>64</beginIndex>
 			<endIndex>68</endIndex>
+                        <length>4</length>
 		</Item>
 		<Item>
 			<name>rsWindspeed</name>
 			<beginIndex>68</beginIndex>
 			<endIndex>72</endIndex>
+                        <length>4</length>
 		</Item>
 		<Item>
 			<name>temprs</name>
 			<beginIndex>72</beginIndex>
 			<endIndex>76</endIndex>
+                        <length>4</length>
 		</Item>
 				
 	</factor>
@@ -102,26 +120,31 @@
 			<name>Wettemp</name>
 			<beginIndex>76</beginIndex>
 			<endIndex>80</endIndex>
+                        <length>4</length>
 		</Item>
 		<Item>
 			<name>HumicapRH</name>
 			<beginIndex>80</beginIndex>
 			<endIndex>84</endIndex>
+                        <length>4</length>
 		</Item>	
 		<Item>
 			<name>Rh</name>
 			<beginIndex>84</beginIndex>
 			<endIndex>88</endIndex>
+                        <length>4</length>
 		</Item>
 		<Item>
 			<name>VPressure</name>
 			<beginIndex>88</beginIndex>
 			<endIndex>92</endIndex>
+                        <length>4</length>
 		</Item>
 		<Item>
 			<name>DewPointtemp</name>
 			<beginIndex>92</beginIndex>
 			<endIndex>96</endIndex>
+                        <length>4</length>
 		</Item>				
 	</factor>
 	<factor name = "AP">
@@ -129,6 +152,7 @@
 			<name>Pressure</name>
 			<beginIndex>96</beginIndex>
 			<endIndex>101</endIndex>
+                        <length>5</length>
 		</Item>		
 	</factor>
 	<factor name = "GT">
@@ -136,6 +160,7 @@
 			<name>Grasstemp</name>
 			<beginIndex>101</beginIndex>
 			<endIndex>105</endIndex>
+                        <length>4</length>
 		</Item>		
 	</factor>
 	<factor name = "ET">
@@ -143,11 +168,13 @@
 			<name>Groundtemppt</name>
 			<beginIndex>105</beginIndex>
 			<endIndex>109</endIndex>
+                        <length>4</length>
 		</Item>
 		<Item>
 			<name>Groundtempinfrared</name>
 			<beginIndex>109</beginIndex>
 			<endIndex>113</endIndex>
+                        <length>4</length>
 		</Item>				
 	</factor>
 	<factor name = "ShallowT">
@@ -155,41 +182,49 @@
 			<name>g5temp</name>
 			<beginIndex>113</beginIndex>
 			<endIndex>117</endIndex>
+                        <length>4</length>
 		</Item>
 		<Item>
 			<name>g10temp</name>
 			<beginIndex>117</beginIndex>
 			<endIndex>121</endIndex>
+                        <length>4</length>
 		</Item>	
 		<Item>
 			<name>g15temp</name> 
 			<beginIndex>121</beginIndex>
 			<endIndex>125</endIndex>
+                        <length>4</length>
 		</Item>
 		<Item>
 			<name>g20temp</name>
 			<beginIndex>125</beginIndex>
 			<endIndex>129</endIndex>
+                        <length>4</length>
 		</Item>
 		<Item>
 			<name>g40temp</name>
 			<beginIndex>129</beginIndex>
 			<endIndex>133</endIndex>
+                        <length>4</length>
 		</Item>
 		<Item>
 			<name>g80temp</name>
 			<beginIndex>133</beginIndex>
 			<endIndex>137</endIndex>
+                        <length>4</length>
 		</Item>	
 		<Item>
 			<name>g160temp</name> 
 			<beginIndex>137</beginIndex>
 			<endIndex>141</endIndex>
+                        <length>4</length>
 		</Item>
 		<Item>
 			<name>g320temp</name>
 			<beginIndex>141</beginIndex>
 			<endIndex>145</endIndex>
+                        <length>4</length>
 		</Item>		
 	</factor>
 	<factor name = "evaCapacity">
@@ -197,11 +232,13 @@
 			<name>OntimeEvacap</name>
 			<beginIndex>145</beginIndex>
 			<endIndex>149</endIndex>
+                        <length>4</length>
 		</Item>
 		<Item>
 			<name>EvaCapacity</name>
 			<beginIndex>149</beginIndex>
 			<endIndex>153</endIndex>
+                        <length>4</length>
 		</Item>
 	</factor>
 	<factor name = "visibility">
@@ -209,11 +246,13 @@
 			<name>Vis_1min</name>
 			<beginIndex>153</beginIndex>
 			<endIndex>158</endIndex>
+                        <length>5</length>
 		</Item>
 		<Item>
 			<name>Vis_10min</name>
 			<beginIndex>158</beginIndex>
 			<endIndex>163</endIndex>
+                        <length>5</length>
 		</Item>	
 	</factor>
 	<factor name = "Cloud">
@@ -221,16 +260,19 @@
 			<name>Cloudheight</name>
 			<beginIndex>163</beginIndex>
 			<endIndex>168</endIndex>
+                        <length>5</length>
 		</Item>	
 		<Item>
 			<name>Cloudage</name>
 			<beginIndex>168</beginIndex>
 			<endIndex>172</endIndex>
+                        <length>4</length>
 		</Item>
 		<Item>
 			<name>Lowcloudage</name>
 			<beginIndex>172</beginIndex>
 			<endIndex>176</endIndex>
+                        <length>4</length>
 		</Item>		
 	</factor>
 	<factor name = "others">		
@@ -238,36 +280,43 @@
 			<name>Snowdeep</name>
 			<beginIndex>188</beginIndex>
 			<endIndex>192</endIndex>
+                        <length>4</length>
 		</Item>	
 		<Item>
 			<name>Freezingrain</name>
 			<beginIndex>192</beginIndex>
 			<endIndex>196</endIndex>
+                        <length>4</length>
 		</Item>	
 		<Item>
 			<name>Wireice</name>
 			<beginIndex>196</beginIndex>
 			<endIndex>200</endIndex>
+                        <length>4</length>
 		</Item>	
 		<Item>
 			<name>Frozensoliddeep</name>
 			<beginIndex>200</beginIndex>
 			<endIndex>204</endIndex>
+                        <length>4</length>
 		</Item>	
 		<Item>
 			<name>Lightingfreq</name>
 			<beginIndex>204</beginIndex>
 			<endIndex>208</endIndex>
+                        <length>4</length>
 		</Item>	
 		<Item>
 			<name>Weatherphcode</name>
-			<beginIndex>176</beginIndex>
-			<endIndex>188</endIndex>
+                        <beginIndex>208</beginIndex>
+                        <endIndex>214</endIndex>
+                        <length>6</length>
 		</Item>
 		<Item>
 			<name>DataQuality</name>
-			<beginIndex>208</beginIndex>
+                        <beginIndex>214</beginIndex>
 			<endIndex>256</endIndex>
+                        <length>42</length>
 		</Item>	
 	</factor>
 </factors>

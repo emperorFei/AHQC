@@ -30,10 +30,11 @@ struct  TimeRange
     }
 };
 struct ColInfo {
-    ColInfo(QString &dataName,int &beginIndex,int &endIndex,bool separator = false)
+    ColInfo(QString &dataName,int &beginIndex,int &endIndex,int &length,bool separator = false)
      :dataName(dataName),
       beginIndex(beginIndex),
       endIndex(endIndex),
+      length(length),
       separator(separator){}
 
     QString getDataName() {
@@ -48,19 +49,26 @@ struct ColInfo {
         return beginIndex;
     }
 
+    int getLength() {
+        return length;
+    }
+
     bool isSeparator() {
         return separator;
     }
 
     QString toString() {
         return dataName+
-                "<"+QString::number(beginIndex)+","+QString::number(endIndex)+">"
+                "<"+QString::number(beginIndex)
+                +","+QString::number(endIndex)
+                +","+QString::number(length)+">"
                 + ((separator == true) ? "_S": "");
     }
 
     QString dataName;
     int beginIndex;
     int endIndex;
+    int length;
     bool separator;
 };
 #endif // SIMPLEOBJECT_H

@@ -20,7 +20,6 @@ AWSMinuteData::AWSMinuteData(const QDate &awsDay,const QString &line):
         observeTime = observeTime.addSecs((minute/100)*60*60+ (minute%100)*60);
         updateTime = insertTime = observeTime;
 
-
         initData(line);
         validateData();
         nestenData();
@@ -38,7 +37,7 @@ void AWSMinuteData::initData(const QString &line){
 
 
     for(;it != cendIt;it++){
-        tempString = line.mid(it->beginIndex,it->endIndex);
+        tempString = line.mid(it->getBeginIndex(),it->getLength());
         if(tempString.at(0) == "/"){
             tempString = tempString.replace('/',9);
         }else if(tempString.at(0) == '-' ) {
@@ -52,9 +51,9 @@ void AWSMinuteData::initData(const QString &line){
         data.append(temp);
     }
 
-    weatherphcode = line.mid(it->getBeginIndex(), it->getEndIndex());
+    weatherphcode = line.mid(it->getBeginIndex(), it->getLength());
     it++;
-    dataQulity = line.mid(it->getBeginIndex(), it->getEndIndex());
+    dataQulity = line.mid(it->getBeginIndex(), it->getLength());
     it++;
 }
 void AWSMinuteData::validateData(){
