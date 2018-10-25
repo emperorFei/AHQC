@@ -2,8 +2,8 @@
 QString AHQC::TimeUtil::sdf4SMOLocFile("'smo_'yyyyMMdd'_'HHmmss'.loc'");
 
 QString AHQC::TimeUtil::sdf4YMD("yyyyMMdd");
-QTime AHQC::TimeUtil::dayDemarcationTime = QTime::fromString("200000");
-QTime AHQC::TimeUtil::changeShiftsTime = QTime::fromString("163000");
+QTime AHQC::TimeUtil::dayDemarcationTime = QTime::fromString("200000","HHmmss");
+QTime AHQC::TimeUtil::changeShiftsTime = QTime::fromString("163000","HHmmss");
 int AHQC::TimeUtil::OBInterval = 6;
 
 QString AHQC::FileNameUtil::ISOSPath = "\\\\10.126.148.90\\isos\\";
@@ -25,7 +25,7 @@ QDate AHQC::TimeUtil::translateDateTime2AWSDay(QDateTime dateTime){
      QDate awsDay = dateTime.date();
 
      if(dateTime.time() > dayDemarcationTime){
-        awsDay.addDays(1);
+        awsDay = awsDay.addDays(1);
      }
      return awsDay;
 }
@@ -38,9 +38,9 @@ QDateTime AHQC::TimeUtil::getPreviousDayBound(QDateTime gaveTime){
     QDateTime previousDayBound;
     int seconds = -gaveTime.time().secsTo(QTime::fromString("000000","HHmmss"));
     previousDayBound = gaveTime.addSecs(-seconds);
-    previousDayBound = previousDayBound.addDays(20*60*60);
+    previousDayBound = previousDayBound.addSecs(20*60*60);
     if(seconds  < 20*60*60){
-      previousDayBound.addDays(-1);
+      previousDayBound = previousDayBound.addDays(-1);
     }
     return previousDayBound;
 }
@@ -88,6 +88,20 @@ QList<QDateTime> AHQC::TimeUtil::getFocusedHours(TimeRange focusedTimeRange){
     }
     return focusedHours;
 }
+
+TimeRange AHQC::TimeUtil::getTimeRange(const QDateTime &onTime,int hours){
+    QDateTime older = onTime.addSecs(-hours*60*60);
+    QDateTime later = onTime;
+    return TimeRange(older,later,timeRange_bound::BEGINEND);
+}
+
+TimeRange AHQC::TimeUtil::getTimeRange4Sum(const QDateTime &onTime,int hours){
+    QDateTime older = onTime.addSecs(-hours*60*60);
+    QDateTime later = onTime;
+    return TimeRange(older,later,timeRange_bound::BEND);
+}
+
+
 
 QList<QString> AHQC::FileNameUtil::getAMFileNamesFormFocusedHours(QList<QDateTime> focursedHours){
     if(focursedHours.length() == 0){

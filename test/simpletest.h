@@ -1,6 +1,8 @@
 #ifndef SIMPLETEST_H
 #define SIMPLETEST_H
 
+#include <QList>
+#include <QMap>
 #include <QtTest/QtTest>
 #include <QObject>
 #include "util/simpleutil.h"
@@ -10,6 +12,7 @@
 #include "solvecncodeproblem.h"
 #include "globalseeting.h"
 #include "awsminutedata.h"
+#include "util/sqlfileexecutor.h"
 
 class SimpleTest : public QObject
 {
@@ -43,8 +46,16 @@ private slots:
     void testGlobalSettingInit();
     void testGlobalSettingInit_data();
 
+    void testReadNull();
+    void testReadNull_data();
+
     void testReadAMFile();
     void testReadAMFile_data();
+
+
+//    void testExecuteSqlScript();
+//    void testExecuteSqlScript_data();
+
 };
 
 #endif // SIMPLETEST_H

@@ -25,11 +25,43 @@ void GlobalSetting::init(){
     //colInfoFileName = resource.absoluteFilePath()+"/conf/ItemCols.xml";
     this->colInfoFileName = "F:/GitRepository/OFFICE_AHQC/configs/ItemCols.xml";
     MyXMLProcessor xmlProcessor;
-    this->colInfos = xmlProcessor.readColsXml(this->colInfoFileName);
+    this -> colInfos = xmlProcessor.readColsXml(this->colInfoFileName);
+    this -> dbHostName = "10.126.148.92";
+    this -> dbPort = 3306;
+    this -> databaseName = "tempDB";
+    this -> pressureHeight = 6.4;
+    this -> intDataNum = 47;
 
 
 
     this->inited =true;
+}
+
+int GlobalSetting::getDBPort() const
+{
+    return dbPort;
+}
+
+QString GlobalSetting::getDatabaseName() const
+{
+    return databaseName;
+}
+
+double GlobalSetting::getPressureHeight() const
+{
+    return pressureHeight;
+}
+
+int GlobalSetting::getIntDataNum() const
+{
+    return intDataNum;
+}
+
+
+
+QString GlobalSetting::getDBHostName() const
+{
+    return dbHostName;
 }
 
 QString GlobalSetting::getColInfoFileName() const

@@ -6,7 +6,7 @@ class DayBoundScheme : public FocusScheme
 {
 public:
     DayBoundScheme();
-    ~DayBoundScheme();
+    ~DayBoundScheme() override;
     TimeRange getFocusRange() override;
 };
 

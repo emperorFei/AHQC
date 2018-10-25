@@ -22,23 +22,37 @@ public:
     static GlobalSetting * getInstance();
 
     QList<ColInfo> *getColInfos() const;
-
     QString getColInfoFileName() const;
+    QString getDBHostName() const;
+    int getDBPort() const;
+    QString getDatabaseName() const;
+    double getPressureHeight() const;
+    int getIntDataNum() const;
 
 private:
+    QList<ColInfo>* colInfos;
+    QString colInfoFileName;
+    QString dbHostName;
+    int dbPort;
+    QString databaseName;
+    double pressureHeight;
+    int intDataNum;
+    bool inited;
+
+
     explicit GlobalSetting(QObject *parent = nullptr);
     GlobalSetting& operator =(const GlobalSetting&) = delete;
     GlobalSetting(const GlobalSetting&) = delete;
     void init();
-    QList<ColInfo>* colInfos;
-    QString colInfoFileName;
-    bool inited;
+
+
     static GlobalSetting* instance;
+
 signals:
 
 public slots:
 };
-
+//template class singleton<GlobalSetting>;
 template<>
 class singleton<GlobalSetting>{
 protected:
@@ -52,4 +66,5 @@ private:
 public:
    static GlobalSetting* GetInstance();
 };
+
 #endif // GLOABLSEETING_H

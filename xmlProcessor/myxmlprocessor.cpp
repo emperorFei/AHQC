@@ -14,7 +14,7 @@ QList<ColInfo>* MyXMLProcessor::readColsXml(QString &fileName){
 
         tinyxml2::XMLDocument colsInfoDoc;
         const char * fileName_cstr = fileName.toStdString().c_str();
-        fileName_cstr = "F:/GitRepository/OFFICE_AHQC/configs/ItemCols.xml";
+        fileName_cstr = "F:/GitRepository/AHQC/configs/ItemCols.xml";
 //        fileName_cstr = "F:/ItemCols.xml";
 
         colsInfoDoc.LoadFile(fileName_cstr);
@@ -29,7 +29,8 @@ QList<ColInfo>* MyXMLProcessor::readColsXml(QString &fileName){
                 QString dataName(item->FirstChildElement("name")->FirstChild()->ToText()->Value());
                 int beginIndex = std::atoi(item->FirstChildElement("beginIndex")->FirstChild()->ToText()->Value());
                 int endIndex = std::atoi(item->FirstChildElement("endIndex")->FirstChild()->ToText()->Value());
-                colsInfo->append(ColInfo(dataName,beginIndex,endIndex));
+                int length= std::atoi(item->FirstChildElement("length")->FirstChild()->ToText()->Value());
+                colsInfo->append(ColInfo(dataName,beginIndex,endIndex,length));
                 item = item -> NextSiblingElement("Item");
             }
 
