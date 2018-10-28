@@ -14,7 +14,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = AHQ
 TEMPLATE = app
-CONFIG += debug
+CONFIG += release
+//CONFIG += debug
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
@@ -34,7 +35,6 @@ SOURCES += \
     tinyXml2/tinyxml2.cpp \
     test/testreadxmldata.cpp \
     xmlProcessor/myxmlprocessor.cpp \
-    #tinyXml2/tinyxml2.cpp
     test/simpletest.cpp \
     util/simpleutil.cpp \
     focusScheme/shiftsscheme.cpp \
@@ -48,30 +48,38 @@ SOURCES += \
     dbcenter.cpp \
     awsminutedaomysqlimp.cpp \
     awsminutedbserver.cpp \
-    ahdata.cpp
+    ahdata.cpp \
+    zdata.cpp \
+    util/dataformatutil.cpp \
+    test/qtfeaturetest.cpp
 
 
 HEADERS += \
         mainwindow.h \
     test/testreadxmldata.h \
-    xmlProcessor/myxmlprocessor.h \
-    simpleobject.h \
-    tinyXml2/tinyxml2.h \
     test/simpletest.h \
+    test/qtfeaturetest.h \
+    xmlProcessor/myxmlprocessor.h \    
+    tinyXml2/tinyxml2.h \
+    util/dataformatutil.h \
     util/simpleutil.h \
+    util/sqlfileexecutor.h \
     focusScheme/focusscheme.h \
     focusScheme/shiftsscheme.h \
     focusScheme/dayboundscheme.h \
     focusScheme/obscheme.h \
+    simpleobject.h \
     solvecncodeproblem.h \
     awsminutedata.h \
     singleton.h \
     globalseeting.h \
-    util/sqlfileexecutor.h \
     dbcenter.h \
     awsminutedaomysqlimp.h \
     awsminutedbserver.h \
-    ahdata.h
+    ahdata.h \
+    zdata.h
+
+
 
 
 FORMS += \
@@ -79,3 +87,6 @@ FORMS += \
 
 RESOURCES += \
     config.qrc
+
+DISTFILES += \
+

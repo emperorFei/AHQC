@@ -28,10 +28,9 @@ AHData AWSMinuteDBServer::getAHData(const QDateTime &timepoint){
     AWSMinuteData am = this->dao->findByOT(timepoint);
     QMap<QString,int> extremums = this->dao->getExtremums(timepoint);
     QMap<QString,int> vAndRain = this->dao->getVAndRain(timepoint);
-    if(extremums.size() == 0 || vAndRain.size() == 0 || !am.isInited()) {
+    if(extremums.empty() || vAndRain.empty() || !am.isInited()) {
       return uninitedAHData;
     }
-
     extremums.unite(vAndRain);
     return AHData(am,extremums);
 }

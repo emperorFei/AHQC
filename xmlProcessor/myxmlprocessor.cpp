@@ -14,7 +14,7 @@ QList<ColInfo>* MyXMLProcessor::readColsXml(QString &fileName){
 
         tinyxml2::XMLDocument colsInfoDoc;
         const char * fileName_cstr = fileName.toStdString().c_str();
-        fileName_cstr = "F:/GitRepository/AHQC/configs/ItemCols.xml";
+        fileName_cstr = "F:/GitRepository/OFFICE_AHQC/configs/ItemCols.xml";
 //        fileName_cstr = "F:/ItemCols.xml";
 
         colsInfoDoc.LoadFile(fileName_cstr);

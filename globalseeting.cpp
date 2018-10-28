@@ -11,6 +11,8 @@ GlobalSetting::~GlobalSetting()
     //qDeleteAll(colInfos->begin(),colInfos->end());
     colInfos->clear();
     delete colInfos;
+    delete dataSetting;
+    delete uiSetting;
 }
 
 GlobalSetting* GlobalSetting::getInstance(){
@@ -31,6 +33,8 @@ void GlobalSetting::init(){
     this -> databaseName = "tempDB";
     this -> pressureHeight = 6.4;
     this -> intDataNum = 47;
+
+    this->dataSetting = new QSettings(":/conf/dataSetting");
 
 
 

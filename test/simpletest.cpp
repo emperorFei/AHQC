@@ -3,6 +3,9 @@
 SimpleTest::SimpleTest(QObject *parent) : QObject(parent){}
 SimpleTest::~SimpleTest(){}
 
+
+
+
 void SimpleTest::testTransformDateFromSOMFileName(){
     QFETCH(QString,SMOFileName);
     QFETCH(QString,DateShouldBe);
@@ -192,7 +195,7 @@ void SimpleTest::testReadNull(){
     }
     //GlobalSetting * global = GlobalSetting::getInstance();
     //QCOMPARE(QString::number(*global),GlobalSettingShouldBe);
-    QCOMPARE("aaaa",LineShouldBe);
+    QCOMPARE("aaaa",LineShouldBe.toStdString().c_str());
     int i = 0;//debug before flow end;
 }
 

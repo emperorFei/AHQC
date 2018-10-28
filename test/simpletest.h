@@ -25,6 +25,8 @@ signals:
 public slots:
 
 private slots:
+
+
     void testTransformDateFromSOMFileName();
     void testTransformDateFromSOMFileName_data();
     void testTransformDate2SOMFileName();

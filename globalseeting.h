@@ -6,6 +6,7 @@
 #include "singleton.h"
 #include "simpleobject.h"
 #include "xmlProcessor/myxmlprocessor.h"
+#include <QSettings>
 
 template<class T> class singleton;
 
@@ -38,6 +39,8 @@ private:
     double pressureHeight;
     int intDataNum;
     bool inited;
+    QSettings *dataSetting;
+    QSettings *uiSetting;
 
 
     explicit GlobalSetting(QObject *parent = nullptr);
