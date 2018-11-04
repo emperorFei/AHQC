@@ -123,6 +123,27 @@ QList<QString> AHQC::FileNameUtil::getAMFileNamesFormFocusedHours(QList<QDateTim
     return amFileNames;
 
 }
+
+QList<QString> AHQC::FileNameUtil::getZFileNamesFormFocusedHours(QList<QDateTime> focursedHours){
+    if(focursedHours.length() == 0){
+        return QList<QString>();
+    }
+    QList<QString> amFileNames;
+    QDateTime firstHour = focursedHours.at(0);
+    QDateTime lastHour = focursedHours.back();
+    QDate firstAWSDay = AHQC::TimeUtil::translateDateTime2AWSDay(firstHour);
+    QDate lastAWSDay = AHQC::TimeUtil::translateDateTime2AWSDay(lastHour);
+    QDate tempDate = firstAWSDay;
+    QString fileName("beforeGiveValue");
+    while(tempDate <= lastAWSDay){
+        fileName = AHQC::FileNameUtil::amFileFolderPath+tempDate.toString(AHQC::TimeUtil::sdf4SMOFile);
+        amFileNames.append(fileName);
+        fileName = fileName.toLocal8Bit();
+        tempDate = tempDate.addDays(1);
+    }
+    return amFileNames;
+
+}
 QDate AHQC::FileNameUtil::getDayFormAMFileFullName(const QString &AMFileFullName){
     QString amFileName = AMFileFullName;
     amFileName = amFileName.replace(amFileFolderPath,"");

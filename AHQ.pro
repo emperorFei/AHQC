@@ -14,8 +14,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = AHQ
 TEMPLATE = app
-CONFIG += release
-//CONFIG += debug
+#CONFIG += qt release warn_off
+CONFIG += qt debug  warn_off
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
@@ -51,7 +51,10 @@ SOURCES += \
     ahdata.cpp \
     zdata.cpp \
     util/dataformatutil.cpp \
-    test/qtfeaturetest.cpp
+    test/qtfeaturetest.cpp \
+    settingwidget.cpp \
+    ahqcomboboxitem.cpp \
+    nofocusframedelegate.cpp
 
 
 HEADERS += \
@@ -77,16 +80,25 @@ HEADERS += \
     awsminutedaomysqlimp.h \
     awsminutedbserver.h \
     ahdata.h \
-    zdata.h
+    zdata.h \
+    settingwidget.h \
+    ahqcomboboxitem.h \
+    nofocusframedelegate.h
 
 
 
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    settingwidget.ui
 
 RESOURCES += \
-    config.qrc
+    config.qrc \
+    ico.qrc
 
 DISTFILES += \
+    configs/ItemCols.xml \
+    configs/dataSetting.ini \
+    configs/uiSetting.ini \
+
 

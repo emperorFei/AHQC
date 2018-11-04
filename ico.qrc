@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/ico">
+        <file alias="down_arrow">resource/icons/down_arrow.ico</file>
+        <file alias="up_arrow">resource/icons/up_arrow.ico</file>
+        <file alias="close">resource/icons/close.ico</file>
+    </qresource>
+</RCC>

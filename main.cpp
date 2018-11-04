@@ -12,6 +12,7 @@
 #include <iostream>
 #include <QFileInfo>
 #include <QResource>
+#include "settingwidget.h"
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -52,41 +53,43 @@ int main(int argc, char *argv[])
 //    }
 
     //QSettings *dataSetting = new QSettings(":/conf/dataSetting",QSettings::IniFormat);
-    QResource re("");
+//    QResource re("");
 
-    QFile file("configs/dataSetting.ini");
-    QFileInfo fInfo(":/conf/dataSetting");
-    QString fileName = file.fileName();
-    QString absfileName = fInfo.absoluteFilePath();
-    qDebug() << fileName;
-    qDebug() << absfileName;
+//    QFile file("configs/dataSetting.ini");
+//    QFileInfo fInfo(":/conf/dataSetting");
+//    QString fileName = file.fileName();
+//    QString absfileName = fInfo.absoluteFilePath();
+//    qDebug() << fileName;
+//    qDebug() << absfileName;
 
 
-    if(file.exists()){
-        qDebug() << "file " << fileName << "exists";
-        if(file.open(QIODevice::ReadOnly|QIODevice::Text)){
-            QTextStream ts(&file);
-            QString temp("string before init");
-            if(!ts.atEnd()){
-                temp = ts.readLine();
-                qDebug() << "file " << fileName << " line1: " << temp << " endl.";
-            }else{
-                qDebug() << "file " << fileName << " empty.";
-            }
-        }else{
-            qDebug() << "file " << fileName << "open fault";
-        }
-    }else{
-        qDebug() << "file " << fileName << " not exists.";
-    }
+//    if(file.exists()){
+//        qDebug() << "file " << fileName << "exists";
+//        if(file.open(QIODevice::ReadOnly|QIODevice::Text)){
+//            QTextStream ts(&file);
+//            QString temp("string before init");
+//            if(!ts.atEnd()){
+//                temp = ts.readLine();
+//                qDebug() << "file " << fileName << " line1: " << temp << " endl.";
+//            }else{
+//                qDebug() << "file " << fileName << " empty.";
+//            }
+//        }else{
+//            qDebug() << "file " << fileName << "open fault";
+//        }
+//    }else{
+//        qDebug() << "file " << fileName << " not exists.";
+//    }
 
     //QString value = dataSetting->value("stationNum", "58343").toString();
 
     //qDebug() << value ;
     //std::cout << value.toStdString().c_str() << std::endl;
 
-    MainWindow w;
-    w.show();
+//    MainWindow w;
+//    w.show();
+    SettingWidget settingWidget;
+    settingWidget.show();
 
     //delete dataSetting;
 

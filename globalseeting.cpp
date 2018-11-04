@@ -34,12 +34,34 @@ void GlobalSetting::init(){
     this -> pressureHeight = 6.4;
     this -> intDataNum = 47;
 
-    this->dataSetting = new QSettings(":/conf/dataSetting");
-
-
+    this->dataSetting = new QSettings("configs/dataSetting.ini");
+    this->uiSetting = new QSettings("configs/uiSetting.ini");
 
     this->inited =true;
 }
+
+void GlobalSetting::confirmSettingChanged(){
+    confirmUISettingChanged();
+    confirmDataSettingChanged();
+}
+
+void GlobalSetting::confirmDataSettingChanged(){
+
+}
+
+void GlobalSetting::confirmUISettingChanged(){
+
+}
+
+QString GlobalSetting::value(const QString &itemName){
+    if(dataSetting->contains(itemName)){
+        return dataSetting->value(itemName).toString();
+    }else if(uiSetting->contains(itemName)){
+        return uiSetting->value(itemName).toString();
+    }
+    return QString();
+}
+
 
 int GlobalSetting::getDBPort() const
 {

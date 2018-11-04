@@ -14,86 +14,162 @@ const QString DataFormatUtil::zIntItem[] =
         };
 const QString DataFormatUtil::zStringItem[] =
         {
-            "stationNum","time","latitude","longitude","QCCode","CC","CFC",
+            "stationNum","time","latitude","longitude","QCCode","CFC",
             "WD2","WD10","WD","ExWD","MaxWD","ExWD6","ExWD12",
-            "HMRain","MW","WW","WT","W1","W2",
+            "HMRain","MWW","WW","WT","W1","W2",
             "Q1PP","Q1TH","Q1RE","Q1WI","Q1DT","Q1VV","Q1CW","Q1SP","Q1MR",
             "Q2PP","Q2TH","Q2RE","Q2WI","Q2DT","Q2VV","Q2CW","Q2SP","Q2MR",
             "Q3PP","Q3TH","Q3RE","Q3WI","Q3DT","Q3VV","Q3CW","Q3SP","Q3MR"
         };
+const QString DataFormatUtil::zDBItem[] =
+        {
+            "stationNum","time","latitude","longitude","height","PPHeight","awsMode","QCCode","CFC",
+            "P","SP","VP3","VP24","MaxP","MaxPT","MinP","MinPT",
+            "T","MaxT","MaxTT","MinT","MinTT","VT24","MaxT24","MinT24","TD","RH","MinRH","MinRHT","WP",
+            "HRain","HRain3","HRain6","HRain12","HRain24","RainMT","RainM","E",
+            "WD2","WS2","WD10","WS10","MaxWD","MaxWS","MaxWST","WD","WS","ExWD","ExWS","ExWST","ExWS6","ExWD6","ExWS12","ExWD12",
+            "ET","MaxET","MaxETT","MinET","MinETT","MinET12","ET5","ET10","ET15","ET20","ET40","ET80","ET160","ET320","GT","MaxGT","MaxGTT","MinGT","MinGTT",
+            "V1","V10","MinV","MinVT",
+            "V","CA","LCA","RCA","CH","CF","EC","MW","WW","WT","W1","W2",
+            "SnowD","SnowP","FE1U","FE1D","FE2U","FE2D","TRT","TRD","GA","HA",
+            "HMRain",
+            "MWW",
+            "Q1PP","Q1TH","Q1RE","Q1WI","Q1DT","Q1VV","Q1CW","Q1SP","Q1MR",
+            "Q2PP","Q2TH","Q2RE","Q2WI","Q2DT","Q2VV","Q2CW","Q2SP","Q2MR",
+            "Q3PP","Q3TH","Q3RE","Q3WI","Q3DT","Q3VV","Q3CW","Q3SP","Q3MR"
+        };
+const QString DataFormatUtil::zFileItem[] =
+        {
+            "stationNum","time","latitude","longitude","height","PPHeight","awsMode","QCCode","CFC",
+            "P","SP","VP3","VP24","MaxP","MaxPT","MinP","MinPT",
+            "T","MaxT","MaxTT","MinT","MinTT","VT24","MaxT24","MinT24","TD","RH","MinRH","MinRHT","WP",
+            "HRain","HRain3","HRain6","HRain12","HRain24","RainMT","RainM","E",
+            "WD2","WS2","WD10","WS10","MaxWD","MaxWS","MaxWST","WD","WS","ExWD","ExWS","ExWST","ExWS6","ExWD6","ExWS12","ExWD12",
+            "ET","MaxET","MaxETT","MinET","MinETT","MinET12","ET5","ET10","ET15","ET20","ET40","ET80","ET160","ET320","GT","MaxGT","MaxGTT","MinGT","MinGTT",
+            "V1","V10","MinV","MinVT",
+            "V","CA","LCA","RCA","CH","CF","EC","MW","WW","WT","W1","W2",
+            "SnowD","SnowP","FE1U","FE1D","FE2U","FE2D","TRT","TRD","GA","HA",
+            "HMRain",
+            "MWW",
+            "Q1PP","Q1TH","Q1RE","Q1WI","Q1DT","Q1VV","Q1CW","Q1SP","Q1MR",
+            "Q2PP","Q2TH","Q2RE","Q2WI","Q2DT","Q2VV","Q2CW","Q2SP","Q2MR",
+            "Q3PP","Q3TH","Q3RE","Q3WI","Q3DT","Q3VV","Q3CW","Q3SP","Q3MR"
+        };
+const QString DataFormatUtil::zFileSectionID[] =
+        {"PP","TH","RH","RE","WI","DT","VV","CW","SP","MR","MW","Q1","Q2","Q3" "=[\\s=]+NNNN"};
 
-
-const QString DataFormatUtil::zTimeItem[]{"MaxPT","MinPT","MaxTT","MinTT","MinRHT",
+const QString DataFormatUtil::zTimeItem[] = {"MaxPT","MinPT","MaxTT","MinTT","MinRHT",
         "MaxETT","MinETT","MaxGTT","MinGTT","MinVT","MaxWST","ExWST"};
 
 
-QMap<QString,int> DataFormatUtil::zFileData2ZIntData(const QMap<QString,QString> &zFileData){
-    QMap<QString,int> zIntData;
-    QString tempV("/////");
-    int temp = 99999;
-    bool* ok  = new bool(false);
-    if(!zFileData.empty()){        
-        for(const QString &s: zIntItem) {
-            tempV = zFileData.value(s);
-            temp = tempV.toInt(ok,10);
-            if(!ok){
-                if(tempV.length() !=0 && tempV.at(0) == '/'){
-                    temp = tempV.replace("/","9").toInt(ok);
-                    if(!ok){
-                        temp = 99999;
-                    }
-                }else if(tempV.length() !=0 && tempV.at(0) == ','){
-                    temp = tempV.replace(",","9").toInt(ok);
-                    if(!ok){
-                        temp = 99999;
-                    }
-                }else{
-                   temp = 99999;
-                }
-            }
-            zIntData.insert(s, temp);
-        }
-        zIntData.insert("CH",couldHeightFromZFileData(zFileData));
+
+QMap<QString,QString> DataFormatUtil::zFileContent2zData(const QString &zFileContent){
+    QMap<QString,QString> zData;
+    if(!zFileContent.isEmpty()){
+        QString zFileDataString = removeZFileSectionID(zFileContent);
+        zData = zFileDataString2zFileData(zFileDataString);
     }
-    delete ok;
-    return zIntData;
+    return zData;
 }
 
-QMap<QString,QString> DataFormatUtil::zFileData2ZStringData(const QMap<QString,QString> &zFileData){
-    QMap<QString,QString> zStringData ;
-    QString missing("/////");
-    for(const QString &s: zStringItem) {
-        if(zFileData.contains(s)){
-            zStringData.insert(s, zFileData.value(s));
-        }else{
-            zStringData.insert(s, missing);
-        }
+QString DataFormatUtil::removeZFileSectionID(const QString &zFileContent){
+    QString zFileDataString(zFileContent);
+    if(zFileContent.isEmpty()){
+        return zFileContent;
     }
-    return zStringData;
-}
-
-void DataFormatUtil::amendZTimeItem(QMap<QString,int> &zIntData) {
-    int temp = 999999;
-    for(const QString &s:zTimeItem) {
-        if(zIntData.contains(s)){
-            temp = zIntData.value(s);
-            if(temp >= 2400) {
-                temp -= 2400;
-            }
-            zIntData.insert(s, temp);
-        }
+    for(const QString &sectionID : zFileSectionID){
+        zFileDataString = zFileDataString.replace(sectionID,"");
     }
+    return zFileDataString;
 }
 
-int DataFormatUtil::couldHeightFromZFileData(const QMap<QString,QString> &zFileData) {
-    int temp = 999999;
-    if(zFileData.contains("CH")){
-        return zFileData.value("CH").toInt();
+
+QMap<QString,QString> DataFormatUtil::zFileDataString2zFileData(const QString &zFileDataString){
+    QMap<QString,QString> zFileData;
+    if(zFileDataString.isEmpty()){
+        return zFileData;
     }
-    return temp;
+    QStringList zDataList = zFileDataString.split("[\\s=]+");
+    if(zFileItem->length() != zDataList.length()){
+        return zFileData;
+    }
+    QStringList::const_iterator constIt = zDataList.cbegin();
+    for(const QString &item : zFileItem){
+        zFileData.insert(item,*constIt);
+        constIt++;
+    }
+    return zFileData;
 }
 
-QString DataFormatUtil::zIntData2String(int zIntData) {
 
-}
+
+//QMap<QString,int> DataFormatUtil::zFileData2ZIntData(const QMap<QString,QString> &zFileData){
+//    QMap<QString,int> zIntData;
+//    QString tempV("/////");
+//    int temp = 99999;
+//    bool* ok  = new bool(false);
+//    if(!zFileData.empty()){
+//        for(const QString &s: zIntItem) {
+//            tempV = zFileData.value(s);
+//            temp = tempV.toInt(ok,10);
+//            if(!ok){
+//                if(tempV.length() !=0 && tempV.at(0) == '/'){
+//                    temp = tempV.replace("/","9").toInt(ok);
+//                    if(!ok){
+//                        temp = 99999;
+//                    }
+//                }else if(tempV.length() !=0 && tempV.at(0) == ','){
+//                    temp = tempV.replace(",","9").toInt(ok);
+//                    if(!ok){
+//                        temp = 99999;
+//                    }
+//                }else{
+//                   temp = 99999;
+//                }
+//            }
+//            zIntData.insert(s, temp);
+//        }
+//        zIntData.insert("CH",couldHeightFromZFileData(zFileData));
+//    }
+//    delete ok;
+//    return zIntData;
+//}
+
+//QMap<QString,QString> DataFormatUtil::zFileData2ZStringData(const QMap<QString,QString> &zFileData){
+//    QMap<QString,QString> zStringData ;
+//    QString missing("/////");
+//    for(const QString &s: zStringItem) {
+//        if(zFileData.contains(s)){
+//            zStringData.insert(s, zFileData.value(s));
+//        }else{
+//            zStringData.insert(s, missing);
+//        }
+//    }
+//    return zStringData;
+//}
+
+//void DataFormatUtil::amendZTimeItem(QMap<QString,int> &zIntData) {
+//    int temp = 999999;
+//    for(const QString &s:zTimeItem) {
+//        if(zIntData.contains(s)){
+//            temp = zIntData.value(s);
+//            if(temp >= 2400) {
+//                temp -= 2400;
+//            }
+//            zIntData.insert(s, temp);
+//        }
+//    }
+//}
+
+//int DataFormatUtil::couldHeightFromZFileData(const QMap<QString,QString> &zFileData) {
+//    int temp = 999999;
+//    if(zFileData.contains("CH")){
+//        return zFileData.value("CH").toInt();
+//    }
+//    return temp;
+//}
+
+//QString DataFormatUtil::zIntData2String(int zIntData) {
+
+//}
 

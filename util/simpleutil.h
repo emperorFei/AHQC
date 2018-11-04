@@ -6,6 +6,7 @@
 #include "simpleobject.h"
 #include "focusScheme/focusscheme.h"
 #include <QDebug>
+#include "globalseeting.h"
 namespace AHQC {
     extern QString stationNo;
 
@@ -44,6 +45,7 @@ namespace AHQC {
 
 
         QList<QString> getAMFileNamesFormFocusedHours(QList<QDateTime> foucsedHours);
+        QList<QString> getZFileNamesFormFocusedHours(QList<QDateTime> foucsedHours);
         QList<QString> getAMFileNamesFormFocusedTimeRange();
         QDate getDayFormAMFileFullName(const QString &AMFileFullName);
 

@@ -29,18 +29,20 @@ public:
     QString getDatabaseName() const;
     double getPressureHeight() const;
     int getIntDataNum() const;
-
+    QString value(const QString &itemName);
 private:
     QList<ColInfo>* colInfos;
     QString colInfoFileName;
     QString dbHostName;
-    int dbPort;
+    int dbPort = 3306;
     QString databaseName;
     double pressureHeight;
     int intDataNum;
     bool inited;
+
     QSettings *dataSetting;
     QSettings *uiSetting;
+
 
 
     explicit GlobalSetting(QObject *parent = nullptr);
@@ -54,6 +56,9 @@ private:
 signals:
 
 public slots:
+    void confirmSettingChanged();
+    void confirmDataSettingChanged();
+    void confirmUISettingChanged();
 };
 //template class singleton<GlobalSetting>;
 template<>
