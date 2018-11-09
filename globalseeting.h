@@ -2,11 +2,13 @@
 #define GLOABLSEETING_H
 
 #include <QObject>
+#include <QDateTime>
 #include <QApplication>
 #include "singleton.h"
 #include "simpleobject.h"
 #include "xmlProcessor/myxmlprocessor.h"
 #include <QSettings>
+
 
 template<class T> class singleton;
 
@@ -68,7 +70,6 @@ protected:
 private:
    singleton(const singleton&) = delete;
    singleton& operator=(const singleton&) = delete;
-   //(const singleton&){}
    static GlobalSetting* m_instance ;
    static QMutex mutex;
 public:

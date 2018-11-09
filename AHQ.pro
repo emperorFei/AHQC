@@ -53,8 +53,9 @@ SOURCES += \
     util/dataformatutil.cpp \
     test/qtfeaturetest.cpp \
     settingwidget.cpp \
-    ahqcomboboxitem.cpp \
-    nofocusframedelegate.cpp
+    nofocusframedelegate.cpp \
+    ahqlistwidgetitem.cpp \
+    zdatadaomysqlimp.cpp
 
 
 HEADERS += \
@@ -82,8 +83,9 @@ HEADERS += \
     ahdata.h \
     zdata.h \
     settingwidget.h \
-    ahqcomboboxitem.h \
-    nofocusframedelegate.h
+    nofocusframedelegate.h \
+    ahqlistwidgetitem.h \
+    zdatadaomysqlimp.h
 
 
 

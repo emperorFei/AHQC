@@ -1,5 +1,14 @@
 #include "zdata.h"
-ZData::ZData(){}
+
+ZData::ZData():
+    observeTime(unInitTime),
+    insertTime(unInitTime),
+    updateTime(unInitTime),
+    data(QMap<QString,QString>())
+{}
+
+
+
 
 
 ZData ZData::fromZFile(const QString &zFileName){
@@ -17,27 +26,42 @@ ZData ZData::fromZFile(const QString &zFileName){
     return zData;
 }
 
-//ZData::ZData(const QDateTime &observeTime,const QMap<QString,QString> &zFileData):observeTime(observeTime)
-//{
-//    this->observeTime = observeTime;
-//    intData = DataFormatUtil::zFileData2ZIntData(zFileData);
-//    stringData = DataFormatUtil::zFileData2ZStringData(zFileData);
-//    DataFormatUtil::amendZTimeItem(intData);
-//    if(observeTime != QDateTime() && !intData.empty() && !stringData.empty()){
-//        totalInited = true;
-//    }
-//}
 
 bool ZData::isTotalInited() const
 {
     return totalInited;
 }
 
-QString ZData::value(const QString &key){
-    if(key == "observeTime"){
-        return observeTime.toString("yyyy年MM月mm日 HH:mm:dd");
-    }else if(data.contains(key)){
+QString ZData::value(const QString &key) const{
+    if(data.contains(key)){
         return data.value(key);
     }
     return QString();
+}
+
+
+QDateTime ZData::getObserveTime() const
+{
+    return observeTime;
+}
+QDateTime ZData::getUpdateTime() const
+{
+    return updateTime;
+}
+
+QDateTime ZData::getInsertTime() const
+{
+    return insertTime;
+}
+void ZData::setUpdateTime(const QDateTime &value)
+{
+    updateTime = value;
+}
+void ZData::setInsertTime(const QDateTime &value)
+{
+    insertTime = value;
+}
+void ZData::setObserveTime(const QDateTime &value)
+{
+    observeTime = value;
 }

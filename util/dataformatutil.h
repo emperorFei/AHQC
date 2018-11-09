@@ -2,9 +2,10 @@
 #define DATAFORMATUTIL_H
 
 #include <QMap>
-
+class ZDataDAOMysqlImp;
 class DataFormatUtil
 {
+friend class ZDataDAOMysqlImp;
 public:
 //    static QMap<QString,int> zFileData2ZIntData(const QMap<QString,QString> &zFileData);
 //    static QMap<QString,QString> zFileData2ZStringData(const QMap<QString,QString> &zFileData);

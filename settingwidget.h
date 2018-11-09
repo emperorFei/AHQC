@@ -11,8 +11,10 @@
 #include <QFileDialog>
 #include <QListWidget>
 #include "nofocusframedelegate.h"
-#include "ahqcomboboxitem.h"
-
+#include "ahqlistwidgetitem.h"
+#include "globalseeting.h"
+#include <QRegExp>
+#include <QStyledItemDelegate>
 namespace Ui {
 class SettingWidget;
 }
@@ -38,10 +40,10 @@ public slots:
     void pathSwitchButtonToggled(QAbstractButton *button, bool checked);
     void filesysAccountCheckBoxStateChanged(int state);
     void isospathChangeButtonClicked(bool checked = false);
+    void isospathLineEditTextChanged();
 private:
 
-
-    void initComboBoxView();
+    void initPages();
     void connectSingles();
 
 
@@ -50,7 +52,7 @@ private:
     void connectDBSettingPageSingles();
     void connectStationSettingPageSingles();
     void connectCacheSettingPageSingles();
-
+    GlobalSetting *setting;
     Ui::SettingWidget *ui;
     void navigationTreeIndent();
 };

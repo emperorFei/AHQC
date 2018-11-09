@@ -2,7 +2,7 @@
 #include "ui_settingwidget.h"
 
 SettingWidget::SettingWidget(QWidget *parent) :
-    QWidget(parent),
+    QWidget(parent),setting(singleton<GlobalSetting>::GetInstance()),
     ui(new Ui::SettingWidget)
 {
     ui->setupUi(this);
@@ -40,8 +40,9 @@ SettingWidget::SettingWidget(QWidget *parent) :
     ui->settingTreeWidget->expandItem(ui->settingTreeWidget->topLevelItem(0));
     ui->settingTreeWidget->setItemSelected(ui->settingTreeWidget->topLevelItem(0)->child(0),true);
     ui->filesys_account_checkBox->setCheckState(Qt::CheckState::Checked);
+    ui->main_stackedWidget->setCurrentIndex(0);
 
-    initComboBoxView();
+    initPages();
     connectSingles();
 
 
@@ -56,23 +57,82 @@ SettingWidget::~SettingWidget()
     delete ui;
 }
 
-void SettingWidget::initComboBoxView(){
-    QListWidget *isostpath_comboBox_ListWidget  = new QListWidget(ui->isostpath_comboBox);
-    isostpath_comboBox_ListWidget->setItemDelegate(new NoFocusFrameDelegate(ui->observeTimes_comboBox));
-    ui->isostpath_comboBox->setEditable(true);
-    ui->isostpath_comboBox->setModel(isostpath_comboBox_ListWidget->model());
-    ui->isostpath_comboBox->setView(isostpath_comboBox_ListWidget);
+//stationNum = 58342
+//stationHeight = 5.4
+//presureHeight = 6.4
+//ISOSPath = \\\\10.126.148.90\\isos
+//isISOSPathLocal = true
+//ISOSPathNeedAccount = false
+//ISOSPathUsername = observer
+//ISOSPathPassword = 58342
+//minuteDataPathTemplate =  \\dataset\\江苏\\#{stationNum}\\AWS\\新型自动站\\质控
+//AWSNetPathTemplate = \\bin\\Awsnet\\#{month}
+//AMFileNameTemplate = AWS_M_Z_#{stationNum}_#{Date}.txt
+//ZFileNameTemplate= Z_SURF_I_#{stationNum}_#{DateTime}_O_AWS_FTM#{ccx}.txt
 
-    for (int i = 0; i < 5; ++i)
-        {
-            QListWidget* isostpath_comboBox_view = static_cast<QListWidget* >(ui->isostpath_comboBox->view());
-            AHQComboboxItem *item = new AHQComboboxItem(ui->isostpath_comboBox);
-            item->setLabelContent(QString("Account") + QString::number(i, 10));
-            QListWidgetItem* widgetItem = new QListWidgetItem(isostpath_comboBox_view);
-            isostpath_comboBox_view->setItemWidget(widgetItem,item);
+//dbHost = localhost
+//dbPort = 3306
+//dbAccount = 58342
+//dbPassword = 58342
 
-        }
+
+//delayOfOnTime = 70
+//delayOfObserveTime = 170;
+//shiftTime = 16:30
+//observeTimes = 20,08,11,14,15 20,08,14
+//observeTimesCheckedIndex = 0
+void SettingWidget::initPages(){
+    qDebug() << setting->value("stationHeight");
+
+    ui->station_height_edit->setText(setting->value("stationHeight"));
+    ui->presure_height_edit->setText(setting->value("presureHeight"));
+//    QString observeTimess (setting->value("observeTimes"));
+//    observeTimess = observeTimess.replace(QRegExp("-"),",");
+//    QStringList observeTimesList = observeTimess.split("<>");
+    QStyledItemDelegate* itemDelegate = new QStyledItemDelegate(ui->observeTimes_comboBox);
+    ui->observeTimes_comboBox->setItemDelegate(itemDelegate);
+    ui->observeTimes_comboBox->addItems(setting->value("observeTimes").replace("-",",").split("<>"));
+    ui->observeTimes_comboBox->setCurrentIndex(setting->value("observeTimesCheckedIndex").toInt());
+    ui->onTime_sendDelay_edit->setText(setting->value("delayOfOnTime"));
+    ui->observeTime_sendDelay_edit->setText(setting->value("delayOfObserveTime"));
+    ui->shiftTime_edit->setText(setting->value("shiftTime"));
+    setting->value("isISOSPathLocal") == "true" ?
+          ui->localpath_radioButton->animateClick(10):
+          ui->netpath_radioButton->animateClick(10);
+    ui->isospath_lineEdit->setText(setting->value("ISOSPath"));
+    setting->value("ISOSPathNeedAccount") == "true" ?
+          ui->filesys_account_checkBox->setChecked(true):
+          ui->filesys_account_checkBox->setChecked(false);
+    ui->filesys_username_edit->setText(setting->value("ISOSPathUsername"));
+    ui->filesys_password_edit->setText(setting->value("ISOSPathPassword"));
+    ui->db_address_edit->setText(setting->value("dbHost"));
+    ui->db_port_edit->setText(setting->value("dbPort"));
+    ui->db_account_edit->setText(setting->value("dbAccount"));
+    ui->db_password_edit->setText(setting->value("dbPassword"));
 }
+
+//void SettingWidget::initComboBoxView(){
+//    QComboBox *comboBox = ui->isostpath_comboBox;
+//    QListWidget *isostpath_comboBox_ListWidget  = new QListWidget(ui->isostpath_comboBox);
+//    isostpath_comboBox_ListWidget->setItemDelegate(new NoFocusFrameDelegate(ui->observeTimes_comboBox));
+//    ui->isostpath_comboBox->setEditable(true);
+//    ui->isostpath_comboBox->setModel(isostpath_comboBox_ListWidget->model());
+//    ui->isostpath_comboBox->setView(isostpath_comboBox_ListWidget);
+//    ui->isostpath_comboBox->setMaxVisibleItems(10);
+
+
+//    QListWidget* isostpath_comboBox_view = static_cast<QListWidget* >(ui->isostpath_comboBox->view());
+//    for (int i = 0; i < 3; ++i)
+//        {
+//            AHQListWidgetItem *item = new AHQListWidgetItem(isostpath_comboBox_view,QListWidgetItem::Type);
+//            item->setData(Qt::ItemDataRole::DisplayRole,QVariant("Account:"+QString::number(i)));
+//            isostpath_comboBox_view->setItemWidget(item,item->getWidget());
+//            //item->getWidget()->show();
+//            //isostpath_comboBox_view->addItem(item);
+//        }
+//    ui->isostpath_comboBox->setCurrentIndex(0);
+
+//}
 
 
 void SettingWidget::treeWidget_itemExpanded(QTreeWidgetItem *item)
@@ -192,10 +252,20 @@ void SettingWidget::connectFilePathSettingPageSingles(){
                   SIGNAL(stateChanged(int)),
                   this,
                   SLOT(filesysAccountCheckBoxStateChanged(int)));
-    this->connect(ui->isospath_change_Button,
+    this->connect(ui->isospath_change_btn,
                   SIGNAL(clicked(bool)),
                   this,
                   SLOT(isospathChangeButtonClicked(bool)));
+
+    this->connect(ui->isospath_lineEdit,
+                  SIGNAL(editingFinished()),
+                  this,
+                  SLOT(isospathLineEditTextChanged()));
+    this->connect(ui->isospath_lineEdit,
+                  SIGNAL(editingFinished()),
+                  this,
+                  SLOT(isospathLineEditTextChanged()));
+
 }
 void SettingWidget::connectDBSettingPageSingles(){
 
@@ -251,59 +321,74 @@ void SettingWidget::filesysAccountCheckBoxStateChanged(int state){
 
 void SettingWidget::isospathChangeButtonClicked(bool checked){
     Q_UNUSED(checked);
-    QString directory =
-            QDir::toNativeSeparators(QFileDialog::getExistingDirectory(this, tr("Find Files"), QDir::currentPath()));
-    qDebug() << directory;
-        if (!directory.isEmpty()) {
-//            QString disk(directory.mid(0,1));
-//            QFile diskPath(disk+":");
-//            QFileInfo fi(directory);
-//            if(fi.exists()){
-//                //QDir dir(directory);
-//                if(directory == fi.absoluteFilePath()){
-//                    qDebug() << directory <<  " -- SAME";
-//                }else{
-//                    qDebug() << directory <<  " -- " <<  fi.canonicalFilePath()
-//                             <<" @-@" << fi.absoluteDir()<< " @-@ " << fi.absoluteFilePath()
-//                             <<"@_@"
-//                               <<" @-@" << fi.completeBaseName();
-
-////                             << QDir(directory).root()
-////                             <<"@_@"
-////                             << QDir(directory).rootPath()
-////                             <<"@_@"
-////                             << QDir(directory).dirName();
-//                   QFileInfoList fl(QDir::drives());
-//                   QString buffer("");
-//                   for(QFileInfo filei:fl){
-
-//                       if(filei.isSymLink()){
-//                          buffer += filei.symLinkTarget();
-//                       }else{
-//                          buffer += " "+filei.completeBaseName();
-//                       }
-
-//                   }
-//                   qDebug() << buffer;
-//                }
-
-//            }
-
-            if (ui->isostpath_comboBox->findText(directory) == -1){
-//                ui->isostpath_comboBox->addItem(directory);
-                QListWidget* isostpath_comboBox_view = static_cast<QListWidget* >(ui->isostpath_comboBox->view());
-                AHQComboboxItem *item = new AHQComboboxItem(ui->isostpath_comboBox);
-                item->setLabelContent(directory);
-                QListWidgetItem* widgetItem = new QListWidgetItem(isostpath_comboBox_view);
-                isostpath_comboBox_view->setItemWidget(widgetItem,item);
+    QString lineEditText = ui->isospath_lineEdit->text();
+    QString directory("");
+    QString path(QDir::currentPath());
+    if(!lineEditText.isEmpty()){
+        lineEditText = lineEditText.trimmed();
+        if(!lineEditText.isEmpty()){
+            QFile currectPath(lineEditText);
+            QFileInfo currectPathInfo(currectPath);
+            if(currectPath.exists() && currectPathInfo.isDir()){
+              path = currectPath.fileName();
             }
-
-            ui->isostpath_comboBox->setCurrentIndex(ui->isostpath_comboBox->findText(directory));
         }
-    qDebug() << directory << "aaa";
+    }
+    directory =
+            QDir::toNativeSeparators(QFileDialog::getExistingDirectory(this, tr("Find Files"), path));
+    qDebug() << directory;
+    if (!directory.isEmpty()) {
+            ui->isospath_lineEdit->setText(directory);
+    }
+    isospathLineEditTextChanged();
+
 }
 
+void SettingWidget::isospathLineEditTextChanged(){
+    //qDebug() << "ddd";
+    QString text(ui->isospath_lineEdit->text());
+    QString lineEditText = text;
+    QString directory("");
+    QString path(QDir::currentPath());
+    if(!lineEditText.isEmpty()){
+        lineEditText = lineEditText.trimmed();
+        if(!lineEditText.isEmpty()){
+            QFile currectPath(lineEditText);
+            QFileInfo currectPathInfo(currectPath);
+            if(currectPath.exists() && currectPathInfo.isDir()){
+              path = currectPath.fileName();
 
+              QFont font = ui->isospath_lineEdit->font();
+              QFontMetrics lineEditFontMetrics(font);
+              int totalPixSize = lineEditFontMetrics.width(text);
+              //int placeholderPixSize = lineEditFontMetrics.width("···");
+              QString disPlayText = text;
+              QString tempString(disPlayText);
+              QRegExp reg("\\\\[^\\\\]+$");
+              QString tail("\\ISOS");
+              if(reg.indexIn(tempString,0) != -1){
+                tail = tempString.mid(reg.indexIn(tempString,0));
+                tempString = tempString.remove("\\\\[^\\\\]+$");
+              }
+              int lastIndex = -1;
+              int displayPixSize = -1;
+              int maxPixSize = ui->isospath_lineEdit->width()-30;
+              if(totalPixSize >= maxPixSize){
+                  do{
+                      lastIndex = tempString.lastIndexOf("\\\\[^\\\\]+$");
+                      tempString = tempString.remove(lastIndex,tempString.length()-lastIndex);
+                      disPlayText = tempString+"\\···"+tail;
+                      displayPixSize = lineEditFontMetrics.width(disPlayText);
+                  }while(lineEditFontMetrics.width(disPlayText) >= ui->isospath_lineEdit->width()-30);        ui->isospath_lineEdit->setText("ddddddddd");
+              }
+              ui->isospath_lineEdit->setText(disPlayText);
+              qDebug() << "path: " << path;
+              return ;
+            }
+        }
+    }
+    ui->isospath_lineEdit->setText("invalidpath");
+}
 
 void SettingWidget::mousePressEvent(QMouseEvent *event)
 {
