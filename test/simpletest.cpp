@@ -6,40 +6,40 @@ SimpleTest::~SimpleTest(){}
 
 
 
-void SimpleTest::testTransformDateFromSOMFileName(){
-    QFETCH(QString,SMOFileName);
+void SimpleTest::testDateFromSOMFileName(){
+    QFETCH(QString,AMFileName);
     QFETCH(QString,DateShouldBe);
 
-    QCOMPARE(AHQC::TimeUtil::SMOFileName2DT(SMOFileName).toString("yyyyMMdd"),DateShouldBe);
+    QCOMPARE(AHQC::FileNameUtil::AMFileName2Date(AMFileName).toString("yyyyMMdd"),DateShouldBe);
 
 
 
 }
-void SimpleTest::testTransformDateFromSOMFileName_data(){
-    QTest::addColumn<QString>("SMOFileName");
+void SimpleTest::testDateFromSOMFileName_data(){
+    QTest::addColumn<QString>("AMFileName");
     QTest::addColumn<QString>("DateShouldBe");
-    QTest::newRow("SMOFileName") << "AWS_M_Z_58342_20150724.txt" << "20150724";
+    QTest::newRow("AMFileName") << "AWS_M_Z_58342_20150724.txt" << "20150724";
 
 }
 
-void SimpleTest::testTransformDate2SOMFileName(){
-    QFETCH(QDateTime,date);
-    QFETCH(QString,SMOFileNameShouldBe);
+void SimpleTest::testDate2SOMFileName(){
+    QFETCH(QDateTime,datetime);
+    QFETCH(QString,AMFileNameShouldBe);
 
-    QCOMPARE(AHQC::TimeUtil::DT2SMOFileName(date),SMOFileNameShouldBe);
+    QCOMPARE(AHQC::FileNameUtil::Date2AMFileName(datetime.date()),AMFileNameShouldBe);
 }
-void SimpleTest::testTransformDate2SOMFileName_data(){
-    QTest::addColumn<QDateTime>("date");
-    QTest::addColumn<QString>("SMOFileNameShouldBe");
+void SimpleTest::testDate2SOMFileName_data(){
+    QTest::addColumn<QDateTime>("datetime");
+    QTest::addColumn<QString>("AMFileNameShouldBe");
     QTest::newRow("date") << QDateTime::fromString("20150724","yyyyMMdd") << "AWS_M_Z_58342_20150724.txt";
 }
 
-void SimpleTest::testTranslateDateTime2AWSDay(){
+void SimpleTest::testDateTime2AWSDay(){
     QFETCH(QDateTime,dateTime);
     QFETCH(QString,AWSDayShouldBe);
     //QCOMPARE(AHQC::TimeUtil::translateDateTime2AWSDay(dateTime).toString("yyyyMMdd"),AWSDayShouldBe);
 }
-void SimpleTest::testTranslateDateTime2AWSDay_data(){
+void SimpleTest::testDateTime2AWSDay_data(){
     QTest::addColumn<QDateTime>("dateTime");
     QTest::addColumn<QString>("AWSDayShouldBe");
     QTest::newRow("dateTime") << QDateTime::fromString("20181017193351","yyyyMMddHHmmss") << "20181017";
@@ -139,27 +139,39 @@ void SimpleTest::testReadAMFile(){
     TimeRange focusedTimeRange = AHQC::TimeUtil::getFocusedTimeRange(&dbScheme);
     QList<QDateTime> focusedHours = AHQC::TimeUtil::getFocusedHours(focusedTimeRange);
     QList<QString> amFileNames = AHQC::FileNameUtil::getAMFileNamesFormFocusedHours(focusedHours);
+    if(amFileNames.isEmpty()){
+        qDebug() << "no amFiles between "<< focusedTimeRange.toQString() << "found in " << AHQC::isosPath;
+        return;
+    }
     QString line("beforeInit");
     QList<AWSMinuteData> awsMinuteDatas;
     for(QString amFileName:amFileNames){
         QFile amFile(amFileName);
-        if(amFile.open(QIODevice::ReadOnly|QIODevice::Text)){
-            QTextStream amIn(&amFile);
-            QDate awsDay = QDate::fromString(amFileName.replace(AHQC::FileNameUtil::amFileFolderPath,""),AHQC::TimeUtil::sdf4SMOFile);
-
-            if(!amIn.atEnd()){
-                line = amIn.readLine();
-                while(!amIn.atEnd()){
+        if(amFile.exists()){
+            if(amFile.open(QIODevice::ReadOnly|QIODevice::Text)){
+                QTextStream amIn(&amFile);
+                QDate awsDay = AHQC::FileNameUtil::AMFileName2Date(amFileName);
+                if(!amIn.atEnd()){
                     line = amIn.readLine();
-                    if(line.compare("") != 0 && line.at(0) != '-'){
-                        AWSMinuteData awsMinuteData(awsDay,line);
-                        awsMinuteDatas.append(awsMinuteData);
+                    while(!amIn.atEnd()){
+                        line = amIn.readLine();
+                        if(line.compare("") != 0 && line.at(0) != '-'){
+                            AWSMinuteData awsMinuteData(awsDay,line);
+                            awsMinuteDatas.append(awsMinuteData);
+                        }
                     }
                 }
+                amFile.close();
+            }else{
+                qDebug() << "file: " << amFileName << "can't open";
+                return ;
             }
-            amFile.close();
+        }else{
+            qDebug() << "file: " << amFileName << "not exists";
+            return ;
         }
     }
+
     qDebug() << awsMinuteDatas.first().toString();
     if(awsMinuteDatas.length()!=0){
         QCOMPARE(awsMinuteDatas.first().toString(),AMDataShouldBe);
@@ -202,6 +214,34 @@ void SimpleTest::testReadNull(){
 void SimpleTest::testReadNull_data(){
     QTest::addColumn<QString>("LineShouldBe");
     QTest::newRow("line")   << "00";
+}
+
+void SimpleTest::testGetZFileNames(){
+    QFETCH(QString,FileNamesShouldBe);
+//    DayBoundScheme dbScheme;
+    TimeRange focusedTimeRange = TimeRange(
+                QDateTime::fromString("20170930193000","yyyyMMddHHmmss"),
+                QDateTime::fromString("20171201203000","yyyyMMddHHmmss"),
+                timeRange_bound::BEND);
+
+    QList<QDateTime> focusedHours = AHQC::TimeUtil::getFocusedHours(focusedTimeRange);
+    QList<QString> zFileNames = AHQC::FileNameUtil::getZFileNamesFormFocusedHours(focusedHours);
+    if(zFileNames.isEmpty()){
+        qDebug() << "no zFiles between "<< focusedTimeRange.toQString() << "found in " << AHQC::isosPath;
+    }
+    QString qsb;
+    for(QString ss : zFileNames){
+        if(ss.indexOf("FTM-CC[A-Z]") != -1){
+            qDebug() << ss;
+            qsb += " " + ss + " ";
+        }
+    }
+    QCOMPARE(qsb,FileNamesShouldBe);
+    QString qsb1;
+}
+void SimpleTest::testGetZFileNames_data(){
+    QTest::addColumn<QString>("FileNamesShouldBe");
+    QTest::newRow("Hours")   << "00";
 }
 
 

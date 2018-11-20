@@ -27,12 +27,12 @@ public slots:
 private slots:
 
 
-    void testTransformDateFromSOMFileName();
-    void testTransformDateFromSOMFileName_data();
-    void testTransformDate2SOMFileName();
-    void testTransformDate2SOMFileName_data();
-    void testTranslateDateTime2AWSDay();
-    void testTranslateDateTime2AWSDay_data();
+    void testDateFromSOMFileName();
+    void testDateFromSOMFileName_data();
+    void testDate2SOMFileName();
+    void testDate2SOMFileName_data();
+    void testDateTime2AWSDay();
+    void testDateTime2AWSDay_data();
     void testGetFocusedTimeRange();
     void testGetFocusedTimeRange_data();
 
@@ -53,6 +53,9 @@ private slots:
 
     void testReadAMFile();
     void testReadAMFile_data();
+
+    void testGetZFileNames();
+    void testGetZFileNames_data();
 
 
 //    void testExecuteSqlScript();

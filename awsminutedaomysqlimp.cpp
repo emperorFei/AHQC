@@ -207,9 +207,8 @@ int AWSMinuteDAOMySqlImp::getRecordsCount(const TimeRange &tr){
 int AWSMinuteDAOMySqlImp::findTempisByObserveTime(const QDateTime &observeTime){
     int temp = 0;
     QSqlQuery query(*conn);
-
+    query.prepare(findTByObserveTimeSql);
     query.addBindValue(QVariant(observeTime));
-
     query.exec();
     if(query.next()) {
         temp = query.value(0).toInt();

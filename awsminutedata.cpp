@@ -1,4 +1,4 @@
-#include "awsminutedata.h"
+﻿#include "awsminutedata.h"
 const int AWSMinuteData::validateIndexs[] = {15,17,18,22,24,25,26,27,28,29,30,31,32,33,34,};
 const int AWSMinuteData::nestenIndex[] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,16,19,20,21,40,41,42,43,44,45,46};
 
@@ -87,7 +87,7 @@ QDebug& operator<<(QDebug &debug, const AWSMinuteData &obj){
 }
 
 QString operator+(const QString &string,const AWSMinuteData &obj){
-    return string + obj.getObserveTime().toString("yyyy年MM月dd日HH时mm分")
+    return string + obj.getObserveTime().toString(QString::fromLocal8Bit("yyyy年MM月dd日HH时mm分"))
             + " IntData: "+ AHQC::PrintUtil::printList(obj.getData())
             + " Weatherphcod: "+obj.getWeatherphcode()
             + " DataQulity: "+obj.getDataQulity();

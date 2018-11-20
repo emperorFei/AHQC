@@ -1,24 +1,2573 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow" >
-  <property name="geometry" >
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>1280</width>
+    <height>721</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="minimumSize">
+   <size>
+    <width>1280</width>
+    <height>720</height>
+   </size>
+  </property>
+  <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QMenuBar" name="menuBar" />
-  <widget class="QToolBar" name="mainToolBar" />
-  <widget class="QWidget" name="centralWidget" />
-  <widget class="QStatusBar" name="statusBar" />
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>380</y>
+      <width>381</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="title">
+     <string>风</string>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <property name="spacing">
+      <number>6</number>
+     </property>
+     <item row="2" column="2">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_5">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>风向</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QLabel" name="label_8">
+       <property name="text">
+        <string>风速</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="3">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>时间</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>瞬时</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>10min</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_6">
+       <property name="text">
+        <string>最大</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="label_7">
+       <property name="text">
+        <string>极大</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="label_9">
+       <property name="text">
+        <string>过去6小时极大</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="label_10">
+       <property name="text">
+        <string>过去12小时极大</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_2">
+       <property name="rightText">
+        <string>中文1</string>
+       </property>
+       <property name="leftText">
+        <string>左中文</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="MyDoubleLabel" name="myDoubleLabel">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_6">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_7">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="3">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_16">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_8">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_4">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="3">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_17">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_14">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_13">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="3">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_15">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="2">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_12">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="2">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_11">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="2">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_10">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>2min</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_18">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="3">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_19">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="2">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_20">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="1">
+      <spacer name="verticalSpacer_11">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>1060</x>
+      <y>560</y>
+      <width>41</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-style:solid;
+border-width:3px;
+border-color: rgb(85, 255, 0);
+
+background-color: rgb(0, 255, 255);
+
+border-top-left-radius:24;
+border-bottom-left-radius:24;
+border-top-right-radius:24;
+border-bottom-right-radius:24;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="label_13">
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_14">
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>530</y>
+      <width>82</width>
+      <height>14</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+.QWidget{
+	
+	background-color: lightgrey;
+	border-style:solid;
+	border-color: grey;
+	border-width:1px;
+	border-top-left-radius:8px;
+	border-bottom-left-radius:8px;
+	border-top-right-radius:8px;
+	border-bottom-right-radius:8px;
+}
+#line{
+	border-style:solid;
+	border-color: rgb(255, 255, 0);
+	border-width:10;
+	background-color:#EEF1F7;
+	max-width : 55px;
+	max-height:20px;
+}
+
+
+
+
+
+
+</string>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="label_11">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="margin">
+        <number>1</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="Line" name="line">
+       <property name="frameShadow">
+        <enum>QFrame::Plain</enum>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_12">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>/////</string>
+       </property>
+       <property name="margin">
+        <number>1</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>190</y>
+      <width>261</width>
+      <height>181</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>气压</string>
+    </property>
+    <layout class="QGridLayout" name="gridLayout_2">
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_16">
+       <property name="text">
+        <string>本站</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QLabel" name="label_22">
+       <property name="text">
+        <string>时间</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_17">
+       <property name="text">
+        <string>海平面</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_19">
+       <property name="text">
+        <string>24小时变压</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="label_21">
+       <property name="text">
+        <string>气压值（hpa）</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_18">
+       <property name="text">
+        <string>3小时变压</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="label_20">
+       <property name="text">
+        <string>最大</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="label_15">
+       <property name="text">
+        <string>最小</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_43">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_44">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_45">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_69">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_70">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_71">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="2">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_72">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="2">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_73">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <spacer name="verticalSpacer_10">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>261</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>温度</string>
+    </property>
+    <layout class="QGridLayout" name="gridLayout_3">
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_26">
+       <property name="text">
+        <string>24小时变温</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="label_28">
+       <property name="text">
+        <string>温度值0.1℃</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QLabel" name="label_29">
+       <property name="text">
+        <string>时间</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_23">
+       <property name="text">
+        <string>正点</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="label_24">
+       <property name="text">
+        <string>最高</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="label_25">
+       <property name="text">
+        <string>最低</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_27">
+       <property name="text">
+        <string>24小时最高</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_30">
+       <property name="text">
+        <string>24小时最低</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="3" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_74">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_75">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_76">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_77">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="2">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_78">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="2">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_79">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_83">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_82">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_4">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>10</y>
+      <width>261</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>湿度</string>
+    </property>
+    <layout class="QGridLayout" name="gridLayout_4">
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_32">
+       <property name="text">
+        <string>正点湿度</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_36">
+       <property name="text">
+        <string>水汽压</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_35">
+       <property name="text">
+        <string>最小</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_37">
+       <property name="text">
+        <string>露点温度</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QLabel" name="label_34">
+       <property name="text">
+        <string>时间</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="label_33">
+       <property name="text">
+        <string>值</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="2" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_81">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_87">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_86">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_85">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_84">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_5">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>190</y>
+      <width>291</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>草温＆地表温度</string>
+    </property>
+    <layout class="QGridLayout" name="gridLayout_5">
+     <item row="0" column="2">
+      <widget class="QLabel" name="label_41">
+       <property name="text">
+        <string>时间</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_38">
+       <property name="text">
+        <string>最小</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="label_40">
+       <property name="text">
+        <string>值（0.1℃）</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_31">
+       <property name="text">
+        <string>正点草温</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_39">
+       <property name="text">
+        <string>最大</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_40">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="label_42">
+       <property name="text">
+        <string>正点地面</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="label_43">
+       <property name="text">
+        <string>最小</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="label_44">
+       <property name="text">
+        <string>最大</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_64">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="2">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_46">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="2">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_41">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_51">
+       <property name="text">
+        <string>过去12小时最低</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_55">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_42">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_65">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_66">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_67">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_68">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0">
+      <spacer name="verticalSpacer_5">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_6">
+    <property name="geometry">
+     <rect>
+      <x>750</x>
+      <y>10</y>
+      <width>141</width>
+      <height>231</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>浅层＆深层</string>
+    </property>
+    <layout class="QGridLayout" name="gridLayout_6">
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_49">
+       <property name="text">
+        <string>15cm</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_47">
+       <property name="text">
+        <string>5cm</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_48">
+       <property name="text">
+        <string>10cm</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="label_45">
+       <property name="text">
+        <string>值（0.1℃）</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_50">
+       <property name="text">
+        <string>20cm</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="label_46">
+       <property name="text">
+        <string>40cm</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="label_52">
+       <property name="text">
+        <string>80cm</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="label_53">
+       <property name="text">
+        <string>160cm</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0">
+      <widget class="QLabel" name="label_54">
+       <property name="text">
+        <string>320cm</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_91">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_88">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_90">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_89">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_92">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_93">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_94">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_95">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="1">
+      <spacer name="verticalSpacer_9">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_7">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>10</y>
+      <width>221</width>
+      <height>221</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>降水＆蒸发</string>
+    </property>
+    <layout class="QGridLayout" name="gridLayout_7">
+     <item row="8" column="0">
+      <widget class="QLabel" name="label_63">
+       <property name="text">
+        <string>人工加密周期降水量</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="label_56">
+       <property name="text">
+        <string>小时蒸发</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="label_62">
+       <property name="text">
+        <string>人工加密周期</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_103">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_58">
+       <property name="text">
+        <string>3h降水量</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_59">
+       <property name="text">
+        <string>6h降水量</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_57">
+       <property name="text">
+        <string>1h降水量</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="label_61">
+       <property name="text">
+        <string>24h降水量</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="label_55">
+       <property name="text">
+        <string>值（0.1mm）</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_60">
+       <property name="text">
+        <string>12h降水量</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_96">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_100">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_102">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_101">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_97">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_98">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_99">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="0">
+      <spacer name="verticalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_8">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>250</y>
+      <width>181</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>能见度</string>
+    </property>
+    <layout class="QGridLayout" name="gridLayout_8">
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_69">
+       <property name="text">
+        <string>人工</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QLabel" name="label_65">
+       <property name="text">
+        <string>时间</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="label_64">
+       <property name="text">
+        <string>值（M）</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_68">
+       <property name="text">
+        <string>最小</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_108">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_104">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_66">
+       <property name="text">
+        <string>1min</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_67">
+       <property name="text">
+        <string>10min</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_80">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_107">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_105">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <spacer name="verticalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_9">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>380</y>
+      <width>161</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>云</string>
+    </property>
+    <layout class="QGridLayout" name="gridLayout_9">
+     <item row="5" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_25">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_24">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_23">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_22">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="label_75">
+       <property name="text">
+        <string>云状编码</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_21">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_72">
+       <property name="text">
+        <string>低云量</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_73">
+       <property name="text">
+        <string>云高</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="label_70">
+       <property name="text">
+        <string>值</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_71">
+       <property name="text">
+        <string>总云量</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_74">
+       <property name="text">
+        <string>编报云量</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <spacer name="verticalSpacer_8">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_10">
+    <property name="geometry">
+     <rect>
+      <x>920</x>
+      <y>250</y>
+      <width>191</width>
+      <height>281</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>其它</string>
+    </property>
+    <layout class="QGridLayout" name="gridLayout_11">
+     <item row="5" column="0">
+      <widget class="QLabel" name="label_80">
+       <property name="text">
+        <string>冻土1下限</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="label_76">
+       <property name="text">
+        <string>值</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_79">
+       <property name="text">
+        <string>冻土1上限</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_34">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_35">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_38">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_37">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_36">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_39">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_29">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_33">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_31">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_30">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_90">
+       <property name="text">
+        <string>地面状态</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0">
+      <widget class="QLabel" name="label_88">
+       <property name="text">
+        <string>最大冰雹直径</string>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="0">
+      <widget class="QLabel" name="label_87">
+       <property name="text">
+        <string>龙卷距离编码</string>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="0">
+      <widget class="QLabel" name="label_86">
+       <property name="text">
+        <string>龙卷方位编码</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="label_85">
+       <property name="text">
+        <string>冻土2下限</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="label_81">
+       <property name="text">
+        <string>冻土2上限</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_77">
+       <property name="text">
+        <string>雪深</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_78">
+       <property name="text">
+        <string>雪压</string>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="0">
+      <widget class="QLabel" name="label_89">
+       <property name="text">
+        <string>电线积冰直径</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_32">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="12" column="0">
+      <spacer name="verticalSpacer_7">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_11">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>510</y>
+      <width>161</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>编报相关</string>
+    </property>
+    <layout class="QGridLayout" name="gridLayout_10">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_84">
+       <property name="text">
+        <string>编报质控码</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_83">
+       <property name="text">
+        <string>wwW1W2</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_27">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_28">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="MyDoubleLabel" name="myDoubleLabel_26">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_82">
+       <property name="text">
+        <string>周期</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <spacer name="verticalSpacer_6">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QCalendarWidget" name="calendarWidget">
+    <property name="geometry">
+     <rect>
+      <x>930</x>
+      <y>10</y>
+      <width>248</width>
+      <height>197</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1280</width>
+     <height>23</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
  </widget>
- <layoutDefault spacing="6" margin="11" />
- <pixmapfunction></pixmapfunction>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>MyDoubleLabel</class>
+   <extends></extends>
+   <header>mydoublelabel.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

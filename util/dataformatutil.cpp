@@ -78,7 +78,7 @@ QString DataFormatUtil::removeZFileSectionID(const QString &zFileContent){
         return zFileContent;
     }
     for(const QString &sectionID : zFileSectionID){
-        zFileDataString = zFileDataString.replace(sectionID,"");
+        zFileDataString.replace(sectionID,"");
     }
     return zFileDataString;
 }

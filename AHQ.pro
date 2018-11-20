@@ -97,10 +97,15 @@ FORMS += \
 RESOURCES += \
     config.qrc \
     ico.qrc
-
+DEPENDPATH += $$PWD/lib
 DISTFILES += \
     configs/ItemCols.xml \
     configs/dataSetting.ini \
-    configs/uiSetting.ini \
+    configs/uiSetting.ini
+
+#LIBS += $$PWD/lib/libmydoublelabelplugin.a
+LIBS += $$PWD/lib/libmydoublelabelplugind.a
+#LIBS += $$PWD/lib/mydoublelabelplugin.lib
+INCLUDEPATH += $$PWD/include
 
 
