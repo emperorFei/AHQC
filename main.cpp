@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include <QApplication>
 #include <QSqlDatabase>
 #include <QMessageBox>
@@ -53,8 +53,7 @@ int main(int argc, char *argv[])
 //    oTimes = oTimes.replace("-",",");
 //    qDebug() << oTimes;
 
-    QString tremp = "adsd21aaaasd21";
-    qDebug() << tremp.replace("21","1CCC1");
+
 
     MainWindow w;
     w.show();

@@ -1,4 +1,4 @@
-#ifndef QTFEATURETEST_H
+﻿#ifndef QTFEATURETEST_H
 #define QTFEATURETEST_H
 
 #include <QObject>
@@ -7,6 +7,7 @@
 #include <QMap>
 #include <QDebug>
 #include <QDateTime>
+#include <QRegExp>
 
 class QtFeatureTest : public QObject
 {
@@ -20,7 +21,13 @@ signals:
 public slots:
 private slots:
     void testQString2Int();
-    void testQString2Int_data();
+    void testQString2Int_data();    
+    void testReadNull();
+    void testReadNull_data();
+    void testRegLookBehind();
+    void testRegLookBehind_data();
+
+
 };
 
 #endif // QTFEATURETEST_H

@@ -1,9 +1,10 @@
-#ifndef ZDATA_H
+﻿#ifndef ZDATA_H
 #define ZDATA_H
 
 #include <QDateTime>
 #include <QMap>
 #include "util/dataformatutil.h"
+#include "util/simpleutil.h"
 #include <QFile>
 #include <QTextStream>
 extern QDateTime unInitTime;
@@ -16,7 +17,9 @@ public:
     bool isTotalInited() const;
     QString value(const QString &key) const;
     static ZData fromZFile(const QString &zFileName);
+    QString toString();
 
+    ZData(const ZData &other);
     QDateTime getObserveTime() const;
     QDateTime getInsertTime() const;
     QDateTime getUpdateTime() const;

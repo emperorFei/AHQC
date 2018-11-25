@@ -330,10 +330,13 @@ void SimpleTest::testGetConnect_data(){
 
 }
 void SimpleTest::testSaveAWSMinuteData(){
-
+    QFETCH(AWSMinuteData,awsMinute);
+    QSqlDatabase *database = DBCenter::getDBByAccountType(DBCenter::AccountType::QIU);
+    AWSMinuteDAOMySqlImp awsDao(database);
+    awsDao.saveAWSMinuteData(awsMinute);
 }
 void SimpleTest::testSaveAWSMinuteData_data(){
-
+    
 }
 //void SimpleTest::testExecuteSqlScript(){
 

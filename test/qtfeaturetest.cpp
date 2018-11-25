@@ -1,4 +1,4 @@
-#include "qtfeaturetest.h"
+﻿#include "qtfeaturetest.h"
 
 QtFeatureTest::QtFeatureTest(QObject *parent) : QObject(parent)
 {
@@ -56,8 +56,6 @@ void QtFeatureTest::testQString2Int(){
 
     if(v2 == QString()){
         qDebug() << "1";
-        int v2Int = v2.toInt(ok1);
-       QString S =  "map: ";
     }
     if(v2 == QString("")){
         qDebug() << "2";
@@ -93,4 +91,58 @@ void QtFeatureTest::testQString2Int_data(){
     QTest::addColumn<int>("intShouldBe");
     QTest::newRow("intShouldBe") << "C" << 12;
 
+}
+void QtFeatureTest::testReadNull(){
+
+    QMap<QString,int> map;
+    QList<QString> list;
+    int mapLen = map.size();
+    int listLen = list.length();
+    int cc = 20;
+
+    map.insert("da",10);
+    list.append("asc");
+    QFETCH(QString,LineShouldBe);
+
+    QFile amFile("D:/testReadNull.txt");
+    if(amFile.open(QIODevice::ReadOnly|QIODevice::Text)){
+         QTextStream amIn(&amFile);
+         QString line1 = amIn.readLine();
+         int i2 = 10;
+         QString line2 = amIn.readLine();
+         int i3 = 10;
+         QString line3 = amIn.readLine();
+         int i4 = 10;
+    }
+    //GlobalSetting * global = GlobalSetting::getInstance();
+    //QCOMPARE(QString::number(*global),GlobalSettingShouldBe);
+    QCOMPARE("aaaa",LineShouldBe.toStdString().c_str());
+    int i = 0;//debug before flow end;
+}
+void QtFeatureTest::testReadNull_data(){
+    QTest::addColumn<QString>("LineShouldBe");
+    QTest::newRow("line")   << "00";
+}
+void QtFeatureTest::testRegLookBehind(){
+    QString target("_20170120120001_");
+    QRegExp reg1("[0-9]{14}");
+    QRegExp reg2("(?<=_)[0-9]{14}");
+    QRegExp reg3("(?<=_)[0-9]{14}(?=_)");
+    QRegExp reg4("(?<=_)[0-9]{14}(?<=_)");
+    QRegExp reg5("[0-9]{14}(?=_)");
+    int index1 = reg1.indexIn(target);
+    int len1 = reg1.matchedLength();
+    int index2 = reg2.indexIn(target);
+    int len2 = reg2.matchedLength();
+    int index3 = reg3.indexIn(target);
+    int len3 = reg3.matchedLength();
+    int index4 = reg4.indexIn(target);
+    int len4 = reg4.matchedLength();
+    int index5 = reg5.indexIn(target);
+    int len5 = reg5.matchedLength();
+    QString s1(target.mid(index5,len5));
+    int end = 10;
+
+}
+void QtFeatureTest::testRegLookBehind_data(){
 }

@@ -1,8 +1,9 @@
-#ifndef SIMPLEUTIL_H
+﻿#ifndef SIMPLEUTIL_H
 #define SIMPLEUTIL_H
 #include "QDateTime"
 #include "QTime"
 #include <QList>
+#include <QMap>
 #include "simpleobject.h"
 #include "focusScheme/focusscheme.h"
 #include <QDebug>
@@ -29,8 +30,8 @@ namespace AHQC {
         extern QTime changeShiftsTime;
         extern int OBInterval;
 
-        QDate translateDateTime2AWSDay(QDateTime dateTime);
-        QDate translateDateTime2AWSMonth(QDateTime dateTime);
+        QDate dateTime2AWSDay(const QDateTime &dateTime);
+        QDate dateTime2AWSMonth(const QDateTime &dateTime);
         TimeRange getFocusedTimeRange(FocusScheme *focusScheme);
         QDateTime getPreviousDayBound(QDateTime gaveTime);
         QList<QDateTime> getFocusedHours(TimeRange focusedTimeRange);
@@ -43,9 +44,10 @@ namespace AHQC {
     namespace FileNameUtil {
         QDate AMFileName2Date(const QString &AMFileName);
         QString Date2AMFileName(const QDate &date);
-        QDateTime ZFileName2DT(const QString &ZFileName);
-        QString DT2ZFileName(const QDateTime &dateTime);
-
+        QDateTime ZFileName2DateTime(const QString &ZFileName);
+        QString DateTime2ZFileName(const QDateTime &dateTime);
+        QString AMFUllName2ShortName(const QString &amFullName);
+        QString zFUllName2ShortName(const QString &zFullName);
         QList<QString> getAMFileNamesFormFocusedHours(QList<QDateTime> foucsedHours);
         QList<QString> getZFileNamesFormFocusedHours(QList<QDateTime> foucsedHours);
         QList<QString> getAMFileNamesFormFocusedTimeRange();
@@ -67,19 +69,36 @@ namespace AHQC {
             return temp;
         }
 
-       template<class T>
+        template<class T>
         QString printList(QList<T> const  &list){
             QString temp("");
             for(T t:list){
-
                 temp = temp + t;
                 temp = temp+" ";
             }
             return temp;
         }
+        // argument types can differ but must be compatible
+        template <typename A, typename B>
+        int flexibleCompare(const A& v1, const B& v2)
+        {
+            if (v1 < v2) return -1;
+            if (v2 < v1) return 1;
+            return 0;
+        }
+
+//        template <typename K, typename V> QMap<K,V>::const_iterator;
+        template <typename K, typename V>
+        QString printMap(QMap<K,V> const &map){
+          QString temp("QMap");
+////            auto key = map.keyBegin();
+////            temp += map.value(*key);
+           return temp;
+        }
 
     }
 }
+template QString AHQC::PrintUtil::printMap<QString,QString>(const  QMap<QString,QString>  &map);
 template QString AHQC::PrintUtil::printList<int>(const  QList<int>  &list);
 //#include"simpleutil.cpp"
 #endif // SIMPLEUTIL_H

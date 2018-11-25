@@ -23,7 +23,7 @@ int AHQC::TimeUtil::OBInterval = 6;
 
 
 QDate AHQC::FileNameUtil::AMFileName2Date(const QString &AMFileName){
-    if(AMFileName.isEmpty()){
+    if(!AMFileName.isEmpty()){
         int startIndex = amFileNameReg.indexIn(AMFileName);
         int len = AMFileName.length() - startIndex;
         QString usingSdf4AMFile(QString(AHQC::TimeUtil::sdf4AMFile).replace("#{stationNum}",AHQC::stationNo));
@@ -39,36 +39,61 @@ QString AHQC::FileNameUtil::Date2AMFileName(const QDate &date){
     return AMFileFullNameTemplateNeedDate.replace("#{Date}",date.toString("yyyyMMdd"));
 }
 
-QDateTime AHQC::FileNameUtil::ZFileName2DT(const QString &ZFileName){
-    if(ZFileName.isEmpty()){
+QDateTime AHQC::FileNameUtil::ZFileName2DateTime(const QString &ZFileName){
+    if(!ZFileName.isEmpty()){
         int startIndex = zFileNameReg.indexIn(ZFileName);
         int len = ZFileName.length() - startIndex;
         QString zFileNameWithoutPath = ZFileName.mid(startIndex,len);
-        QRegExp datatimeStringReg("(?<=_)[0-9]{12}(?=_)");
+        QRegExp datatimeStringReg("[0-9]{14}");
         int datatimeStringIndex =  datatimeStringReg.indexIn(zFileNameWithoutPath);
         if(datatimeStringIndex >= 0){
-            return QDateTime::fromString(zFileNameWithoutPath.mid(datatimeStringIndex,12),"yyyyMMddHHmmss");
+            QDateTime utcDateTime(
+                        QDateTime::fromString(zFileNameWithoutPath.mid(datatimeStringIndex,14)
+                                              ,"yyyyMMddHHmmss"));
+            QDateTime observeTime(utcDateTime.addSecs(60*60*8));
+            return observeTime;
         }
     }
     return QDateTime();
 }
 
-QString AHQC::FileNameUtil::DT2ZFileName(const QDateTime &dateTime){
+QString AHQC::FileNameUtil::DateTime2ZFileName(const QDateTime &dateTime){
+    QDateTime utcTime(dateTime.addSecs(-60*60*8));
     QString ZFileFullNameTemplateNeedTime(QString(AHQC::ZFileFullNameTemplate)
                                             .replace("#{isosPath}",AHQC::isosPath)
-                                            .replace("#{stationNum}",AHQC::stationNo));
-    return ZFileFullNameTemplateNeedTime.replace("#{DateTime}",dateTime.toUTC().toString("yyyyMMddHHmmss"));
+                                            .replace("#{stationNum}",AHQC::stationNo)
+                                            .replace("#{ccx}",""));
+    QString zFileName = ZFileFullNameTemplateNeedTime.replace("#{DateTime}",utcTime.toString("yyyyMMddHHmmss"))
+                                        .replace("#{month}",AHQC::TimeUtil::dateTime2AWSMonth(dateTime).toString("yyyyMM"));
+    QString zFileNameCCX = AHQC::FileNameUtil::findCCXZFileNameFromPlanFileName(zFileName);
+    return zFileNameCCX;
 }
-
-QDate AHQC::TimeUtil::translateDateTime2AWSDay(QDateTime dateTime){
+QString AHQC::FileNameUtil::AMFUllName2ShortName(const QString &amFullName){
+    if(!amFullName.isEmpty()){
+        int startIndex = amFileNameReg.indexIn(amFullName);
+        int len = amFullName.length() - startIndex;
+        QString amFileNameWithoutPath = amFullName.mid(startIndex,len);
+        return amFileNameWithoutPath;
+    }
+    return QString();
+}
+QString AHQC::FileNameUtil::zFUllName2ShortName(const QString &zFullName){
+    if(!zFullName.isEmpty()){
+        int startIndex = zFileNameReg.indexIn(zFullName);
+        int len = zFullName.length() - startIndex;
+        QString zFileNameWithoutPath = zFullName.mid(startIndex,len);
+        return zFileNameWithoutPath;
+    }
+    return QString();
+}
+QDate AHQC::TimeUtil::dateTime2AWSDay(const QDateTime &dateTime){
      QDate awsDay = dateTime.date();
-
      if(dateTime.time() > dayDemarcationTime){
         awsDay = awsDay.addDays(1);
      }
      return awsDay;
 }
-QDate AHQC::TimeUtil::translateDateTime2AWSMonth(QDateTime dateTime){
+QDate AHQC::TimeUtil::dateTime2AWSMonth(const QDateTime &dateTime){
     QDate awsMonth = dateTime.date();
     if(dateTime.time() > dayDemarcationTime){
        awsMonth = awsMonth.addDays(1);
@@ -158,8 +183,8 @@ QList<QString> AHQC::FileNameUtil::getAMFileNamesFormFocusedHours(QList<QDateTim
     QList<QString> amFileNames;
     QDateTime firstHour = focursedHours.at(0);
     QDateTime lastHour = focursedHours.back();
-    QDate firstAWSDay = AHQC::TimeUtil::translateDateTime2AWSDay(firstHour);
-    QDate lastAWSDay = AHQC::TimeUtil::translateDateTime2AWSDay(lastHour);
+    QDate firstAWSDay = AHQC::TimeUtil::dateTime2AWSDay(firstHour);
+    QDate lastAWSDay = AHQC::TimeUtil::dateTime2AWSDay(lastHour);
     QDate tempDate = firstAWSDay;
     QString amFileNameTemplateNeedTime(QString(AHQC::AMFileFullNameTemplate)
                                               .replace("#{isosPath}",AHQC::isosPath)
@@ -186,7 +211,7 @@ QList<QString> AHQC::FileNameUtil::getZFileNamesFormFocusedHours(QList<QDateTime
     QDateTime firstHour = focursedHours.at(0);
     QDateTime lastHour = focursedHours.back();
     QDateTime tempHour(firstHour);
-    QDate firstAWSMonth = AHQC::TimeUtil::translateDateTime2AWSMonth(firstHour);
+    QDate firstAWSMonth = AHQC::TimeUtil::dateTime2AWSMonth(firstHour);
     //QDate lastAWSMonth = AHQC::TimeUtil::translateDateTime2AWSMonth(lastHour);
     QDate tempMonth(firstAWSMonth);
     QString tempMonthString(tempMonth.toString("yyyyMM"));

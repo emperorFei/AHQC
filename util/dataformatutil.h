@@ -1,7 +1,8 @@
-#ifndef DATAFORMATUTIL_H
+﻿#ifndef DATAFORMATUTIL_H
 #define DATAFORMATUTIL_H
 
 #include <QMap>
+#include <QRegExp>
 class ZDataDAOMysqlImp;
 class DataFormatUtil
 {
@@ -23,12 +24,14 @@ private:
     static QString removeZFileSectionID(const QString &zFileContent);
     static QMap<QString,QString> zFileDataString2zFileData(const QString &zFileDataString);
 
+
     static const QString zIntItem[];
     static const QString zStringItem[];
     static const QString zTimeItem[];
     static const QString zDBItem[];
     static const QString zFileItem[];
     static const QString zFileSectionID[];
+    static const QRegExp mwReg;
 };
 
 #endif // DATAFORMATUTIL_H

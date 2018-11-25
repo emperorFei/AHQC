@@ -1,4 +1,4 @@
-#include "dataformatutil.h"
+﻿#include "dataformatutil.h"
 
 const QString DataFormatUtil::zIntItem[] =
         {
@@ -56,11 +56,10 @@ const QString DataFormatUtil::zFileItem[] =
             "Q3PP","Q3TH","Q3RE","Q3WI","Q3DT","Q3VV","Q3CW","Q3SP","Q3MR"
         };
 const QString DataFormatUtil::zFileSectionID[] =
-        {"PP","TH","RH","RE","WI","DT","VV","CW","SP","MR","MW","Q1","Q2","Q3" "=[\\s=]+NNNN"};
-
+        {"PP","TH","RH","RE","WI","DT","VV","CW","SP","MR","MW","QC","Q1","Q2","Q3"};
 const QString DataFormatUtil::zTimeItem[] = {"MaxPT","MinPT","MaxTT","MinTT","MinRHT",
         "MaxETT","MinETT","MaxGTT","MinGTT","MinVT","MaxWST","ExWST"};
-
+const QRegExp DataFormatUtil::mwReg = QRegExp("MW.*\\.");
 
 
 QMap<QString,QString> DataFormatUtil::zFileContent2zData(const QString &zFileContent){
@@ -77,26 +76,45 @@ QString DataFormatUtil::removeZFileSectionID(const QString &zFileContent){
     if(zFileContent.isEmpty()){
         return zFileContent;
     }
+
+    int startIndex = mwReg.indexIn(zFileDataString);
+    int len = mwReg.matchedLength();
+    QString MW(zFileDataString.mid(startIndex,len));
+    QString forMatedMW(MW);
+    forMatedMW.replace(QRegExp("[\\s]+"),"@");
+    zFileDataString.replace(MW,forMatedMW);
+    zFileDataString.remove(QRegExp("\\s*=\\s*NNNN\\s*"));
     for(const QString &sectionID : zFileSectionID){
-        zFileDataString.replace(sectionID,"");
+       zFileDataString = zFileDataString.replace(sectionID,"");
     }
     return zFileDataString;
 }
-
-
 QMap<QString,QString> DataFormatUtil::zFileDataString2zFileData(const QString &zFileDataString){
     QMap<QString,QString> zFileData;
     if(zFileDataString.isEmpty()){
         return zFileData;
     }
-    QStringList zDataList = zFileDataString.split("[\\s=]+");
-    if(zFileItem->length() != zDataList.length()){
+    QString zDataString(zFileDataString);
+
+    QStringList zDataList = zDataString.split(QRegExp("[\\s]+"));
+    QString temp("");
+    for(const QString &item : zFileItem){
+        temp += item +" ";
+    }
+    int size = zFileItem->size();
+    if(128 != zDataList.length()){
         return zFileData;
     }
     QStringList::const_iterator constIt = zDataList.cbegin();
     for(const QString &item : zFileItem){
         zFileData.insert(item,*constIt);
         constIt++;
+    }
+    QString MWW = zFileData.value("MWW");
+    if(!MWW.isEmpty()){
+        MWW.replace("@"," ");
+        zFileData.remove("MWW");
+        zFileData.insert("MWW",MWW);
     }
     return zFileData;
 }

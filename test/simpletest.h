@@ -1,10 +1,11 @@
-#ifndef SIMPLETEST_H
+﻿#ifndef SIMPLETEST_H
 #define SIMPLETEST_H
 
 #include <QList>
 #include <QMap>
 #include <QtTest/QtTest>
 #include <QObject>
+#include <QSqlDatabase>
 #include "util/simpleutil.h"
 #include "focusScheme/shiftsscheme.h"
 #include "focusScheme/dayboundscheme.h"
@@ -12,7 +13,11 @@
 #include "solvecncodeproblem.h"
 #include "globalseeting.h"
 #include "awsminutedata.h"
+#include "zdata.h"
 #include "util/sqlfileexecutor.h"
+#include "dbcenter.h"
+#include "awsminutedaomysqlimp.h"
+#include "zdatadaomysqlimp.h"
 
 class SimpleTest : public QObject
 {
@@ -27,15 +32,22 @@ public slots:
 private slots:
 
 
-    void testDateFromSOMFileName();
-    void testDateFromSOMFileName_data();
-    void testDate2SOMFileName();
-    void testDate2SOMFileName_data();
+    void testDate2AMFileName();
+    void testDate2AMFileName_data();
+    void testAMFileName2Date();
+    void testAMFileName2Date_data();
+    void testDateTime2ZFileName();
+    void testDateTime2ZFileName_data();
+    void testZFileName2DateTime();
+    void testZFileName2DateTime_data();
+
     void testDateTime2AWSDay();
     void testDateTime2AWSDay_data();
+    void testDateTime2AWSMonth();
+    void testDateTime2AWSMonth_data();
+
     void testGetFocusedTimeRange();
     void testGetFocusedTimeRange_data();
-
     void testGetFocusedTimeRange_dayBound();
     void testGetFocusedTimeRange_dayBound_data();
 
@@ -44,18 +56,27 @@ private slots:
 
     void testGetAMFileNamesFormFocusedHours();
     void testGetAMFileNamesFormFocusedHours_data();
+    void testGetZFileNamesFormFocusedHours();
+    void testGetZFileNamesFormFocusedHours_data();
 
     void testGlobalSettingInit();
     void testGlobalSettingInit_data();
 
-    void testReadNull();
-    void testReadNull_data();
 
     void testReadAMFile();
     void testReadAMFile_data();
+    void testReadZFile();
+    void testReadZFile_data();
+
 
     void testGetZFileNames();
     void testGetZFileNames_data();
+
+    void testGetConnect();
+    void testGetConnect_data();
+
+    void testSaveAWSMinuteData();
+    void testSaveAWSMinuteData_data();
 
 
 //    void testExecuteSqlScript();

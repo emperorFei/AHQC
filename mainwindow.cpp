@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "test/testreadxmldata.h"
 #include "test/simpletest.h"
@@ -9,8 +9,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 //    TestReadXmlData tReadXml;
     SimpleTest simpleTest;
-//   QtFeatureTest qtFeatureTest;
-//    QTest::qExec(&qtFeatureTest);
+    QtFeatureTest qtFeatureTest;
+    QTest::qExec(&qtFeatureTest);
 //    QTest::qExec(&tReadXml);
     QTest::qExec(&simpleTest);
     ui->setupUi(this);
@@ -22,4 +22,5 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+    DBCenter::cleanCreatedConns();
 }

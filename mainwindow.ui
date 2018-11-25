@@ -20,7 +20,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QGroupBox" name="groupBox">
+   <widget class="QGroupBox" name="Wind_GB">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -52,7 +52,7 @@
       <number>6</number>
      </property>
      <item row="2" column="2">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_5">
+      <widget class="MyDoubleLabel" name="WS2_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -131,7 +131,7 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_2">
+      <widget class="MyDoubleLabel" name="WD_DL">
        <property name="rightText">
         <string>中文1</string>
        </property>
@@ -144,7 +144,7 @@
       </widget>
      </item>
      <item row="1" column="2">
-      <widget class="MyDoubleLabel" name="myDoubleLabel">
+      <widget class="MyDoubleLabel" name="WS_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -160,7 +160,7 @@
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_6">
+      <widget class="MyDoubleLabel" name="WD10_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -176,7 +176,7 @@
       </widget>
      </item>
      <item row="3" column="2">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_7">
+      <widget class="MyDoubleLabel" name="WS10_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -192,7 +192,7 @@
       </widget>
      </item>
      <item row="5" column="3">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_16">
+      <widget class="MyDoubleLabel" name="ExWST_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -208,7 +208,7 @@
       </widget>
      </item>
      <item row="4" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_8">
+      <widget class="MyDoubleLabel" name="MaxWD_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -224,7 +224,7 @@
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_4">
+      <widget class="MyDoubleLabel" name="WD2_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -240,7 +240,7 @@
       </widget>
      </item>
      <item row="4" column="3">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_17">
+      <widget class="MyDoubleLabel" name="MaxWST_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -256,7 +256,7 @@
       </widget>
      </item>
      <item row="5" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_14">
+      <widget class="MyDoubleLabel" name="ExWD_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -272,23 +272,7 @@
       </widget>
      </item>
      <item row="6" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_13">
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-       <property name="rightText">
-        <string>99999</string>
-       </property>
-       <property name="leftText">
-        <string>99999</string>
-       </property>
-       <property name="alignment">
-        <enum>MyDoubleLabel::AlignLeft</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="3">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_15">
+      <widget class="MyDoubleLabel" name="ExWD6_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -304,7 +288,7 @@
       </widget>
      </item>
      <item row="6" column="2">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_12">
+      <widget class="MyDoubleLabel" name="ExWS6_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -320,7 +304,7 @@
       </widget>
      </item>
      <item row="5" column="2">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_11">
+      <widget class="MyDoubleLabel" name="ExWS_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -336,7 +320,7 @@
       </widget>
      </item>
      <item row="4" column="2">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_10">
+      <widget class="MyDoubleLabel" name="MaxWS_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -359,23 +343,7 @@
       </widget>
      </item>
      <item row="7" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_18">
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-       <property name="rightText">
-        <string>99999</string>
-       </property>
-       <property name="leftText">
-        <string>99999</string>
-       </property>
-       <property name="alignment">
-        <enum>MyDoubleLabel::AlignLeft</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="3">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_19">
+      <widget class="MyDoubleLabel" name="ExWD12_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -391,7 +359,7 @@
       </widget>
      </item>
      <item row="7" column="2">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_20">
+      <widget class="MyDoubleLabel" name="ExWS12_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -581,7 +549,7 @@ border-bottom-right-radius:24;</string>
      </item>
     </layout>
    </widget>
-   <widget class="QGroupBox" name="groupBox_2">
+   <widget class="QGroupBox" name="P_GB">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -651,7 +619,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_43">
+      <widget class="MyDoubleLabel" name="P_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -667,7 +635,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_44">
+      <widget class="MyDoubleLabel" name="SP_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -683,7 +651,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_45">
+      <widget class="MyDoubleLabel" name="VP3_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -699,7 +667,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="4" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_69">
+      <widget class="MyDoubleLabel" name="VP24_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -715,7 +683,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="5" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_70">
+      <widget class="MyDoubleLabel" name="MaxP_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -731,7 +699,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="6" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_71">
+      <widget class="MyDoubleLabel" name="MinP_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -747,7 +715,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="5" column="2">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_72">
+      <widget class="MyDoubleLabel" name="MaxPT_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -763,7 +731,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="6" column="2">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_73">
+      <widget class="MyDoubleLabel" name="MinPT_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -793,7 +761,7 @@ border-bottom-right-radius:24;</string>
      </item>
     </layout>
    </widget>
-   <widget class="QGroupBox" name="groupBox_3">
+   <widget class="QGroupBox" name="T_GB">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -876,7 +844,7 @@ border-bottom-right-radius:24;</string>
       </spacer>
      </item>
      <item row="3" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_74">
+      <widget class="MyDoubleLabel" name="MaxT24_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -892,7 +860,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="4" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_75">
+      <widget class="MyDoubleLabel" name="MinT24_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -908,7 +876,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="5" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_76">
+      <widget class="MyDoubleLabel" name="MaxT_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -924,7 +892,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="6" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_77">
+      <widget class="MyDoubleLabel" name="MinT_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -940,7 +908,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="5" column="2">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_78">
+      <widget class="MyDoubleLabel" name="MaxTT_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -956,7 +924,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="6" column="2">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_79">
+      <widget class="MyDoubleLabel" name="MinTT_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -972,7 +940,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_83">
+      <widget class="MyDoubleLabel" name="T_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -988,7 +956,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_82">
+      <widget class="MyDoubleLabel" name="VT24_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1005,7 +973,7 @@ border-bottom-right-radius:24;</string>
      </item>
     </layout>
    </widget>
-   <widget class="QGroupBox" name="groupBox_4">
+   <widget class="QGroupBox" name="RH_GB">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -1074,7 +1042,7 @@ border-bottom-right-radius:24;</string>
       </spacer>
      </item>
      <item row="2" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_81">
+      <widget class="MyDoubleLabel" name="MinRH_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1090,7 +1058,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_87">
+      <widget class="MyDoubleLabel" name="WP_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1106,7 +1074,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="4" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_86">
+      <widget class="MyDoubleLabel" name="TD_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1122,7 +1090,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_85">
+      <widget class="MyDoubleLabel" name="RH_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1138,7 +1106,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="2" column="2">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_84">
+      <widget class="MyDoubleLabel" name="MinRHT_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1155,7 +1123,7 @@ border-bottom-right-radius:24;</string>
      </item>
     </layout>
    </widget>
-   <widget class="QGroupBox" name="groupBox_5">
+   <widget class="QGroupBox" name="ETAndGT_GB">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -1204,7 +1172,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="3" column="2">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_40">
+      <widget class="MyDoubleLabel" name="MaxGTT_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1241,7 +1209,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="7" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_64">
+      <widget class="MyDoubleLabel" name="MaxET_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1257,7 +1225,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="6" column="2">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_46">
+      <widget class="MyDoubleLabel" name="MinETT_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1273,7 +1241,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="7" column="2">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_41">
+      <widget class="MyDoubleLabel" name="MaxETT_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1288,15 +1256,8 @@ border-bottom-right-radius:24;</string>
        </property>
       </widget>
      </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="label_51">
-       <property name="text">
-        <string>过去12小时最低</string>
-       </property>
-      </widget>
-     </item>
      <item row="6" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_55">
+      <widget class="MyDoubleLabel" name="MinET_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1312,7 +1273,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_42">
+      <widget class="MyDoubleLabel" name="GT_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1328,23 +1289,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="5" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_65">
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-       <property name="rightText">
-        <string>99999</string>
-       </property>
-       <property name="leftText">
-        <string>99999</string>
-       </property>
-       <property name="alignment">
-        <enum>MyDoubleLabel::AlignLeft</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_66">
+      <widget class="MyDoubleLabel" name="ET_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1360,7 +1305,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_67">
+      <widget class="MyDoubleLabel" name="MaxGT_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1376,7 +1321,36 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_68">
+      <widget class="MyDoubleLabel" name="MinGT_DL">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="0">
+      <spacer name="verticalSpacer_5">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="2" column="2">
+      <widget class="MyDoubleLabel" name="MinGTT_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1392,21 +1366,31 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="8" column="0">
-      <spacer name="verticalSpacer_5">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
+      <widget class="QLabel" name="label_51">
+       <property name="text">
+        <string>过去12小时最低</string>
        </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
+      </widget>
+     </item>
+     <item row="8" column="1">
+      <widget class="MyDoubleLabel" name="MinET12_DL">
+       <property name="styleSheet">
+        <string notr="true"/>
        </property>
-      </spacer>
+       <property name="rightText">
+        <string>99999</string>
+       </property>
+       <property name="leftText">
+        <string>99999</string>
+       </property>
+       <property name="alignment">
+        <enum>MyDoubleLabel::AlignLeft</enum>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
-   <widget class="QGroupBox" name="groupBox_6">
+   <widget class="QGroupBox" name="XCM_GB">
     <property name="geometry">
      <rect>
       <x>750</x>
@@ -1483,7 +1467,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="4" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_91">
+      <widget class="MyDoubleLabel" name="ET20_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1499,7 +1483,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_88">
+      <widget class="MyDoubleLabel" name="ET10_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1515,7 +1499,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_90">
+      <widget class="MyDoubleLabel" name="ET15_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1531,7 +1515,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_89">
+      <widget class="MyDoubleLabel" name="ET5_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1547,7 +1531,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="5" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_92">
+      <widget class="MyDoubleLabel" name="ET40_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1563,7 +1547,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="6" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_93">
+      <widget class="MyDoubleLabel" name="ET80_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1579,7 +1563,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="7" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_94">
+      <widget class="MyDoubleLabel" name="ET160_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1595,7 +1579,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="8" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_95">
+      <widget class="MyDoubleLabel" name="ET320_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1625,7 +1609,7 @@ border-bottom-right-radius:24;</string>
      </item>
     </layout>
    </widget>
-   <widget class="QGroupBox" name="groupBox_7">
+   <widget class="QGroupBox" name="RainAndE_GB">
     <property name="geometry">
      <rect>
       <x>530</x>
@@ -1660,7 +1644,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_103">
+      <widget class="MyDoubleLabel" name="HRain3_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1691,6 +1675,11 @@ border-bottom-right-radius:24;</string>
      </item>
      <item row="1" column="0">
       <widget class="QLabel" name="label_57">
+       <property name="styleSheet">
+        <string notr="true">border-style:solid;
+border-width:5px;
+</string>
+       </property>
        <property name="text">
         <string>1h降水量</string>
        </property>
@@ -1718,7 +1707,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_96">
+      <widget class="MyDoubleLabel" name="HRain_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1734,7 +1723,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="8" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_100">
+      <widget class="MyDoubleLabel" name="RainM_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1750,7 +1739,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_102">
+      <widget class="MyDoubleLabel" name="HRain6_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1766,7 +1755,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="4" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_101">
+      <widget class="MyDoubleLabel" name="HRain12_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1782,7 +1771,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="5" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_97">
+      <widget class="MyDoubleLabel" name="HRain24_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1798,7 +1787,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="6" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_98">
+      <widget class="MyDoubleLabel" name="E_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1814,7 +1803,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="7" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_99">
+      <widget class="MyDoubleLabel" name="RainMT_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1844,7 +1833,7 @@ border-bottom-right-radius:24;</string>
      </item>
     </layout>
    </widget>
-   <widget class="QGroupBox" name="groupBox_8">
+   <widget class="QGroupBox" name="V_GB">
     <property name="geometry">
      <rect>
       <x>670</x>
@@ -1886,7 +1875,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_108">
+      <widget class="MyDoubleLabel" name="MinV_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1902,7 +1891,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_104">
+      <widget class="MyDoubleLabel" name="V10_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1932,7 +1921,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_80">
+      <widget class="MyDoubleLabel" name="V1_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1948,7 +1937,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="4" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_107">
+      <widget class="MyDoubleLabel" name="MV_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1964,7 +1953,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="3" column="2">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_105">
+      <widget class="MyDoubleLabel" name="MinVT_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -1994,7 +1983,7 @@ border-bottom-right-radius:24;</string>
      </item>
     </layout>
    </widget>
-   <widget class="QGroupBox" name="groupBox_9">
+   <widget class="QGroupBox" name="Cloud_DL">
     <property name="geometry">
      <rect>
       <x>390</x>
@@ -2008,7 +1997,7 @@ border-bottom-right-radius:24;</string>
     </property>
     <layout class="QGridLayout" name="gridLayout_9">
      <item row="5" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_25">
+      <widget class="MyDoubleLabel" name="FC_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -2024,7 +2013,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="4" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_24">
+      <widget class="MyDoubleLabel" name="RCA_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -2040,7 +2029,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_23">
+      <widget class="MyDoubleLabel" name="CH_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -2056,7 +2045,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_22">
+      <widget class="MyDoubleLabel" name="LCA_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -2079,7 +2068,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_21">
+      <widget class="MyDoubleLabel" name="CA_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -2144,7 +2133,7 @@ border-bottom-right-radius:24;</string>
      </item>
     </layout>
    </widget>
-   <widget class="QGroupBox" name="groupBox_10">
+   <widget class="QGroupBox" name="Other_GB">
     <property name="geometry">
      <rect>
       <x>920</x>
@@ -2179,7 +2168,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="6" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_34">
+      <widget class="MyDoubleLabel" name="FE2U_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -2195,7 +2184,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="7" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_35">
+      <widget class="MyDoubleLabel" name="FE2D_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -2211,7 +2200,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="10" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_38">
+      <widget class="MyDoubleLabel" name="TRT_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -2227,7 +2216,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="9" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_37">
+      <widget class="MyDoubleLabel" name="GA_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -2243,7 +2232,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="8" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_36">
+      <widget class="MyDoubleLabel" name="HA_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -2259,7 +2248,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="11" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_39">
+      <widget class="MyDoubleLabel" name="TRD_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -2275,7 +2264,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_29">
+      <widget class="MyDoubleLabel" name="SnowD_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -2291,7 +2280,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="5" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_33">
+      <widget class="MyDoubleLabel" name="FE1D_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -2307,7 +2296,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_31">
+      <widget class="MyDoubleLabel" name="EC_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -2323,7 +2312,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_30">
+      <widget class="MyDoubleLabel" name="SnowP_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -2402,7 +2391,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="4" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_32">
+      <widget class="MyDoubleLabel" name="FE1U_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -2432,7 +2421,7 @@ border-bottom-right-radius:24;</string>
      </item>
     </layout>
    </widget>
-   <widget class="QGroupBox" name="groupBox_11">
+   <widget class="QGroupBox" name="Cood_GB">
     <property name="geometry">
      <rect>
       <x>740</x>
@@ -2460,7 +2449,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_27">
+      <widget class="MyDoubleLabel" name="WT_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -2476,7 +2465,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_28">
+      <widget class="MyDoubleLabel" name="wwWW_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -2492,7 +2481,7 @@ border-bottom-right-radius:24;</string>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="MyDoubleLabel" name="myDoubleLabel_26">
+      <widget class="MyDoubleLabel" name="QCC_DL">
        <property name="styleSheet">
         <string notr="true"/>
        </property>

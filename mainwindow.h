@@ -1,8 +1,8 @@
-#ifndef MAINWINDOW_H
+﻿#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include "dbcenter.h"
 namespace Ui {
 class MainWindow;
 }

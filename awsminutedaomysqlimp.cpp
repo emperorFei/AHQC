@@ -1,4 +1,4 @@
-#include "awsminutedaomysqlimp.h"
+﻿#include "awsminutedaomysqlimp.h"
 
 QString AWSMinuteDAOMySqlImp::findTByObserveTimeSql = "select tempis from AWSMinute where ObserveTime = ?";
 QString AWSMinuteDAOMySqlImp::findOTDByOTSql = "select * from AWSMinute where observeTime = ?";
@@ -323,6 +323,19 @@ QMap<QString,int> AWSMinuteDAOMySqlImp::getExtremums(const QDateTime &observeTim
     extremums.insert("MinV", temp);
     temp = getMinVTByOT(observeTime);
     extremums.insert("MinVT", temp);
+
+//    //雨量
+//    extremums.insert("HRain", temp);
+//    temp = getHRain3ByOT(observeTime);
+//    extremums.insert("HRain3",temp);
+//    temp = getHRain6ByOT(observeTime);
+//    extremums.insert("HRain6", temp);
+//    temp = getHRain12ByOT(observeTime);
+//    extremums.insert("HRain12",temp);
+//    temp = getHRain24ByOT(observeTime);
+//    extremums.insert("HRain24",temp);
+
+
     return extremums;
 }
 
