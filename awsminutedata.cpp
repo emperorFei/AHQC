@@ -4,22 +4,16 @@ const int AWSMinuteData::nestenIndex[] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,16,
 
 AWSMinuteData::AWSMinuteData(){}
 AWSMinuteData::~AWSMinuteData(){}
-AWSMinuteData::AWSMinuteData(const QDate &awsDay,const QString &line):
-    observeDay(awsDay),
-    observeMonth(awsDay.toString("yyyyMM")),
-    observeTime(QDateTime(awsDay)),
-    insertTime(observeTime),
-    updateTime(observeTime){
+AWSMinuteData::AWSMinuteData(const QDate &awsDay,const QString &line):observeDay(awsDay),
+    observeMonth(QDate::fromString(awsDay.toString("yyyyMM")+"01","yyyyMMdd"))
+{
     if(line != Q_NULLPTR && line != QString("") && line.at(0) != '-' ) {
-
-        minute = line.mid(0,4).toInt();
-
+        QString minuteString(line.mid(0,4));
+        minute = minuteString.toInt();
+        observeTime = QDateTime::fromString(awsDay.toString("yyyyMMdd")+minuteString,"yyyyMMddHHmm");
         if( minute > 2000) {
             observeTime = observeTime.addDays(-1);
         }
-        observeTime = observeTime.addSecs((minute/100)*60*60+ (minute%100)*60);
-        updateTime = insertTime = observeTime;
-
         initData(line);
         validateData();
         nestenData();
@@ -114,8 +108,6 @@ void AWSMinuteData::setObserveDay(const QDate &value)
     observeDay = value;
 }
 
-
-
 int AWSMinuteData::getMinute() const
 {
     return minute;
@@ -127,12 +119,12 @@ void AWSMinuteData::setMinute(int value)
 }
 
 
-QString AWSMinuteData::getObserveMonth() const
+QDate AWSMinuteData::getObserveMonth() const
 {
     return observeMonth;
 }
 
-void AWSMinuteData::setObserveMonth(const QString &value)
+void AWSMinuteData::setObserveMonth(const QDate &value)
 {
     observeMonth = value;
 }
@@ -149,27 +141,6 @@ void AWSMinuteData::setObserveTime(const QDateTime &value)
     observeTime = value;
 }
 
-
-QDateTime AWSMinuteData::getInsertTime() const
-{
-    return insertTime;
-}
-
-void AWSMinuteData::setInsertTime(const QDateTime &value)
-{
-    insertTime = value;
-}
-
-
-QDateTime AWSMinuteData::getUpdateTime() const
-{
-    return updateTime;
-}
-
-void AWSMinuteData::setUpdateTime(const QDateTime &value)
-{
-    updateTime = value;
-}
 
 QList<int> AWSMinuteData::getData() const
 {

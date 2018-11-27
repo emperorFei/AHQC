@@ -22,6 +22,111 @@ int AHQC::TimeUtil::OBInterval = 6;
 
 
 
+
+QDate AHQC::TimeUtil::dateTime2AWSDay(const QDateTime &dateTime){
+     QDate awsDay = dateTime.date();
+     if(dateTime.time() > dayDemarcationTime){
+        awsDay = awsDay.addDays(1);
+     }
+     return awsDay;
+}
+QDate AHQC::TimeUtil::dateTime2AWSMonth(const QDateTime &dateTime){
+    QDate awsMonth = dateTime.date();
+    if(dateTime.time() > dayDemarcationTime){
+       awsMonth = awsMonth.addDays(1);
+    }
+    awsMonth = QDate::fromString(awsMonth.toString("yyyyMM"),"yyyyMM");
+    return awsMonth;
+}
+
+TimeRange AHQC::TimeUtil::getFocusedTimeRange(FocusScheme* focusScheme){
+    return focusScheme->getFocusRange();
+}
+
+QDateTime AHQC::TimeUtil::getPreviousDayBound(QDateTime gaveTime){
+    QDateTime previousDayBound;
+    int seconds = -gaveTime.time().secsTo(QTime::fromString("000000","HHmmss"));
+    previousDayBound = gaveTime.addSecs(-seconds);
+    previousDayBound = previousDayBound.addSecs(20*60*60);
+    if(seconds  < 20*60*60){
+      previousDayBound = previousDayBound.addDays(-1);
+    }
+    return previousDayBound;
+}
+QDateTime AHQC::TimeUtil::nextHour(const QDateTime &dateTime){
+    if(dateTime.toString("mmss") == "0000"){
+       return  QDateTime(dateTime);
+    }else{
+       return QDateTime::fromString(dateTime.toString("yyyyMMddHH"),"yyyyMMddHH").addSecs(60*60);
+    }
+}
+inline QDateTime AHQC::TimeUtil::prevoiusOnHour(const QDateTime &dateTime){
+    return QDateTime::fromString(dateTime.toString("yyyyMMddHH"),"yyyyMMddHH");
+}
+
+
+QList<QDateTime> AHQC::TimeUtil::getFocusedHours(TimeRange focusedTimeRange){
+    QList<QDateTime> focusedHours ;
+    QDateTime lastHour =  AHQC::TimeUtil::prevoiusOnHour(focusedTimeRange.later);
+    QDateTime onHour = AHQC::TimeUtil::nextHour(focusedTimeRange.older);
+    QDateTime previousZSendTime = previousOnTimeZSendTime();
+    QDateTime now = QDateTime::currentDateTime();
+    if(!QFile(AHQC::FileNameUtil::DateTime2ZFileName(onHour)).exists()){
+        return focusedHours;
+    }else if(!QFile(AHQC::FileNameUtil::DateTime2ZFileName(lastHour)).exists()){
+        lastHour = previousOnTimeZSendTime();
+    }
+    if(onHour > lastHour){
+        focusedHours.append(lastHour);
+        return focusedHours;
+    }
+    while(onHour <= lastHour){
+        focusedHours.append(onHour);
+        onHour = onHour.addSecs(60*60);
+    }
+    if(focusedHours.length() >= 2 ){
+        if(focusedTimeRange.older.toString("mmss") == "0000"){
+            if(focusedTimeRange.bound == timeRange_bound::BE
+                    || focusedTimeRange.bound == timeRange_bound::BEND ){
+                focusedHours.pop_front();
+            }
+        }
+        if(focusedTimeRange.later.toString("mmss") == "0000"){
+            if(focusedTimeRange.bound == timeRange_bound::BEGINE
+                    || focusedTimeRange.bound == timeRange_bound::BEGINE ){
+                focusedHours.pop_back();
+            }
+        }
+    }
+    return focusedHours;
+}
+
+TimeRange AHQC::TimeUtil::getTimeRange(const QDateTime &onTime,int hours){
+    QDateTime older = onTime.addSecs(-hours*60*60);
+    QDateTime later = onTime;
+    return TimeRange(older,later,timeRange_bound::BEGINEND);
+}
+
+
+
+TimeRange AHQC::TimeUtil::getTimeRange4Sum(const QDateTime &onTime,int hours){
+    QDateTime older = onTime.addSecs(-hours*60*60);
+    older = older.addSecs(-60);
+    QDateTime later = onTime;
+    return TimeRange(older,later,timeRange_bound::BEND);
+}
+
+QDateTime AHQC::TimeUtil::previousOnTimeZSendTime(){
+    QDateTime now = QDateTime::currentDateTime();
+    QDateTime previousHour = AHQC::TimeUtil::prevoiusOnHour(now);
+    QString zFileName = AHQC::FileNameUtil::DateTime2ZFileName(previousHour);
+    if(QFile(zFileName).exists()){
+        return previousHour;
+    }else{
+        return previousHour.addSecs(-60*60);
+    }
+}
+
 QDate AHQC::FileNameUtil::AMFileName2Date(const QString &AMFileName){
     if(!AMFileName.isEmpty()){
         int startIndex = amFileNameReg.indexIn(AMFileName);
@@ -86,97 +191,8 @@ QString AHQC::FileNameUtil::zFUllName2ShortName(const QString &zFullName){
     }
     return QString();
 }
-QDate AHQC::TimeUtil::dateTime2AWSDay(const QDateTime &dateTime){
-     QDate awsDay = dateTime.date();
-     if(dateTime.time() > dayDemarcationTime){
-        awsDay = awsDay.addDays(1);
-     }
-     return awsDay;
-}
-QDate AHQC::TimeUtil::dateTime2AWSMonth(const QDateTime &dateTime){
-    QDate awsMonth = dateTime.date();
-    if(dateTime.time() > dayDemarcationTime){
-       awsMonth = awsMonth.addDays(1);
-    }
-    awsMonth = QDate::fromString(awsMonth.toString("yyyyMM"),"yyyyMM");
-    return awsMonth;
-}
 
-TimeRange AHQC::TimeUtil::getFocusedTimeRange(FocusScheme* focusScheme){
-    return focusScheme->getFocusRange();
-}
-
-QDateTime AHQC::TimeUtil::getPreviousDayBound(QDateTime gaveTime){
-    QDateTime previousDayBound;
-    int seconds = -gaveTime.time().secsTo(QTime::fromString("000000","HHmmss"));
-    previousDayBound = gaveTime.addSecs(-seconds);
-    previousDayBound = previousDayBound.addSecs(20*60*60);
-    if(seconds  < 20*60*60){
-      previousDayBound = previousDayBound.addDays(-1);
-    }
-    return previousDayBound;
-}
-QDateTime AHQC::TimeUtil::nextHour(QDateTime dateTime){
-    QDateTime oneMinuteAfterTheHour = QDateTime::fromString(dateTime.toString("yyyyMMddHH"),"yyyyMMddHH").addSecs(60);
-    if(dateTime >= oneMinuteAfterTheHour){
-        return oneMinuteAfterTheHour.addSecs(59*60);
-    }else{
-        return oneMinuteAfterTheHour.addSecs(-60);
-    }
-}
-QDateTime AHQC::TimeUtil::prevoiusOnHour(QDateTime dateTime){
-    return QDateTime::fromString(dateTime.toString("yyyyMMddHH"),"yyyyMMddHH");
-}
-
-
-QList<QDateTime> AHQC::TimeUtil::getFocusedHours(TimeRange focusedTimeRange){
-    QList<QDateTime> focusedHours ;
-    QDateTime lastHour =  AHQC::TimeUtil::prevoiusOnHour(focusedTimeRange.later);
-    QDateTime onHour = AHQC::TimeUtil::nextHour(focusedTimeRange.older);
-
-    while(onHour <= lastHour){
-        focusedHours.append(onHour);
-        onHour = onHour.addSecs(60*60);
-    }
-    if(focusedTimeRange.older.toString("mmss") == "0000"){
-        if(focusedHours.length() >= 2){
-            switch(focusedTimeRange.bound) {
-
-            case timeRange_bound::BE:
-                focusedHours.pop_front();
-                focusedHours.pop_back();
-                break;
-            case timeRange_bound::BEND:
-                focusedHours.pop_front();
-                break;
-            case timeRange_bound::BEGINE:
-                focusedHours.pop_back();
-                break;
-            case timeRange_bound::BEGINEND:
-                break;
-            default:
-                break;
-            }
-        }
-    }
-    return focusedHours;
-}
-
-TimeRange AHQC::TimeUtil::getTimeRange(const QDateTime &onTime,int hours){
-    QDateTime older = onTime.addSecs(-hours*60*60);
-    QDateTime later = onTime;
-    return TimeRange(older,later,timeRange_bound::BEGINEND);
-}
-
-TimeRange AHQC::TimeUtil::getTimeRange4Sum(const QDateTime &onTime,int hours){
-    QDateTime older = onTime.addSecs(-hours*60*60);
-    QDateTime later = onTime;
-    return TimeRange(older,later,timeRange_bound::BEND);
-}
-
-
-
-QList<QString> AHQC::FileNameUtil::getAMFileNamesFormFocusedHours(QList<QDateTime> focursedHours){
+QList<QString> AHQC::FileNameUtil::getAMFileNamesFormFocusedHours(const QList<QDateTime> &focursedHours){
     if(focursedHours.length() == 0){
         return QList<QString>();
     }
@@ -189,7 +205,7 @@ QList<QString> AHQC::FileNameUtil::getAMFileNamesFormFocusedHours(QList<QDateTim
     QString amFileNameTemplateNeedTime(QString(AHQC::AMFileFullNameTemplate)
                                               .replace("#{isosPath}",AHQC::isosPath)
                                               .replace("#{stationNum}",AHQC::stationNo));
-    QString usingSdf4AMFile = QString(AHQC::TimeUtil::sdf4AMFile).replace("#{stationNum}",AHQC::stationNo);
+   // QString usingSdf4AMFile = QString(AHQC::TimeUtil::sdf4AMFile).replace("#{stationNum}",AHQC::stationNo);
     QString fileName("beforeGiveValue");
     while(tempDate <= lastAWSDay){
         fileName = QString(amFileNameTemplateNeedTime).replace("#{Date}",tempDate.toString("yyyyMMdd"));
@@ -201,7 +217,7 @@ QList<QString> AHQC::FileNameUtil::getAMFileNamesFormFocusedHours(QList<QDateTim
 
 }
 
-QList<QString> AHQC::FileNameUtil::getZFileNamesFormFocusedHours(QList<QDateTime> focursedHours){
+QList<QString> AHQC::FileNameUtil::getZFileNamesFormFocusedHours(const QList<QDateTime> &focursedHours){
     if(focursedHours.length() == 0){
         return QList<QString>();
     }
@@ -283,7 +299,42 @@ inline QString AHQC::FileNameUtil::findCCXZFileNameFromPlanFileName(const QStrin
     delete tempFilePtr;
     return fileName;
 }
+QList<QString> AHQC::FileNameUtil::prepareAMFile4Select(const QDateTime &timepoint){
+    QList<QString> amFileNames;
+    QDateTime time4V24H = timepoint.addDays(-1);
+    QString fileName1 = AHQC::FileNameUtil::Date2AMFileName(AHQC::TimeUtil::dateTime2AWSDay(time4V24H));
+    QString fileName2 = AHQC::FileNameUtil::Date2AMFileName(AHQC::TimeUtil::dateTime2AWSDay(timepoint));
+    amFileNames.append(fileName1);
+    amFileNames.append(fileName2);
+    return amFileNames;
 
+}
+QList<QString> AHQC::FileNameUtil::prepareAMFile4Select(const TimeRange &timeRange){
+    QList<QDateTime> focursedHours = AHQC::TimeUtil::getFocusedHours(timeRange);
+    QList<QString> amFileNames = AHQC::FileNameUtil::getAMFileNamesFormFocusedHours(focursedHours);
+    if(!focursedHours.isEmpty()){
+        QString fileName1 = AHQC::FileNameUtil::Date2AMFileName(
+                    AHQC::TimeUtil::dateTime2AWSDay(
+                        focursedHours.first().addDays(-1)));;
+        amFileNames.append(fileName1);
+    }
+    return amFileNames;
+}
+QList<QString> AHQC::FileNameUtil::prepareAMFile4Select(const QList<QDateTime> &timepoints){
+    QList<QString> amFileNames;
+    for(const QDateTime &timepoint:timepoints){
+        QDateTime time4V24H = timepoint.addDays(-1);
+        QString fileName1 = AHQC::FileNameUtil::Date2AMFileName(AHQC::TimeUtil::dateTime2AWSDay(time4V24H));
+        QString fileName2 = AHQC::FileNameUtil::Date2AMFileName(AHQC::TimeUtil::dateTime2AWSDay(timepoint));
+        if(!amFileNames.contains(fileName1)){
+            amFileNames.append(fileName1);
+        }
+        if(!amFileNames.contains(fileName2)){
+            amFileNames.append(fileName2);
+        }
+    }
+    return amFileNames;
+}
 
 //template<class T,int N>
 //QString AHQC::PrintUtil::printEmbeddedArray(const T (&list)[N]){

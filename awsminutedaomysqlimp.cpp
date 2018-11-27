@@ -3,7 +3,7 @@
 QString AWSMinuteDAOMySqlImp::findTByObserveTimeSql = "select tempis from AWSMinute where ObserveTime = ?";
 QString AWSMinuteDAOMySqlImp::findOTDByOTSql = "select * from AWSMinute where observeTime = ?";
 QString AWSMinuteDAOMySqlImp::getRecordsCountSql ="select count(*) from AWSMinute where observeTime between ? and ?";
-
+QString AWSMinuteDAOMySqlImp::checkExistsSql = "select isNull((select 1 from AWSMinute where ObserveTime = ?),0)";
 
 //max
 QString AWSMinuteDAOMySqlImp::getMaxTByOnTimeSql = "select max(tempis)  from "
@@ -172,9 +172,9 @@ bool AWSMinuteDAOMySqlImp::saveAWSMinuteData(const AWSMinuteData &amData){
     bool flag = false;
     QSqlQuery query(*conn);
     query.prepare(insertSql);
-    int qmIndex = 0;
-    query.bindValue(++qmIndex, QVariant(amData.getObserveMonth()));
+    int qmIndex = 0;    
     query.bindValue(++qmIndex, QVariant(amData.getObserveTime()));
+    query.bindValue(++qmIndex, QVariant(amData.getObserveMonth()));
     query.bindValue(++qmIndex, QDateTime::currentDateTime());
     query.bindValue(++qmIndex, QVariant(QVariant::DateTime));
     QList<int> minuteData = amData.getData();
@@ -186,6 +186,77 @@ bool AWSMinuteDAOMySqlImp::saveAWSMinuteData(const AWSMinuteData &amData){
     query.exec();
     conn->commit();
     query.finish();
+    flag = true;
+    return flag;
+}
+
+bool AWSMinuteDAOMySqlImp::saveAMFile(const QString &amFileName){
+    bool flag = false;
+    QString line("beforeInit");
+    QList<AWSMinuteData> awsMinuteDatas;
+    QFile amFile(amFileName);
+    if(amFile.exists()){
+        if(amFile.open(QIODevice::ReadOnly|QIODevice::Text)){
+            QTextStream amIn(&amFile);
+            QDate awsDay = AHQC::FileNameUtil::AMFileName2Date(amFileName);
+            if(!amIn.atEnd()){
+                line = amIn.readLine();
+                while(!amIn.atEnd()){
+                    line = amIn.readLine();
+                    if(line.compare("") != 0 && line.at(0) != '-'){
+                        AWSMinuteData awsMinuteData(awsDay,line);
+                        awsMinuteDatas.append(awsMinuteData);
+                    }
+                }
+            }
+            amFile.close();
+        }else{
+            qDebug() << "file: " << amFileName << "can't open";
+            return flag;
+        }
+    }else{
+        qDebug() << "file: " << amFileName << "not exists";
+        return flag;
+    }
+    QSqlQuery query(*conn);
+    if(!conn->isOpen()){
+        if(!conn->open()){
+            conn->lastError().databaseText();
+            //this point neeed report
+            return flag;
+        }
+    }
+    query.prepare(insertSql);
+    QSqlQuery transaction_start(*conn);
+    QSqlQuery transaction_COMMIT(*conn);
+    QSqlQuery transaction_ROLLBACK(*conn);
+    QDateTime beginExecBatch = QDateTime::currentDateTime();
+    qDebug() << beginExecBatch;
+    transaction_start.exec("START TRANSACTION");
+    for(AWSMinuteData amData:awsMinuteDatas){
+        int qmIndex = -1;
+        query.bindValue(++qmIndex, QVariant(amData.getObserveTime()));
+        query.bindValue(++qmIndex, QVariant(amData.getObserveMonth()));
+        query.bindValue(++qmIndex, QDateTime::currentDateTime());
+        query.bindValue(++qmIndex, QDateTime::currentDateTime());
+        QList<int> minuteData = amData.getData();
+        for(int i: minuteData) {
+             query.bindValue(++qmIndex, QVariant(i));
+        }
+        query.bindValue(++qmIndex, QVariant(amData.getWeatherphcode()));
+        query.bindValue(++qmIndex, QVariant(amData.getDataQulity()));
+
+        bool seccess = query.exec();
+
+        qDebug() << seccess
+                 <<" " << amData.getObserveTime().toString("yyyyMMdd-HHmm")
+                 << " " << query.lastError().databaseText();
+    }
+
+    transaction_COMMIT.exec("COMMIT");
+    QDateTime endExecBatch = QDateTime::currentDateTime();
+    qDebug() << endExecBatch;
+    qDebug() << beginExecBatch.secsTo(endExecBatch);
     flag = true;
     return flag;
 }
@@ -203,6 +274,24 @@ int AWSMinuteDAOMySqlImp::getRecordsCount(const TimeRange &tr){
     return 0;
 }
 
+bool AWSMinuteDAOMySqlImp::exists(const QDateTime &observeTime){
+    bool flag = false;
+    QSqlQuery query(*conn);
+    if(!conn->isOpen()){
+        if(!conn->open()){
+            conn->lastError().databaseText();
+        }
+    }
+    query.prepare(checkExistsSql);
+    query.bindValue(0, QVariant(observeTime));
+    query.exec();
+    if(query.next()) {
+        int result = query.value(0).toInt();
+        result == 1 ? flag = true :flag = false;
+        return flag;
+    }
+    return flag;
+}
 //find tempis for check data within db
 int AWSMinuteDAOMySqlImp::findTempisByObserveTime(const QDateTime &observeTime){
     int temp = 0;
@@ -225,10 +314,10 @@ AWSMinuteData AWSMinuteDAOMySqlImp::findByOT(const QDateTime &observeTime){
     AWSMinuteData ad;
     if(query.next()) {
         int index = 0;
-        ad.setMinute(query.value(++index).toInt());
         ad.setObserveTime(query.value(++index).toDateTime());
-        ad.setInsertTime(query.value(++index).toDateTime());
-        ad.setUpdateTime(query.value(++index).toDateTime());
+        ad.setObserveMonth(query.value(++index).toDate());
+        ad.setMinute(ad.observeTime.time().toString("HHmm").toInt());
+        index += 2;
         QList<int> intData = ad.getData();
         int tempValue = 99999;
         int intDataNum = GlobalSetting::getInstance()->getIntDataNum()+5;
@@ -523,7 +612,7 @@ int AWSMinuteDAOMySqlImp::getRain(const TimeRange &tr,AWSMinuteDAOMySqlImp::AWSI
     query.finish();
     return temp;
 }
-int AWSMinuteDAOMySqlImp::getSP(QDateTime onTimeDate) {
+int AWSMinuteDAOMySqlImp::getSP(const QDateTime &onTimeDate) {
     int temp = 99999;
     int t12  = 99999;
     int t0 = 99999;

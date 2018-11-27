@@ -23,14 +23,14 @@ const QString DataFormatUtil::zStringItem[] =
         };
 const QString DataFormatUtil::zDBItem[] =
         {
-            "stationNum","time","latitude","longitude","height","PPHeight","awsMode","QCCode","CFC",
+            "stationNum","time","latitude","longitude","height","PPHeight","awsMode","QCCode","CCX",
             "P","SP","VP3","VP24","MaxP","MaxPT","MinP","MinPT",
             "T","MaxT","MaxTT","MinT","MinTT","VT24","MaxT24","MinT24","TD","RH","MinRH","MinRHT","WP",
             "HRain","HRain3","HRain6","HRain12","HRain24","RainMT","RainM","E",
             "WD2","WS2","WD10","WS10","MaxWD","MaxWS","MaxWST","WD","WS","ExWD","ExWS","ExWST","ExWS6","ExWD6","ExWS12","ExWD12",
             "ET","MaxET","MaxETT","MinET","MinETT","MinET12","ET5","ET10","ET15","ET20","ET40","ET80","ET160","ET320","GT","MaxGT","MaxGTT","MinGT","MinGTT",
             "V1","V10","MinV","MinVT",
-            "V","CA","LCA","RCA","CH","CF","EC","MW","WW","WT","W1","W2",
+            "V","CA","LCA","RCA","CH","CF","CFC","WW","WT","W1","W2","EC"
             "SnowD","SnowP","FE1U","FE1D","FE2U","FE2D","TRT","TRD","GA","HA",
             "HMRain",
             "MWW",
@@ -40,14 +40,14 @@ const QString DataFormatUtil::zDBItem[] =
         };
 const QString DataFormatUtil::zFileItem[] =
         {
-            "stationNum","time","latitude","longitude","height","PPHeight","awsMode","QCCode","CFC",
+            "stationNum","time","latitude","longitude","height","PPHeight","awsMode","QCCode","CCX",
             "P","SP","VP3","VP24","MaxP","MaxPT","MinP","MinPT",
             "T","MaxT","MaxTT","MinT","MinTT","VT24","MaxT24","MinT24","TD","RH","MinRH","MinRHT","WP",
             "HRain","HRain3","HRain6","HRain12","HRain24","RainMT","RainM","E",
             "WD2","WS2","WD10","WS10","MaxWD","MaxWS","MaxWST","WD","WS","ExWD","ExWS","ExWST","ExWS6","ExWD6","ExWS12","ExWD12",
             "ET","MaxET","MaxETT","MinET","MinETT","MinET12","ET5","ET10","ET15","ET20","ET40","ET80","ET160","ET320","GT","MaxGT","MaxGTT","MinGT","MinGTT",
             "V1","V10","MinV","MinVT",
-            "V","CA","LCA","RCA","CH","CF","EC","MW","WW","WT","W1","W2",
+            "V","CA","LCA","RCA","CH","CF","CFC","WW","WT","W1","W2","EC",
             "SnowD","SnowP","FE1U","FE1D","FE2U","FE2D","TRT","TRD","GA","HA",
             "HMRain",
             "MWW",

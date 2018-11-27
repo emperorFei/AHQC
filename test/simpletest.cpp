@@ -178,56 +178,6 @@ void SimpleTest::testGlobalSettingInit_data(){
 
 
 
-//void SimpleTest::testReadAMFile(){
-//    QFETCH(QString,AMDataShouldBe);
-//    DayBoundScheme dbScheme;
-//    TimeRange focusedTimeRange = AHQC::TimeUtil::getFocusedTimeRange(&dbScheme);
-//    QList<QDateTime> focusedHours = AHQC::TimeUtil::getFocusedHours(focusedTimeRange);
-//    QList<QString> amFileNames = AHQC::FileNameUtil::getAMFileNamesFormFocusedHours(focusedHours);
-//    if(amFileNames.isEmpty()){
-//        qDebug() << "no amFiles between "<< focusedTimeRange.toQString() << "found in " << AHQC::isosPath;
-//        return;
-//    }
-//    QString line("beforeInit");
-//    QList<AWSMinuteData> awsMinuteDatas;
-//    for(QString amFileName:amFileNames){
-//        QFile amFile(amFileName);
-//        if(amFile.exists()){
-//            if(amFile.open(QIODevice::ReadOnly|QIODevice::Text)){
-//                QTextStream amIn(&amFile);
-//                QDate awsDay = AHQC::FileNameUtil::AMFileName2Date(amFileName);
-//                if(!amIn.atEnd()){
-//                    line = amIn.readLine();
-//                    while(!amIn.atEnd()){
-//                        line = amIn.readLine();
-//                        if(line.compare("") != 0 && line.at(0) != '-'){
-//                            AWSMinuteData awsMinuteData(awsDay,line);
-//                            awsMinuteDatas.append(awsMinuteData);
-//                        }
-//                    }
-//                }
-//                amFile.close();
-//            }else{
-//                qDebug() << "file: " << amFileName << "can't open";
-//                return ;
-//            }
-//        }else{
-//            qDebug() << "file: " << amFileName << "not exists";
-//            return ;
-//        }
-//    }
-
-//    qDebug() << awsMinuteDatas.first().toString();
-//    if(awsMinuteDatas.length()!=0){
-//        QCOMPARE(awsMinuteDatas.first().toString(),AMDataShouldBe);
-//    }
-//    QString qsb1;
-//}
-//void SimpleTest::testReadAMFile_data(){
-//    QTest::addColumn<QString>("AMDataShouldBe");
-//    QTest::newRow("AMData")   << "00";
-//}
-
 void SimpleTest::testReadAMFile(){
     QFETCH(QString,AMDataShouldBe);
     QFETCH(QString,AMFileName);
@@ -309,7 +259,6 @@ void SimpleTest::testGetZFileNames(){
         }
     }
     QCOMPARE(qsb,FileNamesShouldBe);
-    QString qsb1;
 }
 void SimpleTest::testGetZFileNames_data(){
     QTest::addColumn<QString>("FileNamesShouldBe");
@@ -329,12 +278,91 @@ void SimpleTest::testGetConnect(){
 void SimpleTest::testGetConnect_data(){
 
 }
-void SimpleTest::testSaveAWSMinuteData(){
 
+void SimpleTest::testSaveAMFile(){
+    QFETCH(QString,amFileName);
+    QFETCH(bool,success);
+    QSqlDatabase *database = DBCenter::getDBByAccountType(DBCenter::AccountType::QIU);
+    AWSMinuteDAOMySqlImp awsDao(database);
+    bool successed = awsDao.saveAMFile(amFileName);
+    QCOMPARE(successed,success);
 }
-void SimpleTest::testSaveAWSMinuteData_data(){
+void SimpleTest::testSaveAMFile_data(){
+    QTest::addColumn<QString>("amFileName");
+    QTest::addColumn<bool>("success");
+    QTest::newRow("saveAMFile") <<
+                                   AHQC::FileNameUtil::Date2AMFileName(
+                                       AHQC::TimeUtil::dateTime2AWSDay(
+                                           QDateTime::fromString("20181003140000","yyyyMMddHHmmss")))
+                                << true;
+}
+void SimpleTest::testSaveZData(){
+    QFETCH(QString,zFileName);
+    QFETCH(bool,success);
+    QSqlDatabase *database = DBCenter::getDBByAccountType(DBCenter::AccountType::QIU);
+    ZDataDAOMysqlImp zDao(database);
+    ZData zData(ZData::fromZFile(zFileName));
+    bool successed = zDao.saveZData(zData);
+    QCOMPARE(successed,success);
+}
+void SimpleTest::testSaveZData_data(){
+    QTest::addColumn<QString>("zFileName");
+    QTest::addColumn<bool>("success");
+    QTest::newRow("saveZFile") << AHQC::FileNameUtil::DateTime2ZFileName(
+                                      QDateTime::fromString("20181003140000","yyyyMMddHHmmss"))
+                               << true;
+}
 
+void SimpleTest::testGetZData(){
+    QFETCH(QDateTime,observeTime);
+    QFETCH(bool,success);
+    QSqlDatabase *database = DBCenter::getDBByAccountType(DBCenter::AccountType::QIU);
+    ZDataDAOMysqlImp zDao(database);
+    bool successed = false;
+    if(!zDao.exists(observeTime)){
+        QString zFileName = AHQC::FileNameUtil::DateTime2ZFileName(observeTime);
+        ZData zData(ZData::fromZFile(zFileName));
+        successed = zDao.saveZData(zData);
+    }else{
+        ZData zData(zDao.findByOT(observeTime));
+        qDebug() << zData.toString();
+    }
+    QCOMPARE(successed,success);
 }
+void SimpleTest::testGetZData_data(){
+    QTest::addColumn<QDateTime>("observeTime");
+    QTest::addColumn<bool>("success");
+    QTest::newRow("getZData") << QDateTime::fromString("20181003150000","yyyyMMddHHmmss")
+                               << true;
+}
+void SimpleTest::testGetAHData(){
+    QFETCH(QDateTime,observeTime);
+    QFETCH(bool,success);
+    QSqlDatabase *database = DBCenter::getDBByAccountType(DBCenter::AccountType::QIU);
+    AWSMinuteDAOMySqlImp awsDao(database);
+    bool successed = false;
+    QList<QString> amFileNames = AHQC::FileNameUtil::prepareAMFile4Select(observeTime);
+    for(const QString &amFileName : amFileNames){
+        awsDao.saveAMFile(amFileName);
+    }
+    AWSMinuteData amData = awsDao.findByOT(observeTime);
+    QMap<QString,int> statisticData = awsDao.getExtremums(observeTime);
+    statisticData.unite(awsDao.getVAndRain(observeTime));
+    AHData ahData(amData,statisticData);
+    qDebug() << ahData.getIntItemValue("MaxT");
+    QCOMPARE(successed,success);
+}
+void SimpleTest::testGetAHData_data(){
+    QTest::addColumn<QDateTime>("observeTime");
+    QTest::addColumn<bool>("success");
+    QTest::newRow("getAHData") << QDateTime::fromString("20181003150000","yyyyMMddHHmmss")
+                               << true;
+}
+
+
+
+
+
 //void SimpleTest::testExecuteSqlScript(){
 
 //    QFETCH(QString,ExecuteSqlScript);

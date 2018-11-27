@@ -1,4 +1,4 @@
-#ifndef AWSMINUTEDATA_H
+﻿#ifndef AWSMINUTEDATA_H
 #define AWSMINUTEDATA_H
 #include <QString>
 #include <QDateTime>
@@ -27,17 +27,11 @@ public:
     int getMinute() const;
     void setMinute(int value);
 
-    QString getObserveMonth() const;
-    void setObserveMonth(const QString &value);
-
     QDateTime getObserveTime() const;
     void setObserveTime(const QDateTime &value);
 
-    QDateTime getInsertTime() const;
-    void setInsertTime(const QDateTime &value);
-
-    QDateTime getUpdateTime() const;
-    void setUpdateTime(const QDateTime &value);
+    QDate getObserveMonth() const;
+    void setObserveMonth(const QDate &value);
 
     QList<int> getData() const;
     void setData(const QList<int> &value);
@@ -54,10 +48,8 @@ public:
 private:
     QDate observeDay;
     int  minute;
-    QString observeMonth;
     QDateTime observeTime;
-    QDateTime  insertTime;
-    QDateTime  updateTime;
+    QDate observeMonth;
     QList<int> data;
     QString weatherphcode;
     QString dataQulity;

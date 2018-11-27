@@ -2,16 +2,16 @@
 
 ZData::ZData():
     observeTime(unInitTime),
-    insertTime(unInitTime),
-    updateTime(unInitTime),
+    observeMonth(unInitTime.date()),
     data(QMap<QString,QString>())
 {}
 
 
+
+
 ZData::ZData(const ZData &other){
     this->observeTime = other.observeTime;
-    this->insertTime = other.insertTime;
-    this->updateTime = other.updateTime;
+    this->observeMonth = other.observeMonth;
     this->data.clear();
     this->data.unite(other.data);
 }
@@ -26,8 +26,9 @@ ZData ZData::fromZFile(const QString &zFileName){
         while(!textStream.atEnd()){
             line += textStream.readLine()+" ";
         }
-        zData.data = DataFormatUtil::zFileContent2zData(line);
         zData.observeTime = AHQC::FileNameUtil::ZFileName2DateTime(zFileName);
+        zData.observeMonth = AHQC::TimeUtil::dateTime2AWSMonth(zData.observeTime);
+        zData.data = DataFormatUtil::zFileContent2zData(line);
         zData.totalInited = true;
         zFile.close();
     }else{
@@ -55,29 +56,21 @@ QString ZData::value(const QString &key) const{
     return QString();
 }
 
+QDate ZData::getObserveMonth() const
+{
+    return observeMonth;
+}
 
+void ZData::setObserveMonth(const QDate &value)
+{
+    observeMonth = value;
+}
 QDateTime ZData::getObserveTime() const
 {
     return observeTime;
-}
-QDateTime ZData::getUpdateTime() const
-{
-    return updateTime;
-}
-
-QDateTime ZData::getInsertTime() const
-{
-    return insertTime;
-}
-void ZData::setUpdateTime(const QDateTime &value)
-{
-    updateTime = value;
-}
-void ZData::setInsertTime(const QDateTime &value)
-{
-    insertTime = value;
 }
 void ZData::setObserveTime(const QDateTime &value)
 {
     observeTime = value;
 }
+

@@ -9,8 +9,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 //    TestReadXmlData tReadXml;
     SimpleTest simpleTest;
-    QtFeatureTest qtFeatureTest;
-    QTest::qExec(&qtFeatureTest);
+//    QtFeatureTest qtFeatureTest;
+//    QTest::qExec(&qtFeatureTest);
 //    QTest::qExec(&tReadXml);
     QTest::qExec(&simpleTest);
     ui->setupUi(this);

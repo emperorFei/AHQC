@@ -1,8 +1,9 @@
-#ifndef ZDATADAOMYSQLIMP_H
+﻿#ifndef ZDATADAOMYSQLIMP_H
 #define ZDATADAOMYSQLIMP_H
 #include <QDateTime>
 #include <QSqlQuery>
 #include <QSqlDatabase>
+#include <QSqlError>
 #include "simpleobject.h"
 #include "zdata.h"
 #include "util/dataformatutil.h"
@@ -15,8 +16,10 @@ public:
     int getRecordsCount(const TimeRange &tr);
     bool saveZData(const ZData &zData);
     ZData findByOT(const QDateTime &observeTime);
+    bool exists(const QDateTime &observeTime);
 private:
-    static QString insertSql;
+    QString insertSql;
+    static QString checkExistsSql;
     static QString findOTDByOTSql;
     static QString getRecordsCountSql;
     static QString findTByObserveTimeSql;

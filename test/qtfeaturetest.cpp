@@ -146,3 +146,38 @@ void QtFeatureTest::testRegLookBehind(){
 }
 void QtFeatureTest::testRegLookBehind_data(){
 }
+
+
+void QtFeatureTest::testInsertCause(){
+    QSqlDatabase sqlDatabase(QSqlDatabase::addDatabase("QMYSQL"));
+    sqlDatabase.setHostName("localhost");
+    sqlDatabase.setPort(3306);
+    sqlDatabase.setDatabaseName("tempdb");
+    sqlDatabase.setUserName("fei");
+    sqlDatabase.setPassword("tiger");
+    QSqlQuery transaction_start(sqlDatabase);
+    QSqlQuery transaction_COMMIT(sqlDatabase);
+    QSqlQuery transaction_ROLLBACK(sqlDatabase);
+    if(sqlDatabase.open()){
+        bool start = transaction_start.exec("START TRANSACTION");
+        QSqlQuery query(sqlDatabase);
+        query.prepare("insert into insertTest values(0,?,?)");
+        for(int i=0;i<=100000;i++){
+            query.bindValue(0,QVariant(1000+i));
+            query.bindValue(1,QVariant("title"+QString::number(i)));
+            bool successed = query.exec();
+            qDebug() << i <<
+                        " inseret " << (successed == true ? "success": "fault")
+                        << query.lastError().databaseText();
+        }
+        bool commit = transaction_COMMIT.exec("COMMIT");
+        int i = 10;
+        qDebug() << i;
+
+    }
+    QString c("end");
+    qDebug() << c;
+}
+void QtFeatureTest::testInsertCause_data(){
+
+}

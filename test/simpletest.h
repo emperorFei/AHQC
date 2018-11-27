@@ -14,6 +14,7 @@
 #include "globalseeting.h"
 #include "awsminutedata.h"
 #include "zdata.h"
+#include "ahdata.h"
 #include "util/sqlfileexecutor.h"
 #include "dbcenter.h"
 #include "awsminutedaomysqlimp.h"
@@ -75,8 +76,18 @@ private slots:
     void testGetConnect();
     void testGetConnect_data();
 
-    void testSaveAWSMinuteData();
-    void testSaveAWSMinuteData_data();
+    void testSaveAMFile();
+    void testSaveAMFile_data();
+    void testSaveZData();
+    void testSaveZData_data();
+
+    void testGetZData();
+    void testGetZData_data();
+    void testGetAHData();
+    void testGetAHData_data();
+
+//    void testSaveAWSMinuteData();
+//    void testSaveAWSMinuteData_data();
 
 
 //    void testExecuteSqlScript();

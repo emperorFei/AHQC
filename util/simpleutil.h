@@ -35,10 +35,12 @@ namespace AHQC {
         TimeRange getFocusedTimeRange(FocusScheme *focusScheme);
         QDateTime getPreviousDayBound(QDateTime gaveTime);
         QList<QDateTime> getFocusedHours(TimeRange focusedTimeRange);
-        QDateTime nextHour(QDateTime dateTime);
-        QDateTime prevoiusOnHour(QDateTime dateTime);
+        QDateTime nextHour(const QDateTime &dateTime);
+        inline QDateTime prevoiusOnHour(const QDateTime &dateTime);
         TimeRange getTimeRange(const QDateTime &onTime, int hours);
         TimeRange getTimeRange4Sum(const QDateTime &onTime, int hours);
+        QDateTime previousOnTimeZSendTime();
+
         //QList<QDateTime> getAWSTimepoints(QDateTime );
     }
     namespace FileNameUtil {
@@ -48,10 +50,13 @@ namespace AHQC {
         QString DateTime2ZFileName(const QDateTime &dateTime);
         QString AMFUllName2ShortName(const QString &amFullName);
         QString zFUllName2ShortName(const QString &zFullName);
-        QList<QString> getAMFileNamesFormFocusedHours(QList<QDateTime> foucsedHours);
-        QList<QString> getZFileNamesFormFocusedHours(QList<QDateTime> foucsedHours);
+        QList<QString> getAMFileNamesFormFocusedHours(const QList<QDateTime> &foucsedHours);
+        QList<QString> getZFileNamesFormFocusedHours(const QList<QDateTime> &foucsedHours);
         QList<QString> getAMFileNamesFormFocusedTimeRange();
         QList<QString> getZFileNamesFormFocusedTimeRange();
+        QList<QString> prepareAMFile4Select(const QDateTime &timepoint);
+        QList<QString> prepareAMFile4Select(const TimeRange &timeRange);
+        QList<QString> prepareAMFile4Select(const QList<QDateTime> &timepoints);
 
         inline QString findCCXZFileNameFromPlanFileName(const QString &planZFileName);
 

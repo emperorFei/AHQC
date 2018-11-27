@@ -21,17 +21,14 @@ public:
 
     ZData(const ZData &other);
     QDateTime getObserveTime() const;
-    QDateTime getInsertTime() const;
-    QDateTime getUpdateTime() const;
+    QDate getObserveMonth() const;
     void setObserveTime(const QDateTime &value);
-    void setInsertTime(const QDateTime &value);
-    void setUpdateTime(const QDateTime &value);
+    void setObserveMonth(const QDate &value);
 
 private:
     ZData();
     QDateTime observeTime;
-    QDateTime insertTime;
-    QDateTime updateTime;
+    QDate observeMonth;
     QMap<QString,QString> data;
 //    QMap<QString,QString> stringData;
 //    QMap<QString,int> intData;

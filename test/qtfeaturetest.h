@@ -8,6 +8,10 @@
 #include <QDebug>
 #include <QDateTime>
 #include <QRegExp>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QValidator>
 
 class QtFeatureTest : public QObject
 {
@@ -26,6 +30,8 @@ private slots:
     void testReadNull_data();
     void testRegLookBehind();
     void testRegLookBehind_data();
+    void testInsertCause();
+    void testInsertCause_data();
 
 
 };
