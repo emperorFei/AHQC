@@ -21,7 +21,8 @@ namespace AHQC {
     extern QString ZFileFullNameTemplate;
     extern QRegExp amFileNameReg;
     extern QRegExp zFileNameReg;
-
+    enum DataLevel{INFO,SUSPECTED,CLASH,MISSING,MISSINGZDATA,MISSINGAMDATA,ERROR};
+    int connectToShareDfolder();
     namespace TimeUtil {
 
         extern QString sdf4SMOLocFile;

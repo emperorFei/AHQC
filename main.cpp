@@ -18,6 +18,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     singleton<GlobalSetting>::GetInstance();
+//    int result = system("net use \\\\computer\\temp 2222");
+//    qDebug() << QString::number(result);
 //    QString path1("D:\\CTS2\\TransferClient\\log\\SendDataAck");
 //    QString path2("D:\\CTS2\\Transfer Client\\log\\SendData Ack");
 //    QString path3("D:\\CTS2\\TransferClient\\log\\SendData Ack");

@@ -1,5 +1,5 @@
 ﻿#include "zdatadaomysqlimp.h"
-QString ZDataDAOMysqlImp::checkExistsSql = "select isNull((select 1 from ZData where ObserveTime = ?),0) ";
+QString ZDataDAOMysqlImp::checkExistsSql = "select 1 from ZData where ObserveTime = ?";
 QString ZDataDAOMysqlImp::findTByObserveTimeSql = "select tempis from ZData where ObserveTime = ?";
 QString ZDataDAOMysqlImp::findOTDByOTSql = "select * from ZData where observeTime = ?";
 QString ZDataDAOMysqlImp::getRecordsCountSql ="select count(*) from ZData where observeTime between ? and ?";
@@ -81,11 +81,19 @@ bool ZDataDAOMysqlImp::saveZData(const ZData &zData){
         query.bindValue(++qmIndex,QVariant(zData.value(itemName)));
     }
     bool success =  query.exec();
-    qDebug() << success
-             <<" " << zData.getObserveTime().toString("yyyyMMdd-HHmm")
-             << " " << query.lastError().databaseText();
+//    qDebug() << success
+//             <<" " << zData.getObserveTime().toString("yyyyMMdd-HHmm")
+//             << " " << query.lastError().databaseText();
     flag = true;
     return flag;
+}
+
+ZData ZDataDAOMysqlImp::checkSaveAndFindByOT(const QDateTime &observeTime){
+    QString zFileName = AHQC::FileNameUtil::DateTime2ZFileName(observeTime);
+    ZData saveZ(ZData::fromZFile(zFileName));
+    saveZData(saveZ);
+    ZData findedZ(findByOT(observeTime));
+    return findedZ;
 }
 
 ZData ZDataDAOMysqlImp::findByOT(const QDateTime &observeTime){
@@ -103,13 +111,14 @@ ZData ZDataDAOMysqlImp::findByOT(const QDateTime &observeTime){
     if(query.next()) {
         int index = 0;
         zData.setObserveTime(query.value(++index).toDateTime());
+        zData.setObserveMonth(query.value(++index).toDate());
         index += 2;
-        int intDataNum = DataFormatUtil::zFileItem->length()+4;
-        auto it = DataFormatUtil::zFileItem->constBegin();
-        QString tempValue("");
-        for(++index; index < intDataNum;++index) {
-            tempValue = query.value(index).toString();
-            zData.data.insert(*it,tempValue);
+        QString itemName("");
+        QString itemValue("");
+        for(int i = 0;i < 128;i++){
+            itemName = DataFormatUtil::zFileItem[i];
+            itemValue = query.value(++index).toString();
+            zData.data.insert(itemName,itemValue);
         }
         zData.totalInited = true;
         query.finish();
@@ -129,7 +138,7 @@ bool ZDataDAOMysqlImp::exists(const QDateTime &observeTime){
     }
     query.prepare(checkExistsSql);
     query.bindValue(0, QVariant(observeTime));
-    query.exec();
+    bool success = query.exec();
     if(query.next()) {
         int result = query.value(0).toInt();
         result == 1 ? flag = true :flag = false;

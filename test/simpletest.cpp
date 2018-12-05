@@ -339,12 +339,15 @@ void SimpleTest::testGetAHData(){
     QFETCH(QDateTime,observeTime);
     QFETCH(bool,success);
     QSqlDatabase *database = DBCenter::getDBByAccountType(DBCenter::AccountType::QIU);
+    database->open();
     AWSMinuteDAOMySqlImp awsDao(database);
     bool successed = false;
     QList<QString> amFileNames = AHQC::FileNameUtil::prepareAMFile4Select(observeTime);
     for(const QString &amFileName : amFileNames){
         awsDao.saveAMFile(amFileName);
     }
+    ZDataDAOMysqlImp zDao(database);
+    ZData zData(zDao.findByOT(observeTime));
     AWSMinuteData amData = awsDao.findByOT(observeTime);
     QMap<QString,int> statisticData = awsDao.getExtremums(observeTime);
     statisticData.unite(awsDao.getVAndRain(observeTime));

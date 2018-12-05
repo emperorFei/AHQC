@@ -74,10 +74,10 @@ void AWSMinuteData::nestenData(){
 }
 
 QDebug& operator<<(QDebug &debug, const AWSMinuteData &obj){
-    debug << obj.getObserveTime()
-          <<" IntData: "+ AHQC::PrintUtil::printList(obj.getData())
-          << " Weatherphcod: "+obj.getWeatherphcode()
-          << " DataQulity: "+obj.getDataQulity();
+    return debug << obj.getObserveTime()
+                 << " IntData: "+ AHQC::PrintUtil::printList(obj.getData())
+                 << " Weatherphcod: "+obj.getWeatherphcode()
+                 << " DataQulity: "+obj.getDataQulity();
 }
 
 QString operator+(const QString &string,const AWSMinuteData &obj){

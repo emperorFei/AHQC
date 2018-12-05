@@ -7,11 +7,16 @@
 #include "util/simpleutil.h"
 #include <QFile>
 #include <QTextStream>
+
 extern QDateTime unInitTime;
 class ZDataDAOMysqlImp;
+class AZData;
+class DataFormatUtil;
 class ZData
 {
 friend class ZDataDAOMysqlImp;
+friend class DataFormatUtil;
+friend class AZData;
 public:
 //    explicit ZData(const QDateTime &observeTime,const QMap<QString,QString> &data);
     bool isTotalInited() const;

@@ -19,7 +19,10 @@ QTime AHQC::TimeUtil::changeShiftsTime = QTime::fromString("163000","HHmmss");
 int AHQC::TimeUtil::OBInterval = 6;
 
 
+int AHQC::connectToShareDfolder(){
+    GlobalSetting *globalSetting = GlobalSetting::getInstance();
 
+}
 
 
 

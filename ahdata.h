@@ -1,4 +1,4 @@
-#ifndef AHDATA_H
+﻿#ifndef AHDATA_H
 #define AHDATA_H
 
 #include <QList>
@@ -6,9 +6,12 @@
 #include <QDateTime>
 #include "awsminutedata.h"
 
-
+class DataFormatUtil;
+class AZData;
 class AHData
 {
+friend class DataFormatUtil;
+friend class AZData;
 public:
     AHData();
     AHData(const AWSMinuteData &am, QMap<QString,int> &statisticData);
@@ -34,7 +37,6 @@ private:
     static const QString minuteItems[];
     QString weatherphcode = "------------";
     QString mDataQuality = "------------";
-
 };
 
 #endif // AHDATA_H

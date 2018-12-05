@@ -15,6 +15,7 @@ public:
     int findTempisByObserveTime(const QDateTime &observeTime);
     int getRecordsCount(const TimeRange &tr);
     bool saveZData(const ZData &zData);
+    ZData checkSaveAndFindByOT(const QDateTime &observeTime);
     ZData findByOT(const QDateTime &observeTime);
     bool exists(const QDateTime &observeTime);
 private:

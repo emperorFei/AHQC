@@ -55,7 +55,16 @@ SOURCES += \
     settingwidget.cpp \
     nofocusframedelegate.cpp \
     ahqlistwidgetitem.cpp \
-    zdatadaomysqlimp.cpp
+    zdatadaomysqlimp.cpp \
+    azdata.cpp \
+    fullwidegt.cpp \
+    horizontaltree.cpp \
+    animationstackedwidget.cpp \
+    ui/calendarwidget.cpp \
+    ui/clickablelabel.cpp \
+    ui/date.cpp \
+    ui/daylabel.cpp \
+    ui/hourlabel.cpp
 
 
 HEADERS += \
@@ -85,14 +94,26 @@ HEADERS += \
     settingwidget.h \
     nofocusframedelegate.h \
     ahqlistwidgetitem.h \
-    zdatadaomysqlimp.h
+    zdatadaomysqlimp.h \
+    azdata.h \
+    fullwidegt.h \
+    horizontaltree.h \
+    animationstackedwidget.h \
+    ui/calendarwidget.h \
+    ui/clickablelabel.h \
+    ui/date.h \
+    ui/daylabel.h \
+    ui/hourlabel.h
 
 
 
 
 FORMS += \
         mainwindow.ui \
-    settingwidget.ui
+    settingwidget.ui \
+    fullwidegt.ui \
+    horizontaltree.ui \
+    animationstackedwidget.ui
 
 RESOURCES += \
     config.qrc \

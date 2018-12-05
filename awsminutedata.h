@@ -8,9 +8,11 @@
 #include "util/simpleutil.h"
 #include "globalseeting.h"
 class AWSMinuteDAOMySqlImp;
+
 class AWSMinuteData
 {
 friend class AWSMinuteDAOMySqlImp;
+
 friend QDebug& operator<<(QDebug &debug, const AWSMinuteData &obj);
 friend QString operator+(const QString &string,const AWSMinuteData &obj);
 friend QString operator+(const AWSMinuteData &obj,const QString &string);

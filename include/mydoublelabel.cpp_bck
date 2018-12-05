@@ -20,25 +20,6 @@ MyDoubleLabel::MyDoubleLabel(QWidget *parent) :
     right->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
 
 }
-MyDoubleLabel::MyDoubleLabel(const QString &itemName,
-                       const QPair<QPair<QString,QString>,MyDoubleLabel::Leval> &data,
-                       QWidget *parent):
-    QWidget(parent),dataName(itemName),leval(data.second)
-{
-    ui->setupUi(this);
-    left = ui->left_label;
-    right = ui->right_label;
-
-    setProperty("leftText",data.first.first);
-    setProperty("rightText",data.first.second);
-    setProperty("alignment",TextAlignment::AlignHCerter);
-
-    left->setAlignment(Qt::AlignRight|Qt::AlignVCenter);
-    right->setAlignment(Qt::AlignLeft|Qt::AlignVCenter);
-    left->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
-    right->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
-}
-
 
 MyDoubleLabel::~MyDoubleLabel()
 {
@@ -53,6 +34,11 @@ void MyDoubleLabel::setText(const stringPair& dataPair){
     right->setText(rightText);
 }
 
+
+QString MyDoubleLabel::getRightText() const
+{
+    return rightText;
+}
 
 void MyDoubleLabel::setRightText(const QString &value)
 {
@@ -112,41 +98,4 @@ void MyDoubleLabel::paintEvent(QPaintEvent *){
     opt.init(this);
     QPainter p(this);
     style()->drawPrimitive(QStyle::PE_Widget,&opt,&p,this);
-}
-
-const QFont & MyDoubleLabel::font() const{
-    return left->font();
-}
-
-void MyDoubleLabel::setFont(const QFont &font){
-    left->setFont(font);
-    right->setFont(font);
-}
-
-
-
-QString MyDoubleLabel::getDataName() const
-{
-    return dataName;
-}
-
-void MyDoubleLabel::setDataName(const QString &value)
-{
-    dataName = value;
-}
-
-MyDoubleLabel::Leval MyDoubleLabel::getLevel() const
-{
-    return leval;
-}
-
-void MyDoubleLabel::setLevel(const Leval &value)
-{
-    leval = value;
-}
-
-
-QString MyDoubleLabel::getRightText() const
-{
-    return rightText;
 }

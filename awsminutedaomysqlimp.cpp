@@ -3,7 +3,7 @@
 QString AWSMinuteDAOMySqlImp::findTByObserveTimeSql = "select tempis from AWSMinute where ObserveTime = ?";
 QString AWSMinuteDAOMySqlImp::findOTDByOTSql = "select * from AWSMinute where observeTime = ?";
 QString AWSMinuteDAOMySqlImp::getRecordsCountSql ="select count(*) from AWSMinute where observeTime between ? and ?";
-QString AWSMinuteDAOMySqlImp::checkExistsSql = "select isNull((select 1 from AWSMinute where ObserveTime = ?),0)";
+QString AWSMinuteDAOMySqlImp::checkExistsSql = "select 1 from AWSMinute where ObserveTime = ?";
 
 //max
 QString AWSMinuteDAOMySqlImp::getMaxTByOnTimeSql = "select max(tempis)  from "
@@ -35,32 +35,33 @@ QString AWSMinuteDAOMySqlImp::getMinETByOnTimeSql = "select min(Groundtemppt)  f
 QString AWSMinuteDAOMySqlImp::getMinGTByOnTimeSql = "select min(Grasstemp)  from "
         "(select Grasstemp from AWSMinute where observeTime between ? and ? ) as total "
         "where Grasstemp != 6666 and Grasstemp != 9999";
-QString AWSMinuteDAOMySqlImp::getMinRHByOnTimeSql = "select min(Rh)  from "
+QString AWSMinuteDAOMySqlImp::getMinRHByOnTimeSql = "select min(Rh) from "
         "(select Rh from AWSMinute where observeTime between ? and ? ) as total "
         "where Rh != 6666 and Rh != 9999";
-QString AWSMinuteDAOMySqlImp::getMinPByOnTimeSql = "select min(Pressure)  from "
+QString AWSMinuteDAOMySqlImp::getMinPByOnTimeSql = "select min(Pressure) from "
         "(select Pressure from AWSMinute where observeTime between ? and ? ) as total "
         "where Pressure != 6666 and Pressure != 9999";
-QString AWSMinuteDAOMySqlImp::getMinVByOnTimeSql = "select min(Vis_10min)  from "
+QString AWSMinuteDAOMySqlImp::getMinVByOnTimeSql = "select min(Vis_10min) from "
         "(select Vis_10min from AWSMinute where observeTime between ? and ? ) as total "
         "where Vis_10min != 66666 and Vis_10min != 99999";
 //rain
 QString AWSMinuteDAOMySqlImp::getRainSql = "select sum(MRainweight-1000) from "
         "(select MRainweight from AWSMinute where observeTime between ? and ?) as total"
         " where MRainweight < 6666" ;
-        //+ "where MRainrat != 6666 and MRainrat != 9999";
 //sp
 QString AWSMinuteDAOMySqlImp::getValue4SPSql = "select Pressure,tempis from AWSMinute "
         "where observeTime = ? "
         "union "
         "select Pressure,tempis from AWSMinute where observeTime = ?";
 //extremum that not visible
-QString AWSMinuteDAOMySqlImp::getVPSql = "select b.Pressure - a.Pressure from "
-        "(select Pressure from AWSMinute where observeTime = ? ) a,"
-        "(select Pressure from AWSminute where observeTime = ? ) b";
-QString AWSMinuteDAOMySqlImp::getVTSql = "select b.tempis - a.tempis from "
-        "(select tempis from AWSMinute where observeTime = ? ) a,"
-        "(select tempis from AWSminute where observeTime = ? ) b";
+QString AWSMinuteDAOMySqlImp::getVPSql = "select Pressure from AWSMinute "
+                                         "where observeTime = ? "
+                                         "union "
+                                         "select Pressure from AWSMinute where observeTime = ?";
+QString AWSMinuteDAOMySqlImp::getVTSql = "select tempis from AWSMinute "
+                                         "where observeTime = ? "
+                                         "union "
+                                         "select tempis from AWSMinute where observeTime = ?";
 QString AWSMinuteDAOMySqlImp::getMinTSql = "select min(tempis)  from "
         "(select tempis from AWSMinute where observeTime between ? and ? ) as total "
         "where tempis!= 6666 and tempis != 9999";
@@ -85,74 +86,93 @@ QString AWSMinuteDAOMySqlImp::getMinETSql = "select min(Groundtemppt)  from "
 //maxT
 QString AWSMinuteDAOMySqlImp::getMaxTTByOnTimeSql = "select min(tt) from "
         "(select observeTime as tt , tempis as t from AWSMinute where observeTime between ? and ?) as ttable "
-        //+ "(select max(ttable.t)  from ttable where ttable.t != 6666 and ttable.t != 9999) as maxT"
-        "where t "
-        //+" = 1187";
-        "= (select max(t)  from (select observeTime as tt , tempis as t from AWSMinute where observeTime between ? and ?) as ttablet where t != 6666 and t != 9999)";
+        "where t = "
+        "(select max(t) from "
+        "(select observeTime as tt , tempis as t from AWSMinute where observeTime between ? and ?) as ttablet "
+        "where t != 6666 and t != 9999)";
 QString AWSMinuteDAOMySqlImp::getMaxETTByOnTimeSql = "select min(ett) from "
         "(select observeTime as ett , Groundtemppt as et from AWSMinute where observeTime between ? and ?) as ttable "
-        "where et "
-        "= (select max(et)  from (select observeTime as ett , Groundtemppt as et from AWSMinute where observeTime between ? and ?) as ttablet where et != 6666 and et != 9999)";
+        "where et = "
+        "(select max(et) from "
+        "(select observeTime as ett , Groundtemppt as et from AWSMinute where observeTime between ? and ?) as ttablet "
+        "where et != 6666 and et != 9999)";
 QString AWSMinuteDAOMySqlImp::getMaxGTTByOnTimeSql = "select min(gtt) from "
         "(select observeTime as gtt , Grasstemp as gt from AWSMinute where observeTime between ? and ?) as ttable "
-        "where gt "
-        "= (select max(gt)  from (select observeTime as gtt , Grasstemp as gt from AWSMinute where observeTime between ? and ?) as ttablet where gt != 6666 and gt != 9999)";
+        "where gt = "
+        "(select max(gt) from "
+        "(select observeTime as gtt , Grasstemp as gt from AWSMinute where observeTime between ? and ?) as ttablet "
+        "where gt != 6666 and gt != 9999)";
 QString AWSMinuteDAOMySqlImp::getMaxPTByOnTimeSql = "select min(pt) from "
         "(select observeTime as pt , Pressure as p from AWSMinute where observeTime between ? and ?) as ttable "
-        "where p "
-        "= (select max(p)  from (select observeTime as pt , Pressure as p from AWSMinute where observeTime between ? and ?) as ttablet where p != 6666 and p != 9999)";
+        "where p = "
+        "(select max(p) from "
+        "(select observeTime as pt , Pressure as p from AWSMinute where observeTime between ? and ?) as ttablet "
+        "where p != 6666 and p != 9999)";
 QString AWSMinuteDAOMySqlImp::getMaxWSTByOnTimeSql = "select min(ws10t) from "
         "(select observeTime as ws10t , Windspeed10 as ws10 from AWSMinute where observeTime between ? and ?) as ttable "
-        "where ws10 "
-        "= (select max(ws10)  from (select observeTime as ws10t , Windspeed10 as ws10 from AWSMinute where observeTime between ? and ?) as ttablet where ws10 != 6666 and ws10 != 9999)";
+        "where ws10 = "
+        "(select max(ws10) from "
+        "(select observeTime as ws10t , Windspeed10 as ws10 from AWSMinute where observeTime between ? and ?) as ttablet "
+        "where ws10 != 6666 and ws10 != 9999)";
 QString AWSMinuteDAOMySqlImp::getExWSTByOnTimeSql = "select min(wst) from "
         "(select observeTime as wst , Windspeed as ws from AWSMinute where observeTime between ? and ?) as ttable "
-        "where ws "
-        "= (select max(ws)  from (select observeTime as wst , Windspeed as ws from AWSMinute where observeTime between ? and ?) as ttablet where ws != 6666 and ws != 9999)";
+        "where ws = "
+        "(select max(ws) from "
+        "(select observeTime as wst , Windspeed as ws from AWSMinute where observeTime between ? and ?) as ttablet "
+        "where ws != 6666 and ws != 9999)";
 //minT
 QString AWSMinuteDAOMySqlImp::getMinTTByOnTimeSql = "select min(tt) from "
         "(select observeTime as tt , tempis as t from AWSMinute where observeTime between ? and ?) as ttable "
-        //+ "(select max(ttable.t)  from ttable where ttable.t != 6666 and ttable.t != 9999) as maxT"
-        "where t "
-        //+" = 1187";
-        "= (select min(t)  from (select observeTime as tt , tempis as t from AWSMinute where observeTime between ? and ?) as ttablet where t != 6666 and t != 9999)";
+        "where t = "
+        "(select min(t) from "
+        "(select observeTime as tt , tempis as t from AWSMinute where observeTime between ? and ?) as ttablet "
+        "where t != 6666 and t != 9999)";
 QString AWSMinuteDAOMySqlImp::getMinETTByOnTimeSql = "select min(ett) from "
         "(select observeTime as ett , Groundtemppt as et from AWSMinute where observeTime between ? and ?) as ttable "
-        "where et "
-        "= (select min(et)  from (select observeTime as ett , Groundtemppt as et from AWSMinute where observeTime between ? and ?) as ttablet where et != 6666 and et != 9999)";
+        "where et = "
+        "(select min(et) from "
+        "(select observeTime as ett , Groundtemppt as et from AWSMinute where observeTime between ? and ?) as ttablet "
+        "where et != 6666 and et != 9999)";
 QString AWSMinuteDAOMySqlImp::getMinGTTByOnTimeSql = "select min(gtt) from "
         "(select observeTime as gtt , Grasstemp as gt from AWSMinute where observeTime between ? and ?) as ttable "
-        "where gt "
-        "= (select min(gt)  from (select observeTime as gtt , Grasstemp as gt from AWSMinute where observeTime between ? and ?) as ttablet where gt != 6666 and gt != 9999)";
+        "where gt = "
+        "(select min(gt) from "
+        "(select observeTime as gtt , Grasstemp as gt from AWSMinute where observeTime between ? and ?) as ttablet "
+        "where gt != 6666 and gt != 9999)";
 QString AWSMinuteDAOMySqlImp::getMinPTByOnTimeSql = "select min(pt) from "
         "(select observeTime as pt , Pressure as p from AWSMinute where observeTime between ? and ?) as ttable "
-        "where p "
-        "= (select min(p)  from (select observeTime as pt , Pressure as p from AWSMinute where observeTime between ? and ?) as ttablet where p != 6666 and p != 9999)";
+        "where p = "
+        "(select min(p) from "
+        "(select observeTime as pt , Pressure as p from AWSMinute where observeTime between ? and ?) as ttablet "
+        "where p != 6666 and p != 9999)";
 QString AWSMinuteDAOMySqlImp::getMinRHTByOnTimeSql = "select min(rht) from "
         "(select observeTime as rht , Rh as rh from AWSMinute where observeTime between ? and ?) as ttable "
-        "where rh "
-        "= (select min(rh)  from (select observeTime as rht , Rh as rh from AWSMinute where observeTime between ? and ?) as ttablet where rh != 6666 and rh != 9999)";
+        "where rh = "
+        "(select min(rh) from "
+        "(select observeTime as rht , Rh as rh from AWSMinute where observeTime between ? and ?) as ttablet "
+        "where rh != 6666 and rh != 9999)";
 QString AWSMinuteDAOMySqlImp::getMinVTByOnTimeSql = "select vt from "
         "(select observeTime as vt , Vis_10min as v from AWSMinute where observeTime between ? and ?) as ttable "
-        "where v "
-        "= (select min(v)  from (select observeTime as vt , Vis_10min as v from AWSMinute where observeTime between ? and ?) as ttablet where v != 6666 and v != 9999)";
+        "where v = "
+        "(select min(v) from "
+        "(select observeTime as vt , Vis_10min as v from AWSMinute where observeTime between ? and ?) as ttablet "
+        "where v != 6666 and v != 9999)";
 //WindDir
-QString AWSMinuteDAOMySqlImp::getMaxWSDByOnTimeSql = "select WindDir10 from "
-        //+"(select observeTime as wd10t , WindDir10 as wd10 from AWSMinute where observeTime between ? and ?) as ttable"
-        " AWSMinute "
+QString AWSMinuteDAOMySqlImp::getMaxWSDByOnTimeSql = "select WindDir10 from AWSMinute "
         " where observeTime = "
         "(select min(ws10t) from "
         "(select observeTime as ws10t , Windspeed10 as ws10 from AWSMinute where observeTime between ? and ?) as ttable "
-        "where ws10 "
-        "= (select max(ws10)  from (select observeTime as ws10t , Windspeed10 as ws10 from AWSMinute where observeTime between ? and ?) as ttablet where ws10 != 6666 and ws10 != 9999))";
-QString AWSMinuteDAOMySqlImp::getExWSDByOnTimeSql = "select WindDir from "
-        " AWSMinute "
-        " where observeTime = "
+        "where ws10 = "
+        "(select max(ws10) from "
+        "(select observeTime as ws10t , Windspeed10 as ws10 from AWSMinute where observeTime between ? and ?) as tandwstable "
+        "where ws10 != 6666 and ws10 != 9999))";
+QString AWSMinuteDAOMySqlImp::getExWSDByOnTimeSql = "select WindDir from AWSMinute "
+        "where observeTime = "
         "(select min(wst) from "
         "(select observeTime as wst , Windspeed as ws from AWSMinute where observeTime between ? and ?) as ttable "
-        "where ws "
-        "= (select max(ws)  from "
-        "(select observeTime as wst , Windspeed as ws from AWSMinute where observeTime between ? and ?) as ttablet "
+        "where ws = "
+        "(select max(ws) from "
+        "(select observeTime as wst , Windspeed as ws from AWSMinute where observeTime between ? and ?) as wstandwstable "
         "where ws != 6666 and ws != 9999))";
 
 
@@ -231,7 +251,6 @@ bool AWSMinuteDAOMySqlImp::saveAMFile(const QString &amFileName){
     QSqlQuery transaction_COMMIT(*conn);
     QSqlQuery transaction_ROLLBACK(*conn);
     QDateTime beginExecBatch = QDateTime::currentDateTime();
-    qDebug() << beginExecBatch;
     transaction_start.exec("START TRANSACTION");
     for(AWSMinuteData amData:awsMinuteDatas){
         int qmIndex = -1;
@@ -248,16 +267,14 @@ bool AWSMinuteDAOMySqlImp::saveAMFile(const QString &amFileName){
 
         bool seccess = query.exec();
 
-        qDebug() << seccess
-                 <<" " << amData.getObserveTime().toString("yyyyMMdd-HHmm")
-                 << " " << query.lastError().databaseText();
+//        qDebug() << seccess
+//                 <<" " << amData.getObserveTime().toString("yyyyMMdd-HHmm")
+//                 << " " << query.lastError().databaseText();
     }
 
-    transaction_COMMIT.exec("COMMIT");
-    QDateTime endExecBatch = QDateTime::currentDateTime();
-    qDebug() << endExecBatch;
-    qDebug() << beginExecBatch.secsTo(endExecBatch);
-    flag = true;
+    flag = transaction_COMMIT.exec("COMMIT");
+//    QDateTime endExecBatch = QDateTime::currentDateTime();
+//    flag = true;
     return flag;
 }
 
@@ -317,15 +334,16 @@ AWSMinuteData AWSMinuteDAOMySqlImp::findByOT(const QDateTime &observeTime){
         ad.setObserveTime(query.value(++index).toDateTime());
         ad.setObserveMonth(query.value(++index).toDate());
         ad.setMinute(ad.observeTime.time().toString("HHmm").toInt());
+        ad.setObserveDay(AHQC::TimeUtil::dateTime2AWSDay(ad.observeTime));
         index += 2;
-        QList<int> intData = ad.getData();
+        QList<int> &intData = ad.data;
         int tempValue = 99999;
         int intDataNum = GlobalSetting::getInstance()->getIntDataNum()+5;
         for(++index; index < intDataNum;++index) {
             tempValue = query.value(index).toInt();
             intData.append(tempValue);
         }
-        ad.setWeatherphcode(query.value(++index).toString());
+        ad.setWeatherphcode(query.value(index).toString());
         ad.setDataQulity(query.value(++index).toString());
         ad.inited = true;
         query.finish();
@@ -459,11 +477,14 @@ int AWSMinuteDAOMySqlImp::getMaxByOnTime(QDateTime onTimeDate,AWSMinuteDAOMySqlI
     int temp = 99999;
     QString sql = getMaxSqlString(awsItemType);
     QSqlQuery query(*conn);
+    query.prepare(sql);
     QDateTime firstMinute = onTimeDate.addSecs(-59*60);
     QDateTime lastMinute  = onTimeDate;
     query.addBindValue(QVariant(firstMinute));
     query.addBindValue(QVariant(lastMinute));
-    query.exec();
+    bool success = query.exec();
+    QString errorMessage(query.lastError().databaseText());
+//    qDebug() << success << " : " << query.lastError().databaseText();
     if(query.next()) {
         temp = query.value(0).toInt();
         if(awsItemType != V && awsItemType!= P){
@@ -476,6 +497,7 @@ int AWSMinuteDAOMySqlImp::getMinByOnTime(const QDateTime &onTimeDate,AWSMinuteDA
     int temp = 99999;
     QString sql = getMinSqlString(awsItemType);
     QSqlQuery query(*conn);
+    query.prepare(sql);
     QDateTime firstMinute = onTimeDate.addSecs(-59*60);
     QDateTime lastMinute  = onTimeDate;
     query.addBindValue(QVariant(firstMinute));
@@ -493,6 +515,7 @@ int AWSMinuteDAOMySqlImp::getMaxTimeByOnTime(const QDateTime &onTimeDate,AWSMinu
     int temp = 99999;
     QString sql = getMaxTimeSqlString(awsItemType);
     QSqlQuery query(*conn);
+    query.prepare(sql);
     QDateTime firstMinute = onTimeDate.addSecs(-59*60);
     QDateTime lastMinute  = onTimeDate;
     query.addBindValue(QVariant(firstMinute));
@@ -510,6 +533,7 @@ int AWSMinuteDAOMySqlImp::getMinTimeByOnTime(const QDateTime &onTimeDate,AWSMinu
     int temp = 99999;
     QString sql = getMinTimeSqlString(awsItemType);
     QSqlQuery query(*conn);
+    query.prepare(sql);
     QDateTime firstMinute = onTimeDate.addSecs(-59*60);
     QDateTime lastMinute  = onTimeDate;
     query.addBindValue(QVariant(firstMinute));
@@ -527,6 +551,7 @@ int AWSMinuteDAOMySqlImp::getWDByOnTime(const QDateTime &onTimeDate, AWSMinuteDA
     int temp = 99999;
     QString sql = getMaxSqlString(awsItemType);
     QSqlQuery query(*conn);
+    query.prepare(sql);
     QDateTime firstMinute = onTimeDate.addSecs(-59*60);
     QDateTime lastMinute  = onTimeDate;
     query.addBindValue(QVariant(firstMinute));
@@ -578,7 +603,14 @@ int AWSMinuteDAOMySqlImp::getNVExtremum(const TimeRange &tr,AWSMinuteDAOMySqlImp
     return temp;
 }
 int AWSMinuteDAOMySqlImp::getVariatedValue(const TimeRange &tr,AWSMinuteDAOMySqlImp::AWSItemType awsItemType) {
-    int temp = 99999;
+    int missingNum = 99999;
+    if(awsItemType == AWSMinuteDAOMySqlImp::AWSItemType::VT24){
+        missingNum = 9999;
+    }
+    int valueBefore = missingNum;
+    int valueLater = missingNum;
+    int temp = missingNum;
+
     QString sql = getNVSqlString(awsItemType);
     QSqlQuery query(*conn);
     query.prepare(sql);
@@ -588,7 +620,13 @@ int AWSMinuteDAOMySqlImp::getVariatedValue(const TimeRange &tr,AWSMinuteDAOMySql
     query.addBindValue(QVariant(endTime));
     query.exec();
     if(query.next()) {
-        temp = query.value(0).toInt();
+        valueBefore = query.value(0).toInt();
+    }
+    if(query.next()) {
+        valueLater = query.value(0).toInt();
+    }
+    if(valueBefore != missingNum && valueLater != missingNum ) {
+        temp = valueLater - valueBefore;
     }
     query.finish();
     return temp;
@@ -597,16 +635,13 @@ int AWSMinuteDAOMySqlImp::getRain(const TimeRange &tr,AWSMinuteDAOMySqlImp::AWSI
     int temp = 99999;
     QString sql = getRainSqlString(awsItemType);
     QSqlQuery query(*conn);
-
     query.prepare(sql);
-
     QDateTime startTime = tr.older;
     QDateTime endTime  = tr.later;
     query.addBindValue(QVariant(startTime));
     query.addBindValue(QVariant(endTime));
     query.exec();
     if(query.next()) {
-        //System.out.println("exit");
         temp = query.value(0).toInt();
     }
     query.finish();
@@ -625,8 +660,6 @@ int AWSMinuteDAOMySqlImp::getSP(const QDateTime &onTimeDate) {
     query.addBindValue(QVariant(lastMinute));
     query.exec();
     if(query.next()) {
-        //System.out.println("exit");
-        //t12= rs.getInt(2);
         t12 = query.value(1).toInt();
     }
     if(query.next()) {
@@ -636,7 +669,6 @@ int AWSMinuteDAOMySqlImp::getSP(const QDateTime &onTimeDate) {
     if(t12 != 99999 && pressure != 99999 && t0 != 99999) {
         t12 -= 1000;
         t0 -= 1000;
-        //System.out.println("t12: "+t12+",t0: "+t0+",P: "+pressure+".");
         double dt12 = t12/10;
         double dt0 = t0/10;
         double ph = GlobalSetting::getInstance() -> getPressureHeight();

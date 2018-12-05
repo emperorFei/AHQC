@@ -3,5 +3,20 @@
         <file alias="down_arrow">resource/icons/down_arrow.ico</file>
         <file alias="up_arrow">resource/icons/up_arrow.ico</file>
         <file alias="close">resource/icons/close.ico</file>
+        <file alias="btn_2Left">resource/icons/btn_2Left.ico</file>
+        <file alias="btn_2Right">resource/icons/btn_2Raight.ico</file>
+        <file alias="forbid">resource/icons/forbid.ico</file>
+        <file alias="nextDay_hover">resource/icons/nextDay_hover.png</file>
+        <file alias="nextDay_normal">resource/icons/nextDay_normal.png</file>
+        <file alias="nextMonth_hover">resource/icons/nextMonth_hover.png</file>
+        <file alias="nextMonth_normal">resource/icons/nextMonth_normal.png</file>
+        <file alias="nextYear_hover">resource/icons/nextYear_hover.png</file>
+        <file alias="nextYear_normal">resource/icons/nextYear_normal.png</file>
+        <file alias="previousDay_hover">resource/icons/previousDay_hover.png</file>
+        <file alias="previousDay_normal">resource/icons/previousDay_normal.png</file>
+        <file alias="previousMonth_hover">resource/icons/previousMonth_hover.png</file>
+        <file alias="previousMonth_normal">resource/icons/previousMonth_normal.png</file>
+        <file alias="previousYear_hover">resource/icons/previousYear_hover.png</file>
+        <file alias="previousYear_normal">resource/icons/previousYear_normal.png</file>
     </qresource>
 </RCC>
