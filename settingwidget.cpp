@@ -1,8 +1,8 @@
-#include "settingwidget.h"
+﻿#include "settingwidget.h"
 #include "ui_settingwidget.h"
 
 SettingWidget::SettingWidget(QWidget *parent) :
-    QWidget(parent),setting(singleton<GlobalSetting>::GetInstance()),
+    QDialog(parent),setting(singleton<GlobalSetting>::GetInstance()),
     ui(new Ui::SettingWidget)
 {
     ui->setupUi(this);
@@ -10,7 +10,7 @@ SettingWidget::SettingWidget(QWidget *parent) :
     //设置窗体透明
     this->setAttribute(Qt::WA_TranslucentBackground, true);
     //设置无边框
-    this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint );
+    this->setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint );
     //实例阴影shadow
     QGraphicsDropShadowEffect *shadow = new QGraphicsDropShadowEffect(this);
     //设置阴影距离
@@ -24,10 +24,26 @@ SettingWidget::SettingWidget(QWidget *parent) :
     //给垂直布局器设置边距(此步很重要, 设置宽度为阴影的宽度)
     ui->lay_bg->setMargin(24);
 
-    QPixmap minPix  = style()->standardPixmap(QStyle::SP_TitleBarMinButton);
-    QPixmap closePix = style()->standardPixmap(QStyle::SP_TitleBarCloseButton);
-    ui->closeButton->setIcon(closePix);
-    ui->minButton->setIcon(minPix);
+//    QPixmap minPix  = style()->standardPixmap(QStyle::SP_TitleBarMinButton);
+//    QPixmap closePix = style()->standardPixmap(QStyle::SP_TitleBarCloseButton);
+//    ui->closeButton->setIcon(closePix);
+    ui->closeButton->setStyleSheet(styleSheet()+QString("\n"
+                                           "#closeButtonr{\n"
+                                              "image: url(:/ico/close_normal);\n"
+                                           "}\n"
+                                           "#closeButton:hover{\n"
+                                             "image: url(:/ico/close_hover);\n"
+                                           "}\n"
+                                       ));
+//    ui->minButton->setIcon(minPix);
+    ui->minButton->setStyleSheet(styleSheet()+QString("\n"
+                                           "#minButtonr{\n"
+                                              "image: url(:/ico/min_normal);\n"
+                                           "}\n"
+                                           "#minButton:hover{\n"
+                                             "image: url(:/ico/min_hover);\n"
+                                           "}\n"
+                                       ));
     //ui->closeButton->setStyleSheet("QToolButton{border:none;background:rgb(248,248,248)}");
 
 
@@ -206,6 +222,7 @@ void SettingWidget::minButtonClicked(bool checked)
     Q_UNUSED(checked);
     //qDebug()<<"minButtonClicked";
     this->showMinimized();
+    //this->close();
 }
 
 
@@ -241,7 +258,18 @@ void SettingWidget::connectSingles(){
 }
 
 void SettingWidget::connectUISettingPageSingles(){
-
+    connect(ui->missingColor_btn,
+            &QPushButton::clicked,
+            this,
+            &SettingWidget::sltColorBtnClicled);
+    connect(ui->errorColor_btn,
+            &QPushButton::clicked,
+            this,
+            &SettingWidget::sltColorBtnClicled);
+    connect(ui->suspectedColor_btn,
+            &QPushButton::clicked,
+            this,
+            &SettingWidget::sltColorBtnClicled);
 }
 void SettingWidget::connectFilePathSettingPageSingles(){
     this->connect(ui->filepath_switch_buttonGroup,
@@ -412,4 +440,26 @@ void SettingWidget::mouseMoveEvent(QMouseEvent *event)
         event->accept();
     }
 }
+void SettingWidget::sltColorBtnClicled(bool){
+    QPushButton* btn = static_cast<QPushButton*>(sender());
+    QColor oldColor = btn->palette().background().color();
+    QColor color = QColorDialog::getColor(oldColor,this,
+                                              tr("请选择新颜色"));
 
+    if(!color.isValid()){
+        color = oldColor;
+    }
+    if(color == oldColor){
+        return;
+    }
+    btn->setStyleSheet("background-color:rgb("+
+                       QString::number(color.red())+","+
+                       QString::number(color.green())+","+
+                       QString::number(color.blue())
+                       +");");
+
+    QString dataLavelName(btn->objectName());
+    emit QCColorChanged(color,dataLavelName);
+    //btn->update();
+    qDebug()<<"color: "<<color;
+}

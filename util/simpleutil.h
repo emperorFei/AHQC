@@ -55,10 +55,10 @@ namespace AHQC {
         QList<QString> getZFileNamesFormFocusedHours(const QList<QDateTime> &foucsedHours);
         QList<QString> getAMFileNamesFormFocusedTimeRange();
         QList<QString> getZFileNamesFormFocusedTimeRange();
+        bool validateZFileExistsByDT(const QDateTime&);
         QList<QString> prepareAMFile4Select(const QDateTime &timepoint);
         QList<QString> prepareAMFile4Select(const TimeRange &timeRange);
         QList<QString> prepareAMFile4Select(const QList<QDateTime> &timepoints);
-
         inline QString findCCXZFileNameFromPlanFileName(const QString &planZFileName);
 
     }

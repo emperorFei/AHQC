@@ -30,10 +30,14 @@ FullWidegt::FullWidegt(const AZData &azData,QWidget *parent) :
 {
     ui->setupUi(this);
     initFromAZData(azData);
-    setQCWarn();
+    //setQCWarn();
     QFont font("宋体");
-    font.setPointSize(15);
+    font.setPointSize(30);
     setDoubleLabelFont(font);
+    this->setFont(font);
+
+
+//    this->setStyleSheet(styleSheet()+QString("\n font: '宋体',16pt"));
 
 }
 
@@ -49,41 +53,48 @@ void FullWidegt::initFromAZData(const AZData &azData)
     QList<QString> keys = azData.data.keys();
     QString doubleLabelName("");
     QString dataItemName("");
-    AHQC::DataLevel dataLeval = AHQC::DataLevel::INFO;
-    MyDoubleLabel::Leval level = MyDoubleLabel::Leval::INFO;
+    AHQC::DataLevel dataLevel = AHQC::DataLevel::INFO;
+    MyDoubleLabel::Level level = MyDoubleLabel::Level::INFO;
+    AHQC::DataLevel highestLevel = AHQC::DataLevel::INFO;
     for(const QString &key :keys){
         doubleLabelName = key + "_DL";
         MyDoubleLabel * doubleLabel = this->findChild<MyDoubleLabel *>(doubleLabelName);
         doubleLabel -> setDataName(key);
         doubleLabel -> setText(azData.data.value(key).first);
-        dataLeval = azData.data.value(key).second;
-        switch(dataLeval){
+        dataLevel = azData.data.value(key).second;
+        switch(dataLevel){
             case AHQC::DataLevel::INFO :
-                level = MyDoubleLabel::Leval::INFO;
+                level = MyDoubleLabel::Level::INFO;
                 break;
             case AHQC::DataLevel::SUSPECTED :
-                level = MyDoubleLabel::Leval::SUSPECTED;
+                level = MyDoubleLabel::Level::SUSPECTED;
                 break;
             case AHQC::DataLevel::CLASH :
-                level = MyDoubleLabel::Leval::CLASH ;
+                level = MyDoubleLabel::Level::CLASH ;
                 qDebug() << observeTime.toString("yyyyMMddHH") << " " << doubleLabel->getDataName() << " CLASH.";
                 break;
             case AHQC::DataLevel::MISSING:
-                level = MyDoubleLabel::Leval::MISSING;
+                level = MyDoubleLabel::Level::MISSING;
                 qDebug() << observeTime.toString("yyyyMMddHH") << " " << doubleLabel->getDataName() << " MISSING.";
 
                 break;
             case AHQC::DataLevel::MISSINGZDATA :
-                level = MyDoubleLabel::Leval::MISSINGZDATA;
+                level = MyDoubleLabel::Level::MISSINGZDATA;
                 break;
             case AHQC::DataLevel::MISSINGAMDATA :
-                level = MyDoubleLabel::Leval::MISSINGAMDATA;
+                level = MyDoubleLabel::Level::MISSINGAMDATA;
                 break;
             case AHQC::DataLevel::ERROR :
-                level = MyDoubleLabel::Leval::ERROR;
+                level = MyDoubleLabel::Level::ERROR;
                 break;
         }
+        if(dataLevel > highestLevel){
+            highestLevel = dataLevel;
+            mostSeriousIssue = QPair<QString,MyDoubleLabel::Level>(key,level);
+        }
+        doubleLabel->setProperty("level",level);
         doubleLabel->setLevel(level);
+
     }
 }
 
@@ -97,74 +108,90 @@ void FullWidegt::setDoubleLabelFont(const QFont &font){
     }
 }
 
-void FullWidegt::setQCWarn(){
-    for(const QString &dlName :doubleLabelNames){
-        MyDoubleLabel * doubleLabel = this->findChild<MyDoubleLabel *>(dlName);
-        MyDoubleLabel::Leval level = doubleLabel->getLevel();
-        switch(level){
-        case MyDoubleLabel::Leval::MISSING:
-            doubleLabel->setStyleSheet(doubleLabel->styleSheet()+
-                                       "#"+doubleLabel->objectName()+"{"
-                                       "border-style:solid;"
-                                       "border-width:2;"
-                                       "border-color:red;"
-                                       "border-radius:6;"
-                                       "}");
-            break;
-        case MyDoubleLabel::Leval::CLASH:
-            doubleLabel->setStyleSheet(doubleLabel->styleSheet()+
-                                       "#"+doubleLabel->objectName()+"{"
-                                       "border-style:solid;"
-                                       "border-width:2;"
-                                       "border-color:orange;"
-                                       "border-radius:6;"
-                                       "}");
-            break;
-        case MyDoubleLabel::Leval::MISSINGAMDATA:
-            doubleLabel->setStyleSheet(doubleLabel->styleSheet()+
-                                       "#"+doubleLabel->objectName()+"{"
-                                       "border-style:solid;"
-                                       "border-width:2;"
-                                       "border-color:#0F0F0F;"
-                                       "border-radius:6;"
-                                       "}");
-            break;
-        case MyDoubleLabel::Leval::MISSINGZDATA:
-            doubleLabel->setStyleSheet(doubleLabel->styleSheet()+
-                                       "#"+doubleLabel->objectName()+"{"
-                                       "border-style:solid;"
-                                       "border-width:2;"
-                                       "border-color:#FF05FF;"
-                                       "border-radius:6;"
-                                       "}");
-            break;
-        case MyDoubleLabel::Leval::ERROR:
-            doubleLabel->setStyleSheet(doubleLabel->styleSheet()+
-                                       "#"+doubleLabel->objectName()+"{"
-                                       "border-style:solid;"
-                                       "border-width:2;"
-                                       "border-color:darkred;"
-                                       "border-radius:6;"
-                                       "}");
-            break;
-        case MyDoubleLabel::Leval::SUSPECTED:
-            doubleLabel->setStyleSheet(doubleLabel->styleSheet()+
-                                       "#"+doubleLabel->objectName()+"{"
-                                       "border-style:solid;"
-                                       "border-width:2;"
-                                       "border-color:yellow;"
-                                       "border-radius:6;"
-                                       "}");
-            break;
-        case MyDoubleLabel::Leval::INFO:
+QPair<QString, MyDoubleLabel::Level> FullWidegt::getMostSeriousIssue() const
+{
+    return mostSeriousIssue;
+}
+
+QDateTime FullWidegt::getObserveTime() const
+{
+    return observeTime;
+}
+
+
+//void FullWidegt::setQCWarn(){
+//    this->setStyleSheet(styleSheet()+QString(
+//                            ".DoubleLabel{"
+//                                "background-color:rgb(59,110,158);"
+//                            "}"
+//                            ));
+//    for(const QString &dlName :doubleLabelNames){
+//        MyDoubleLabel * doubleLabel = this->findChild<MyDoubleLabel *>(dlName);
+//        MyDoubleLabel::Level level = doubleLabel->getLevel();
+//        switch(level){
+//        case MyDoubleLabel::Level::MISSING:
 //            doubleLabel->setStyleSheet(doubleLabel->styleSheet()+
 //                                       "#"+doubleLabel->objectName()+"{"
 //                                       "border-style:solid;"
 //                                       "border-width:2;"
-//                                       "border-color:lightgrey;"
+//                                       "border-color:red;"
 //                                       "border-radius:6;"
 //                                       "}");
-            break;
-        }
-    }
-}
+//            break;
+//        case MyDoubleLabel::Level::CLASH:
+//            doubleLabel->setStyleSheet(doubleLabel->styleSheet()+
+//                                       "#"+doubleLabel->objectName()+"{"
+//                                       "border-style:solid;"
+//                                       "border-width:2;"
+//                                       "border-color:orange;"
+//                                       "border-radius:6;"
+//                                       "}");
+//            break;
+//        case MyDoubleLabel::Level::MISSINGAMDATA:
+//            doubleLabel->setStyleSheet(doubleLabel->styleSheet()+
+//                                       "#"+doubleLabel->objectName()+"{"
+//                                       "border-style:solid;"
+//                                       "border-width:2;"
+//                                       "border-color:#0F0F0F;"
+//                                       "border-radius:6;"
+//                                       "}");
+//            break;
+//        case MyDoubleLabel::Level::MISSINGZDATA:
+//            doubleLabel->setStyleSheet(doubleLabel->styleSheet()+
+//                                       "#"+doubleLabel->objectName()+"{"
+//                                       "border-style:solid;"
+//                                       "border-width:2;"
+//                                       "border-color:#FF05FF;"
+//                                       "border-radius:6;"
+//                                       "}");
+//            break;
+//        case MyDoubleLabel::Level::ERROR:
+//            doubleLabel->setStyleSheet(doubleLabel->styleSheet()+
+//                                       "#"+doubleLabel->objectName()+"{"
+//                                       "border-style:solid;"
+//                                       "border-width:2;"
+//                                       "border-color:darkred;"
+//                                       "border-radius:6;"
+//                                       "}");
+//            break;
+//        case MyDoubleLabel::Level::SUSPECTED:
+//            doubleLabel->setStyleSheet(doubleLabel->styleSheet()+
+//                                       "#"+doubleLabel->objectName()+"{"
+//                                       "border-style:solid;"
+//                                       "border-width:2;"
+//                                       "border-color:yellow;"
+//                                       "border-radius:6;"
+//                                       "}");
+//            break;
+//        case MyDoubleLabel::Level::INFO:
+////            doubleLabel->setStyleSheet(doubleLabel->styleSheet()+
+////                                       "#"+doubleLabel->objectName()+"{"
+////                                       "border-style:solid;"
+////                                       "border-width:2;"
+////                                       "border-color:lightgrey;"
+////                                       "border-radius:6;"
+////                                       "}");
+//            break;
+//        }
+//    }
+//}

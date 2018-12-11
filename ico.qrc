@@ -18,5 +18,16 @@
         <file alias="previousMonth_normal">resource/icons/previousMonth_normal.png</file>
         <file alias="previousYear_hover">resource/icons/previousYear_hover.png</file>
         <file alias="previousYear_normal">resource/icons/previousYear_normal.png</file>
+        <file alias="showmore_hover">resource/icons/showmore_hover.png</file>
+        <file alias="showmore_normal">resource/icons/showmore_normal.png</file>
+        <file alias="max_normal">resource/icons/max_normal.png</file>
+        <file alias="max_hover">resource/icons/max_hover.png</file>
+        <file alias="min_hover">resource/icons/min_hover.png</file>
+        <file alias="min_normal">resource/icons/min_normal.png</file>
+        <file alias="close_normal">resource/icons/close_normal.png</file>
+        <file alias="close_hover">resource/icons/close_hover.png</file>
+        <file alias="refresh_normal">resource/icons/refresh_normal.png</file>
+        <file alias="refresh_hover">resource/icons/refresh_hover.png</file>
+        <file alias="qc">resource/icons/qc.png</file>
     </qresource>
 </RCC>

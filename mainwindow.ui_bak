@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1704</width>
+    <width>1280</width>
     <height>720</height>
    </rect>
   </property>
@@ -20,55 +20,34 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">
-#showMoreButton{
-	image: url(:/ico/showmore_normal);
+   <string notr="true">#showMoreButton{
+			image: url(:/ico/showmore_normal);
  }
 
  #showMoreButton:hover{
-	image: url(:/ico/showmore_hover);
+			image: url(:/ico/showmore_hover);
  }
  #minButton{
-	image: url(:/ico/min_normal);
+			image: url(:/ico/min_normal);
  }
+
  #minButton:hover{
-	image: url(:/ico/min_hover);
+			image: url(:/ico/min_hover);
  }
  #maxButton{
-	image: url(:/ico/max_normal);
+			image: url(:/ico/max_normal);
  }
 
  #maxButton:hover{
-	image: url(:/ico/max_hover);
+			image: url(:/ico/max_hover);
  }
  #closeButton{
-	image: url(:/ico/close_normal);
+			image: url(:/ico/close_normal);
  }
+
  #closeButton:hover{
-	image: url(:/ico/close_hover);
+			image: url(:/ico/close_hover);
  }
- #refreshBtn{
-	width:25px;
-	height:25px;
-	background-color: transparent;
-	border:0px;
-	image: url(:/ico/refresh_normal);
- }
-
- #refreshBtn:hover{
-	image: url(:/ico/refresh_hover);
- }
- #refreshBtn:pressed{
-	margin-top:2px;
-	margin-left:2px;
- }
-#cachedMainWidget{
-	border-style:solid;
-	border-width:2;
-	border-color:blue;
-	border-radius:10;
-}
-
 #packingOfMainWidget #mainWidget{
 	border-style:solid;
 	border-width:2;
@@ -77,10 +56,12 @@
 }
 
 #packingOfMainWidget{
-	border-style:solid;
-	border-width:1;
-	border-color:red;
+	
 	background-color: rgb(244, 244, 244);
+
+	border-style:solid;
+	border-width:2;
+	border-color:red;
 /*	border-radius:10; */
 }
 #next_btn{
@@ -121,13 +102,6 @@
 	margin-top:2px;
 	margin-left:2px;
 	background-color:rgba(59,110,158,50);
-}
-#selectedDateTimeRangeLabel{
-	border-style:solid;
-	border-width:2;
-	border-color:lightgrey;
-	background-color: rgba(0, 0, 0, 0);
-	border-radius:5px;
 }</string>
   </property>
   <widget class="QWidget" name="centralWidget">
@@ -239,13 +213,13 @@ QPushButton:pressed{
             </property>
             <property name="minimumSize">
              <size>
-              <width>268</width>
+              <width>300</width>
               <height>0</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>268</width>
+              <width>300</width>
               <height>16777215</height>
              </size>
             </property>
@@ -368,7 +342,7 @@ QPushButton:pressed{
                  </property>
                  <property name="minimumSize">
                   <size>
-                   <width>60</width>
+                   <width>0</width>
                    <height>27</height>
                   </size>
                  </property>
@@ -390,24 +364,6 @@ QPushButton:pressed{
        </item>
        <item row="1" column="1">
         <widget class="QWidget" name="rightWidget" native="true">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>264</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>264</width>
-           <height>16777215</height>
-          </size>
-         </property>
          <property name="styleSheet">
           <string notr="true">#rightWidget{	
 	background-color: rgb(244, 244, 244);
@@ -429,72 +385,67 @@ QPushButton:pressed{
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout">
             <property name="spacing">
-             <number>5</number>
-            </property>
-            <property name="leftMargin">
-             <number>22</number>
-            </property>
-            <property name="rightMargin">
-             <number>22</number>
+             <number>0</number>
             </property>
             <item>
-             <widget class="ClickableLabel" name="selectedDateTimeRangeLabel">
-              <property name="minimumSize">
-               <size>
-                <width>190</width>
-                <height>25</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>190</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>2018-10-01 00 ～ 2018-10-02 23</string>
+             <widget class="QDateTimeEdit" name="beginTime_DTE">
+              <property name="displayFormat">
+               <string>yyyy/M/d H</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="refreshBtn">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>25</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>25</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="text">
-               <string/>
+             <widget class="QDateTimeEdit" name="endTime_DTE">
+              <property name="displayFormat">
+               <string>yyyy/M/d H</string>
               </property>
              </widget>
             </item>
            </layout>
           </item>
           <item>
-           <spacer name="verticalSpacer">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
+           <widget class="CalendarWidget" name="beginTime_CW" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
-            <property name="sizeHint" stdset="0">
+            <property name="minimumSize">
              <size>
-              <width>20</width>
-              <height>40</height>
+              <width>266</width>
+              <height>255</height>
              </size>
             </property>
-           </spacer>
+            <property name="maximumSize">
+             <size>
+              <width>266</width>
+              <height>255</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="CalendarWidget" name="endTime_CW" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>266</width>
+              <height>255</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>266</width>
+              <height>255</height>
+             </size>
+            </property>
+           </widget>
           </item>
           <item>
            <spacer name="verticalSpacer_2">
@@ -639,9 +590,10 @@ QPushButton:pressed{
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>ClickableLabel</class>
-   <extends>QLabel</extends>
-   <header>ui/clickablelabel.h</header>
+   <class>CalendarWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">ui/calendarwidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

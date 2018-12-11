@@ -115,14 +115,14 @@ const QString DataFormatUtil::simpleValidteItems_3Byte[] =
 const QString DataFormatUtil::simpleValidteItems_4Byte[] =
         {
             "E","ET","ET10","ET15","ET160","ET20","ET320",
-            "ET40","ET5","ET80","ExWST","GT",
-            "MaxET","MaxETT","MaxGT","MaxGTT",
-            "MaxPT","MaxT","MaxT24","MaxTT",
-            "MaxWST","MinET","MinET12",
-            "MinETT","MinGT","MinGTT","MinPT",
-            "MinRHT","MinT","MinT24","MinTT",
-            "MinVT","T",
-            "TD","VP24","VP3","VT24","SnowD"
+            "ET40","ET5","ET80","GT",
+            "MaxET","MaxGT",
+            "MaxT","MaxT24",
+            "MinET","MinET12",
+            "MinGT",
+            "MinT","MinT24",
+            "T",
+            "TD","VP24","VP3","VT24","SnowD"    
         };
 const QString DataFormatUtil::simpleValidteItems_5Byte[] =
         {
@@ -234,6 +234,7 @@ void DataFormatUtil::validateAndExport2AZData(QMap<QString,QPair<QPair<QString,Q
     zItemMinusByThousand(zStringData);
 
     validateSimpleItems(dataOfAZ,ahIntData,zStringData);
+    validateTimeItems(dataOfAZ,ahIntData,zStringData);
     validateWD(dataOfAZ,ahIntData,zStringData);
     validateRain(dataOfAZ,ahIntData,zStringData);
     validateManualItems(dataOfAZ,ahIntData,zStringData);
@@ -259,6 +260,7 @@ void DataFormatUtil::validateSimpleItems(QMap<QString,QPair<QPair<QString,QStrin
         ahValueString = QString::number(ahValue);
         if(zValueString != missingString){
             zValue = std::atoi(zValueString.toStdString().c_str());
+            zValueString = QString::number(zValue);
         }else{
             zValue = missingNum;
         }
@@ -301,6 +303,7 @@ void DataFormatUtil::validateSimpleItems(QMap<QString,QPair<QPair<QString,QStrin
         ahValueString = QString::number(ahValue);
         if(zValueString != missingString){
             zValue = std::atoi(zValueString.toStdString().c_str());
+            zValueString = QString::number(zValue);
         }else{
             zValue = missingNum;
         }
@@ -343,6 +346,7 @@ void DataFormatUtil::validateSimpleItems(QMap<QString,QPair<QPair<QString,QStrin
         ahValueString = QString::number(ahValue);
         if(zValueString != missingString){
             zValue = std::atoi(zValueString.toStdString().c_str());
+            zValueString = QString::number(zValue);
         }else{
             zValue = missingNum;
         }
@@ -376,7 +380,59 @@ void DataFormatUtil::validateSimpleItems(QMap<QString,QPair<QPair<QString,QStrin
         data.insert(item,pair);
     }
 }
+void DataFormatUtil::validateTimeItems(QMap<QString,QPair<QPair<QString,QString>,AHQC::DataLevel> > &data,
+                        QMap<QString,int> &ahData,
+                        QMap<QString,QString> &zData){
 
+    int zValue = 9999;
+    QString zValueString("");
+    int ahValue = 9999;
+    QString ahValueString("");
+    QString missingString = "////";
+    QString noTaskPlaceHoldeString = "----";
+    int missingNum = 9999;
+    int noTaskPlaceHolderNum = 6666;
+    AHQC::DataLevel dataLeval = AHQC::DataLevel::ERROR;
+    for(const QString &item : zTimeItem){
+        zValueString = zData.value(item);
+        ahValue = ahData.value(item);
+        ahValueString = QString::number(ahValue);
+        if(zValueString != missingString){
+            zValue = std::atoi(zValueString.toStdString().c_str());
+        }else{
+            zValue = missingNum;
+        }
+        if(ahValue == missingNum){
+            ahValueString = missingString;
+            if(zValueString == missingString){
+                dataLeval = AHQC::DataLevel::MISSING;
+            }else{
+                dataLeval = AHQC::DataLevel::SUSPECTED;
+            }
+        }else if(ahValue == noTaskPlaceHolderNum){
+            ahValueString = noTaskPlaceHoldeString;
+            if(zValueString == missingString){
+                dataLeval = AHQC::DataLevel::MISSING;
+            }else{
+                dataLeval = AHQC::DataLevel::SUSPECTED;
+            }
+        }else{
+            ahValueString = QString("%1").arg(ahValue, 4, 10, QChar('0'));
+            if(zValueString == missingString){
+                dataLeval = AHQC::DataLevel::MISSING;
+            }else{
+                if(ahValue == zValue){
+                  dataLeval = AHQC::DataLevel::INFO;
+                }else{
+                  dataLeval = AHQC::DataLevel::CLASH;
+                }
+            }
+        }
+        QPair<QString,QString> dataPair(ahValueString,zValueString);
+        QPair<QPair<QString,QString>,AHQC::DataLevel> pair(dataPair,dataLeval);
+        data.insert(item,pair);
+    }
+}
 void DataFormatUtil::validateWD(QMap<QString,QPair<QPair<QString,QString>,AHQC::DataLevel> > &data,
                        QMap<QString,int> &ahData,
                        QMap<QString,QString> &zData)
@@ -399,7 +455,7 @@ void DataFormatUtil::validateWD(QMap<QString,QPair<QPair<QString,QString>,AHQC::
             ahValueString = QString("%1").arg(ahValue, 3, 10, QChar('0'));
         }
         if(!zValueString.isEmpty() && zValueString.at(0) != '/'){
-            if(zValueString.at(0) != 'P'){
+            if(zValueString.at(0) != 'C'){
                 zValue = std::atoi(zValueString.toStdString().c_str());
                 if(ahValue != zValue){
                      dataLeval = AHQC::DataLevel::CLASH;
@@ -452,6 +508,7 @@ void DataFormatUtil::validateRain(QMap<QString,QPair<QPair<QString,QString>,AHQC
         ahValueString = QString::number(ahValue);
         if(zValueString != missingString){
             zValue = std::atoi(zValueString.toStdString().c_str());
+            zValueString = QString::number(zValue);
         }else{
             zValue = missingNum;
         }
@@ -469,7 +526,7 @@ void DataFormatUtil::validateRain(QMap<QString,QPair<QPair<QString,QString>,AHQC
                 if(ahValue == zValue){
                   dataLeval = AHQC::DataLevel::INFO;
                 }else{
-                  dataLeval = AHQC::DataLevel::MISSING;
+                  dataLeval = AHQC::DataLevel::CLASH;
                 }
             }
         }

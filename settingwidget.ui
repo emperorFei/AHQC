@@ -440,7 +440,7 @@ QLineEdit[echoMode=&quot;2&quot;],QLineEdit[echoMode=&quot;3&quot;]{
 </string>
            </property>
            <property name="currentIndex">
-            <number>1</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="uiSetting_page">
             <layout class="QGridLayout" name="gridLayout">
@@ -521,7 +521,7 @@ QLineEdit[echoMode=&quot;2&quot;],QLineEdit[echoMode=&quot;3&quot;]{
                  <number>0</number>
                 </property>
                 <property name="rightMargin">
-                 <number>0</number>
+                 <number>10</number>
                 </property>
                 <property name="bottomMargin">
                  <number>0</number>
@@ -769,6 +769,14 @@ QLabel:hover{
                 <string notr="true">QLabel{
 	max-width:60;
 	min-width:60;
+}
+#missingColor_label,#suspectedColor_label,#errorColor_label{
+	max-width:30;
+	min-width:30;
+}
+#QCColor_label{
+	max-width:80;
+	min-width:80;
 }</string>
                </property>
                <property name="frameShape">
@@ -790,52 +798,13 @@ QLabel:hover{
                 <property name="bottomMargin">
                  <number>0</number>
                 </property>
-                <item row="0" column="0">
-                 <layout class="QHBoxLayout" name="station_height_label_layout_2">
-                  <item>
-                   <widget class="QLabel" name="height_label_2">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="minimumSize">
-                     <size>
-                      <width>60</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>60</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string>高度设置</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <spacer name="station_height_label_horizontalSpacer_2">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                 </layout>
-                </item>
-                <item row="1" column="0">
+                <item row="1" column="0" colspan="2">
                  <layout class="QHBoxLayout" name="height_edit_layout_2">
+                  <property name="spacing">
+                   <number>6</number>
+                  </property>
                   <item>
-                   <widget class="QLabel" name="station_height_label_2">
+                   <widget class="QLabel" name="missingColor_label">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                       <horstretch>0</horstretch>
@@ -844,49 +813,67 @@ QLabel:hover{
                     </property>
                     <property name="minimumSize">
                      <size>
-                      <width>60</width>
+                      <width>30</width>
                       <height>25</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>60</width>
+                      <width>30</width>
                       <height>16777215</height>
                      </size>
                     </property>
                     <property name="text">
-                     <string>观测场</string>
+                     <string>缺测</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="station_height_edit_2">
+                   <widget class="QPushButton" name="missingColor_btn">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
                     <property name="minimumSize">
                      <size>
-                      <width>0</width>
+                      <width>25</width>
                       <height>25</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>102</width>
+                      <width>25</width>
                       <height>25</height>
                      </size>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true"/>
+                     <string notr="true">background-color: rgb(255, 0, 127);</string>
                     </property>
-                    <property name="placeholderText">
-                     <string>username</string>
+                    <property name="text">
+                     <string/>
                     </property>
                    </widget>
                   </item>
-                 </layout>
-                </item>
-                <item row="1" column="1">
-                 <layout class="QHBoxLayout" name="shiftTime_layout_6">
                   <item>
-                   <widget class="QLabel" name="presure_height_label_2">
+                   <spacer name="horizontalSpacer_3">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                     <enum>QSizePolicy::Fixed</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="suspectedColor_label">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                       <horstretch>0</horstretch>
@@ -895,45 +882,120 @@ QLabel:hover{
                     </property>
                     <property name="minimumSize">
                      <size>
-                      <width>60</width>
+                      <width>30</width>
                       <height>25</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>60</width>
-                      <height>25</height>
+                      <width>30</width>
+                      <height>16777215</height>
                      </size>
                     </property>
                     <property name="text">
-                     <string>气压传感器</string>
+                     <string>可疑</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="presure_height_edit_2">
+                   <widget class="QPushButton" name="suspectedColor_btn">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
                     <property name="minimumSize">
                      <size>
-                      <width>0</width>
+                      <width>25</width>
                       <height>25</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>102</width>
+                      <width>25</width>
                       <height>25</height>
                      </size>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true"/>
+                     <string notr="true">background-color: rgb(170, 170, 255);</string>
                     </property>
-                    <property name="placeholderText">
-                     <string>3306</string>
+                    <property name="text">
+                     <string/>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <spacer name="height_edit_layout_horizontalSpacer_2">
+                   <spacer name="horizontalSpacer_4">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                     <enum>QSizePolicy::Fixed</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>80</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="errorColor_label">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>30</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>30</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>错误</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="errorColor_btn">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>25</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>25</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(255, 170, 255);</string>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_2">
                     <property name="orientation">
                      <enum>Qt::Horizontal</enum>
                     </property>
@@ -947,7 +1009,7 @@ QLabel:hover{
                   </item>
                  </layout>
                 </item>
-                <item row="3" column="0">
+                <item row="2" column="0">
                  <layout class="QHBoxLayout" name="observeTimes_layout_2">
                   <item>
                    <widget class="QLabel" name="observeTimes_label_2">
@@ -989,7 +1051,7 @@ QLabel:hover{
                   </item>
                  </layout>
                 </item>
-                <item row="4" column="0">
+                <item row="3" column="0">
                  <layout class="QHBoxLayout" name="sendDelay_label_layout_2">
                   <item>
                    <widget class="QLabel" name="sendDelay_label_label_2">
@@ -1031,7 +1093,7 @@ QLabel:hover{
                   </item>
                  </layout>
                 </item>
-                <item row="5" column="0" colspan="2">
+                <item row="4" column="0" colspan="2">
                  <layout class="QHBoxLayout" name="sendDelay_edit_layout_2">
                   <item>
                    <widget class="QLabel" name="onTime_sendDelay_label_2">
@@ -1142,20 +1204,7 @@ QLabel:hover{
                   </item>
                  </layout>
                 </item>
-                <item row="11" column="0">
-                 <spacer name="stationSetting_verticalSpacer_2">
-                  <property name="orientation">
-                   <enum>Qt::Vertical</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>20</width>
-                    <height>40</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item row="6" column="0">
+                <item row="5" column="0">
                  <layout class="QHBoxLayout" name="shiftTime_layout_2">
                   <item>
                    <widget class="QLabel" name="shiftTime_label_2">
@@ -1206,58 +1255,7 @@ QLabel:hover{
                   </item>
                  </layout>
                 </item>
-                <item row="7" column="0">
-                 <layout class="QHBoxLayout" name="shiftTime_layout_4">
-                  <item>
-                   <widget class="QLabel" name="shiftTime_label_4">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="minimumSize">
-                     <size>
-                      <width>60</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>60</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string>换班时间</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLineEdit" name="shiftTime_edit_4">
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>102</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string/>
-                    </property>
-                    <property name="placeholderText">
-                     <string>password</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item row="6" column="1">
+                <item row="5" column="1">
                  <layout class="QHBoxLayout" name="shiftTime_layout_3">
                   <item>
                    <widget class="QLabel" name="shiftTime_label_3">
@@ -1321,7 +1319,58 @@ QLabel:hover{
                   </item>
                  </layout>
                 </item>
-                <item row="7" column="1">
+                <item row="6" column="0">
+                 <layout class="QHBoxLayout" name="shiftTime_layout_4">
+                  <item>
+                   <widget class="QLabel" name="shiftTime_label_4">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>60</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>60</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>换班时间</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="shiftTime_edit_4">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>102</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="placeholderText">
+                     <string>password</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item row="6" column="1">
                  <layout class="QHBoxLayout" name="shiftTime_layout_5">
                   <item>
                    <widget class="QLabel" name="shiftTime_label_5">
@@ -1372,6 +1421,61 @@ QLabel:hover{
                   </item>
                   <item>
                    <spacer name="shiftTime_layout_horizontalSpacer_5">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </item>
+                <item row="7" column="0">
+                 <spacer name="stationSetting_verticalSpacer_2">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="0" column="0" colspan="2">
+                 <layout class="QHBoxLayout" name="station_height_label_layout_2">
+                  <item>
+                   <widget class="QLabel" name="QCColor_label">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>80</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>80</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>质控颜色设置</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="station_height_label_horizontalSpacer_2">
                     <property name="orientation">
                      <enum>Qt::Horizontal</enum>
                     </property>
@@ -1662,7 +1766,7 @@ QLabel:hover{
                  <number>0</number>
                 </property>
                 <property name="rightMargin">
-                 <number>0</number>
+                 <number>10</number>
                 </property>
                 <property name="bottomMargin">
                  <number>0</number>
@@ -2327,7 +2431,7 @@ QLabel:hover{
                  <number>0</number>
                 </property>
                 <property name="rightMargin">
-                 <number>0</number>
+                 <number>10</number>
                 </property>
                 <property name="bottomMargin">
                  <number>0</number>
@@ -3028,7 +3132,7 @@ QLabel:hover{
                  <number>0</number>
                 </property>
                 <property name="rightMargin">
-                 <number>0</number>
+                 <number>10</number>
                 </property>
                 <property name="bottomMargin">
                  <number>0</number>
@@ -3696,7 +3800,7 @@ QLabel:hover{
                  <number>0</number>
                 </property>
                 <property name="rightMargin">
-                 <number>0</number>
+                 <number>10</number>
                 </property>
                 <property name="bottomMargin">
                  <number>0</number>

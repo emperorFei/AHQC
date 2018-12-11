@@ -302,6 +302,14 @@ inline QString AHQC::FileNameUtil::findCCXZFileNameFromPlanFileName(const QStrin
     delete tempFilePtr;
     return fileName;
 }
+bool AHQC::FileNameUtil::validateZFileExistsByDT(const QDateTime &dateTime){
+    QString fileName = AHQC::FileNameUtil::DateTime2ZFileName(dateTime);
+    QFile zFile(fileName);
+    if(zFile.exists()){
+        return true;
+    }
+    return false;
+}
 QList<QString> AHQC::FileNameUtil::prepareAMFile4Select(const QDateTime &timepoint){
     QList<QString> amFileNames;
     QDateTime time4V24H = timepoint.addDays(-1);

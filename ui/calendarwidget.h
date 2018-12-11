@@ -27,6 +27,7 @@ public:
 public:
     //explicit CalendarWidget(QWidget *parent = nullptr);
     explicit CalendarWidget(QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags());
+    explicit CalendarWidget(const QDateTime dateTime,QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags());
     ~CalendarWidget();
 
 

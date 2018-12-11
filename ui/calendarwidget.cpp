@@ -20,6 +20,12 @@ CalendarWidget::CalendarWidget(QWidget *parent,Qt::WindowFlags f) : QWidget(pare
     initStyleSheet();
     connect(this,&CalendarWidget::selectDateTimeChanged,this,&CalendarWidget::sltSelfDateTimeChanged);
 }
+
+CalendarWidget::CalendarWidget(const QDateTime dateTime,QWidget *parent,Qt::WindowFlags f) : CalendarWidget(parent,f)
+{
+    this->setDateTime(dateTime);
+}
+
 CalendarWidget::~CalendarWidget(){}
 
 void CalendarWidget::connectToAnother(CalendarWidget *another){
@@ -156,6 +162,11 @@ void CalendarWidget::initStyleSheet()
                       "#nextDayBtn:hover{\n"
                            "image: url(:/ico/nextDay_hover);\n"
                       "}\n"
+
+
+
+
+
 //                      "#widgetMonth .ClickableLabel[selected = true]{\n"
 //                           "background-color: rgb(18,132,231);\n"
 //                           "color: white;\n"
@@ -808,7 +819,8 @@ QDateTime CalendarWidget::getDateTime() const
 
 void CalendarWidget::setDateTime(const QDateTime &value)
 {
-    if(value == selectedDateTime){
+    QDateTime temp (QDateTime::fromString(value.toString("yyyyMMddHH"),"yyyyMMddHH"));
+    if(temp == selectedDateTime){
         return;
     }
     QDateTime olderTime = selectedDateTime;

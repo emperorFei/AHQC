@@ -21,7 +21,7 @@ MyDoubleLabel::MyDoubleLabel(QWidget *parent) :
 
 }
 MyDoubleLabel::MyDoubleLabel(const QString &itemName,
-                       const QPair<QPair<QString,QString>,MyDoubleLabel::Leval> &data,
+                       const QPair<QPair<QString,QString>,MyDoubleLabel::Level> &data,
                        QWidget *parent):
     QWidget(parent),dataName(itemName),leval(data.second)
 {
@@ -135,12 +135,12 @@ void MyDoubleLabel::setDataName(const QString &value)
     dataName = value;
 }
 
-MyDoubleLabel::Leval MyDoubleLabel::getLevel() const
+MyDoubleLabel::Level MyDoubleLabel::getLevel() const
 {
     return leval;
 }
 
-void MyDoubleLabel::setLevel(const Leval &value)
+void MyDoubleLabel::setLevel(const Level &value)
 {
     leval = value;
 }

@@ -35,6 +35,7 @@ void AnimationStackedWidget::forward(){
     QRect g = geometry();
 //    int x = g.x();
     int width = g.width();
+    width -= 20;
     animation->setStartValue(width);
     animation->setEndValue(0);
     animation->setDuration(duration);
@@ -58,6 +59,7 @@ void AnimationStackedWidget::next(){
     QRect g = geometry();
 //    int x = g.x();
     int width = g.width();
+    width -= 20;
     animation->setStartValue(width);
     animation->setEndValue(0);
     animation->setDuration(duration);
@@ -93,8 +95,8 @@ void AnimationStackedWidget::paintLeft_onNext(QPainter &painter,int currentIndex
     widget->render(&pixmap);
     QRect rectBoxOfWidget = widget->geometry();
     double value = currentValue.toDouble();
-    QRect r1(0.0,0.0,qRound(value),rectBoxOfWidget.height());
-    QRect r2(rectBoxOfWidget.width() - qRound(value),0,qRound(value),rectBoxOfWidget.height());
+    QRect r1(10,10,qRound(value),rectBoxOfWidget.height()-20);
+    QRect r2(rectBoxOfWidget.width()-20+10 - qRound(value),10,qRound(value),rectBoxOfWidget.height()-20);
     painter.drawPixmap(r1,pixmap,r2);
 }
 
@@ -105,8 +107,8 @@ void AnimationStackedWidget::paintRight_onNext(QPainter &painter,int otherIndex)
    QPixmap nextPixmap(otherWidget->size());
    otherWidget->render(&nextPixmap);
    double value = currentValue.toDouble();
-   QRectF r1(value, 0.0, r.width() - value, r.height());
-   QRectF r2(0.0, 0.0, r.width() - value, r.height());
+   QRectF r1(value-10, 10, r.width() -20+10- value, r.height()-20);
+   QRectF r2(10, 10, r.width() -20+10- value, r.height()-20);
    painter.drawPixmap(r1, nextPixmap, r2);
 }
 void AnimationStackedWidget::paintLeft_onPrevious(QPainter &painter,int otherIndex){
@@ -117,8 +119,8 @@ void AnimationStackedWidget::paintLeft_onPrevious(QPainter &painter,int otherInd
     QPixmap nextPixmap(otherWidget->size());
     otherWidget->render(&nextPixmap);
     double value = currentValue.toDouble();
-    QRectF r1(0.0, 0.0, r.width()-value, r.height());
-    QRectF r2(value, 0.0, r.width() - value, r.height());
+    QRectF r1(10, 10, r.width()-20+10-value, r.height()-20);
+    QRectF r2(value-10, 10, r.width() -20+10-value, r.height()-20);
     painter.drawPixmap(r1, nextPixmap, r2);
 }
 
@@ -128,8 +130,8 @@ void AnimationStackedWidget::paintRight_onPrevious(QPainter &painter,int current
     widget->render(&pixmap);
     QRect rectBoxOfWidget = widget->geometry();
     double value = currentValue.toDouble();
-    QRect r1(widget->width() - qRound(value),0.0,qRound(value),rectBoxOfWidget.height());
-    QRect r2(0,0,qRound(value),rectBoxOfWidget.height());
+    QRect r1(widget->width() -20+10- qRound(value),10,qRound(value),rectBoxOfWidget.height()-20);
+    QRect r2(10,10,qRound(value),rectBoxOfWidget.height()-20);
     painter.drawPixmap(r1,pixmap,r2);
 }
 void AnimationStackedWidget::animationFinished()

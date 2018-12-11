@@ -36,6 +36,9 @@ private:
     static void validateSimpleItems(QMap<QString,QPair<QPair<QString,QString>,AHQC::DataLevel> > &data,
                            QMap<QString,int> &ahData,
                            QMap<QString,QString> &zData);
+    static void validateTimeItems(QMap<QString,QPair<QPair<QString,QString>,AHQC::DataLevel> > &data,
+                            QMap<QString,int> &ahData,
+                            QMap<QString,QString> &zData);
     static void validateWD(QMap<QString,QPair<QPair<QString,QString>,AHQC::DataLevel> > &data,
                            QMap<QString,int> &ahData,
                            QMap<QString,QString> &zData);

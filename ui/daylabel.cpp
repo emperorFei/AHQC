@@ -4,7 +4,7 @@ DayLabel::DayLabel(QWidget *parent):
     QLabel(parent),m_nDay(0),m_inErrorRange(false),m_bHover(false),m_bSelect(false)
 {
     forbidCursor = QCursor(QPixmap(":ico/forbid")
-                           .scaled(25,25,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+                           .scaled(22,22,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
 }
 
 
@@ -100,6 +100,16 @@ QString DayLabel::text() const{
 void DayLabel::setText(const QString &text){
     m_strText  = text;
     QLabel::setText(text);
+}
+
+bool DayLabel::getBHover() const
+{
+    return m_bHover;
+}
+
+void DayLabel::setBHover(bool bHover)
+{
+    m_bHover = bHover;
 }
 
 bool DayLabel::getInErrorRange() const

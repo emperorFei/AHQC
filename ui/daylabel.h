@@ -38,26 +38,22 @@ public:
     void setInErrorRange(bool inErrorRange);
     bool getBSelect() const;
     void setSelected(bool value);
+    bool getBHover() const;
+    void setBHover(bool bHover);
+
 public slots:
     void setText(const QString &);
 signals:
     void signalClicked(QDate,int ntype);
     void signalRightButtonClicked(bool);
-private:
+protected:
+    E_DAY m_type = CURR_MONTH_DAY;
+    QString m_strText;
     int m_nDay;
     bool m_inErrorRange = false;
     bool m_inRange = false;
     bool m_bHover = false;
     bool m_bSelect = false;
-
-    E_DAY m_type = CURR_MONTH_DAY;
-    QString m_strText;
-    QDate date = QDate::fromString("19700101","yyyyMMdd");
-    QCursor forbidCursor;
-
-
-
-
     QColor selectedBG = QColor(18,132,231);
     QColor inRangeAndHoverBG = QColor(220,248,255);
     QColor inErrorRangBG = QColor(243,243,243);
@@ -65,6 +61,9 @@ private:
     QColor selectedPenColor = QColor("#FFFFFF");
     QColor normalPenColor = QColor("#000000");
     QColor errorRangePenColor = QColor(204,204,204);
+private:
+    QDate date = QDate::fromString("19700101","yyyyMMdd");
+    QCursor forbidCursor;
 protected:
     void enterEvent(QEvent *e);
     void leaveEvent(QEvent *e);

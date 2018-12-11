@@ -18,15 +18,19 @@ public:
     explicit FullWidegt(QWidget *parent = nullptr);
     explicit FullWidegt(const AZData &azData,QWidget *parent = nullptr);
     ~FullWidegt();
-    void initFromAZData(const AZData &azData);
+
     const QFont &doubleLabelfont() const;
     void setDoubleLabelFont(const QFont &font);
+    QPair<QString, MyDoubleLabel::Level> getMostSeriousIssue() const;
+    QDateTime getObserveTime() const;
 
 private:
-    void setQCWarn();
+    //    void setQCWarn();
+    void initFromAZData(const AZData &azData);
     static const QString doubleLabelNames[];
     QDateTime observeTime;
     Ui::FullWidegt *ui;
+    QPair<QString,MyDoubleLabel::Level> mostSeriousIssue;
 };
 
 #endif // FULLWIDEGT_H

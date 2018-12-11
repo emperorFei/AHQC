@@ -64,7 +64,12 @@ SOURCES += \
     ui/clickablelabel.cpp \
     ui/date.cpp \
     ui/daylabel.cpp \
-    ui/hourlabel.cpp
+    ui/hourlabel.cpp \
+    ui/datetimedialog.cpp \
+    ui/datetimerangeselectdialog.cpp \
+    ui/datetimepagenumberwidget.cpp \
+    ui/signeddaylabel.cpp \
+    ui/signedhourlabel.cpp
 
 
 HEADERS += \
@@ -103,7 +108,13 @@ HEADERS += \
     ui/clickablelabel.h \
     ui/date.h \
     ui/daylabel.h \
-    ui/hourlabel.h
+    ui/hourlabel.h \
+    ui/datetimedialog.h \
+    ui/datetimerangeselectdialog.h \
+    ui/datetimepagenumberwidget.h \
+    enums.h \
+    ui/signeddaylabel.h \
+    ui/signedhourlabel.h
 
 
 

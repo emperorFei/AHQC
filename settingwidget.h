@@ -1,7 +1,8 @@
-#ifndef SETTINGWIDGET_H
+﻿#ifndef SETTINGWIDGET_H
 #define SETTINGWIDGET_H
 
 #include <QWidget>
+#include <QDialog>
 #include <QMouseEvent>
 #include <QGraphicsDropShadowEffect>
 #include <QTreeWidgetItem>
@@ -15,11 +16,12 @@
 #include "globalseeting.h"
 #include <QRegExp>
 #include <QStyledItemDelegate>
+#include <QColorDialog>
 namespace Ui {
 class SettingWidget;
 }
 
-class SettingWidget : public QWidget
+class SettingWidget : public QDialog
 {
     Q_OBJECT
 
@@ -41,6 +43,9 @@ public slots:
     void filesysAccountCheckBoxStateChanged(int state);
     void isospathChangeButtonClicked(bool checked = false);
     void isospathLineEditTextChanged();
+    void sltColorBtnClicled(bool);
+signals:
+    void QCColorChanged(QColor color,QString dataLevelName);
 private:
 
     void initPages();

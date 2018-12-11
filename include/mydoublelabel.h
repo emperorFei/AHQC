@@ -26,14 +26,15 @@ class  QDESIGNER_WIDGET_EXPORT MyDoubleLabel : public QWidget
     Q_PROPERTY(QString rightText READ getRightText WRITE setRightText)
     Q_PROPERTY(QString leftText READ getLeftText WRITE setLeftText)
     Q_PROPERTY(TextAlignment alignment READ getAlignment WRITE setAlignment)
+    Q_PROPERTY(Level level READ getLevel WRITE setLevel)
 
 public:
     enum TextAlignment{AlignLeft,AlignHCerter,AlignRight,AlignJustify};
-    enum Leval{INFO,SUSPECTED,CLASH,MISSING,MISSINGZDATA,MISSINGAMDATA,ERROR};
+    enum Level{INFO,SUSPECTED,CLASH,MISSING,MISSINGZDATA,MISSINGAMDATA,ERROR};
 
     explicit MyDoubleLabel(QWidget *parent = nullptr);
     explicit MyDoubleLabel(const QString &itemName,
-                           const QPair<QPair<QString,QString>,MyDoubleLabel::Leval> &data,
+                           const QPair<QPair<QString,QString>,MyDoubleLabel::Level> &data,
                            QWidget *parent = nullptr);
     ~MyDoubleLabel();
 
@@ -45,8 +46,8 @@ public:
     void setLeftText(const QString &value);
     TextAlignment getAlignment() const;
     void setAlignment(const TextAlignment &value);
-    Leval getLevel() const;
-    void setLevel(const Leval &value);
+    Level getLevel() const;
+    void setLevel(const Level &value);
     QString getDataName() const;
     void setDataName(const QString &value);
     const QFont & font() const;
@@ -63,7 +64,7 @@ private:
     Ui::MyDoubleLabel *ui;
     QLabel *left;
     QLabel *right;
-    Leval leval;
+    Level leval;
     QString leftText;
     QString rightText;
 };
