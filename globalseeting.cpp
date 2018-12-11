@@ -1,5 +1,6 @@
 #include "globalseeting.h"
 #include <QResource>
+QDateTime unInitTime(QDateTime::fromString("19700101000000","yyyyMMddHHmmss"));
 GlobalSetting *GlobalSetting::instance = Q_NULLPTR;
 GlobalSetting::GlobalSetting(QObject *parent) : QObject(parent),inited(false)
 {
@@ -11,6 +12,8 @@ GlobalSetting::~GlobalSetting()
     //qDeleteAll(colInfos->begin(),colInfos->end());
     colInfos->clear();
     delete colInfos;
+    delete dataSetting;
+    delete uiSetting;
 }
 
 GlobalSetting* GlobalSetting::getInstance(){
@@ -31,11 +34,33 @@ void GlobalSetting::init(){
     this -> databaseName = "tempDB";
     this -> pressureHeight = 6.4;
     this -> intDataNum = 47;
-
-
-
+    this->dataSetting = new QSettings("configs/dataSetting.ini",QSettings::IniFormat);
+    this->uiSetting = new QSettings("configs/uiSetting.ini",QSettings::IniFormat);
     this->inited =true;
 }
+
+void GlobalSetting::confirmSettingChanged(){
+    confirmUISettingChanged();
+    confirmDataSettingChanged();
+}
+
+void GlobalSetting::confirmDataSettingChanged(){
+
+}
+
+void GlobalSetting::confirmUISettingChanged(){
+
+}
+
+QString GlobalSetting::value(const QString &itemName){
+    if(dataSetting->contains(itemName)){
+        return dataSetting->value(itemName).toString();
+    }else if(uiSetting->contains(itemName)){
+        return uiSetting->value(itemName).toString();
+    }
+    return QString();
+}
+
 
 int GlobalSetting::getDBPort() const
 {

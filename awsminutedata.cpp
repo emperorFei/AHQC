@@ -1,25 +1,19 @@
-#include "awsminutedata.h"
+﻿#include "awsminutedata.h"
 const int AWSMinuteData::validateIndexs[] = {15,17,18,22,24,25,26,27,28,29,30,31,32,33,34,};
 const int AWSMinuteData::nestenIndex[] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,16,19,20,21,40,41,42,43,44,45,46};
 
 AWSMinuteData::AWSMinuteData(){}
 AWSMinuteData::~AWSMinuteData(){}
-AWSMinuteData::AWSMinuteData(const QDate &awsDay,const QString &line):
-    observeDay(awsDay),
-    observeMonth(awsDay.toString("yyyyMM")),
-    observeTime(QDateTime(awsDay)),
-    insertTime(observeTime),
-    updateTime(observeTime){
+AWSMinuteData::AWSMinuteData(const QDate &awsDay,const QString &line):observeDay(awsDay),
+    observeMonth(QDate::fromString(awsDay.toString("yyyyMM")+"01","yyyyMMdd"))
+{
     if(line != Q_NULLPTR && line != QString("") && line.at(0) != '-' ) {
-
-        minute = line.mid(0,4).toInt();
-
+        QString minuteString(line.mid(0,4));
+        minute = minuteString.toInt();
+        observeTime = QDateTime::fromString(awsDay.toString("yyyyMMdd")+minuteString,"yyyyMMddHHmm");
         if( minute > 2000) {
             observeTime = observeTime.addDays(-1);
         }
-        observeTime = observeTime.addSecs((minute/100)*60*60+ (minute%100)*60);
-        updateTime = insertTime = observeTime;
-
         initData(line);
         validateData();
         nestenData();
@@ -80,14 +74,14 @@ void AWSMinuteData::nestenData(){
 }
 
 QDebug& operator<<(QDebug &debug, const AWSMinuteData &obj){
-    debug << obj.getObserveTime()
-          <<" IntData: "+ AHQC::PrintUtil::printList(obj.getData())
-          << " Weatherphcod: "+obj.getWeatherphcode()
-          << " DataQulity: "+obj.getDataQulity();
+    return debug << obj.getObserveTime()
+                 << " IntData: "+ AHQC::PrintUtil::printList(obj.getData())
+                 << " Weatherphcod: "+obj.getWeatherphcode()
+                 << " DataQulity: "+obj.getDataQulity();
 }
 
 QString operator+(const QString &string,const AWSMinuteData &obj){
-    return string + obj.getObserveTime().toString("yyyy年MM月dd日HH时mm分")
+    return string + obj.getObserveTime().toString(QString::fromLocal8Bit("yyyy年MM月dd日HH时mm分"))
             + " IntData: "+ AHQC::PrintUtil::printList(obj.getData())
             + " Weatherphcod: "+obj.getWeatherphcode()
             + " DataQulity: "+obj.getDataQulity();
@@ -114,8 +108,6 @@ void AWSMinuteData::setObserveDay(const QDate &value)
     observeDay = value;
 }
 
-
-
 int AWSMinuteData::getMinute() const
 {
     return minute;
@@ -127,12 +119,12 @@ void AWSMinuteData::setMinute(int value)
 }
 
 
-QString AWSMinuteData::getObserveMonth() const
+QDate AWSMinuteData::getObserveMonth() const
 {
     return observeMonth;
 }
 
-void AWSMinuteData::setObserveMonth(const QString &value)
+void AWSMinuteData::setObserveMonth(const QDate &value)
 {
     observeMonth = value;
 }
@@ -149,27 +141,6 @@ void AWSMinuteData::setObserveTime(const QDateTime &value)
     observeTime = value;
 }
 
-
-QDateTime AWSMinuteData::getInsertTime() const
-{
-    return insertTime;
-}
-
-void AWSMinuteData::setInsertTime(const QDateTime &value)
-{
-    insertTime = value;
-}
-
-
-QDateTime AWSMinuteData::getUpdateTime() const
-{
-    return updateTime;
-}
-
-void AWSMinuteData::setUpdateTime(const QDateTime &value)
-{
-    updateTime = value;
-}
 
 QList<int> AWSMinuteData::getData() const
 {

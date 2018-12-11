@@ -1,4 +1,4 @@
-#ifndef AWSMINUTEDAOMYSQLIMP_H
+﻿#ifndef AWSMINUTEDAOMYSQLIMP_H
 #define AWSMINUTEDAOMYSQLIMP_H
 
 #include <QObject>
@@ -6,6 +6,7 @@
 #include <QDate>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QSqlError>
 #include <QVariant>
 #include <globalseeting.h>
 #include <QtMath>
@@ -23,6 +24,7 @@ public:
     int findTempisByObserveTime(const QDateTime &observeTime);
     int getRecordsCount(const TimeRange &tr);
     bool saveAWSMinuteData(const AWSMinuteData &amData);
+    bool saveAMFile(const QString &amFileName);
 
     //获取变化值，雨量，海平面气压
     QMap<QString,int> getVAndRain(const QDateTime &observeTime);
@@ -31,6 +33,7 @@ public:
     //获得所有正点数据
     AWSMinuteData findByOT(const QDateTime &observeTime);
 
+    bool exists(const QDateTime &observeTime);
     int getMaxByOnTime(QDateTime onTimeDate,AWSMinuteDAOMySqlImp::AWSItemType awsItemType);
     int getMinByOnTime(const QDateTime &onTimeDate, AWSMinuteDAOMySqlImp::AWSItemType awsItemType);
     int getMaxTimeByOnTime(const QDateTime &onTimeDate, AWSMinuteDAOMySqlImp::AWSItemType awsItemType);
@@ -42,7 +45,7 @@ public:
     int getNVExtremum(const TimeRange &tr,AWSMinuteDAOMySqlImp::AWSItemType awsItemType);
     int getVariatedValue(const TimeRange &tr,AWSMinuteDAOMySqlImp::AWSItemType awsItemType);
     int getRain(const TimeRange &tr,AWSMinuteDAOMySqlImp::AWSItemType awsItemType);
-    int getSP(QDateTime onTimeDate);
+    int getSP(const QDateTime &onTimeDate);
 
     //T
     int getMaxTByOT(QDateTime onTime);
@@ -123,7 +126,7 @@ private:
     static QString findTByObserveTimeSql;
     static QString findOTDByOTSql;
     static QString getRecordsCountSql;
-
+    static QString checkExistsSql;
     //max
     static QString getMaxTByOnTimeSql;
     static QString getMaxETByOnTimeSql;

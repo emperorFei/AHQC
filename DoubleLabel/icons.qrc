@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/" >
+        <file>doubleLabel.ico</file>
+
+    </qresource>
+</RCC>

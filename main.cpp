@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include <QApplication>
 #include <QSqlDatabase>
 #include <QMessageBox>
@@ -7,50 +7,60 @@
 #include <QDateTime>
 #include <QSqlError>
 #include <QVariant>
-
+#include <QSettings>
+#include <QFile>
+#include <iostream>
+#include <QFileInfo>
+#include <QResource>
+#include "settingwidget.h"
+#include <QRegExp>
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    singleton<GlobalSetting>::GetInstance();
+//    int result = system("net use \\\\computer\\temp 2222");
+//    qDebug() << QString::number(result);
+//    QString path1("D:\\CTS2\\TransferClient\\log\\SendDataAck");
+//    QString path2("D:\\CTS2\\Transfer Client\\log\\SendData Ack");
+//    QString path3("D:\\CTS2\\TransferClient\\log\\SendData Ack");
+
+//    QRegExp reg1("\\\\[^\\\\]+$");
 
 
-    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("10.126.148.92");
-    db.setPort(3306);
-    db.setDatabaseName("ontimedata");
-      //这里输入你的数据库名
-    db.setUserName("fei");
-    db.setPassword("tiger");   //这里输入你的密码
-    qDebug() << db.databaseName();
-    qDebug() << db.hostName();
-    qDebug() << db.userName();
-    qDebug() << db.password();
-    if (!db.open()) {
-        QMessageBox::critical(Q_NULLPTR, QObject::tr("无法打开数据库"),
-        "无法创建数据库连接！ ", QMessageBox::Cancel);
+//    int tailIndex = reg1.indexIn(path2,0);
+//    qDebug() << tailIndex;
+//    path2 = path2.remove(tailIndex,path2.length()-tailIndex);
+//    qDebug() << path2;
 
-    }else{
-        QSqlQuery query(db);
-        //query.exec("use tempdb");
-        query.prepare("select Pressure,tempis from AWSMinute "
-                   "where observeTime = ? ");
+//    tailIndex = reg1.indexIn(path2,0);
+//    qDebug() << tailIndex;
+//    path2 = path2.remove(tailIndex,path2.length()-tailIndex);
+//    qDebug() << path2;
 
-        //query.addBindValue(QVariant(time));
-        query.addBindValue(QVariant(QDateTime::fromString("2018-10-24 13:00:00","yyyy-MM-dd HH:mm:ss")));
-        query.exec();
-        if(query.next()){
-            qDebug() << query.value(0).toInt() << " " << query.value(1).toInt();
-        }else{
-            qDebug() << query.lastError();
-        }
+//    tailIndex = reg1.indexIn(path2,0);
+//    qDebug() << tailIndex;
+//    path2 = path2.remove(tailIndex,path2.length()-tailIndex);
+//    qDebug() << path2;
 
-        query.finish();
-        db.close();
-    }
+//    tailIndex = reg1.indexIn(path2,0);
+//    qDebug() << tailIndex;
+//    path2 = path2.remove(tailIndex,path2.length()-tailIndex);
+//    qDebug() << path2;
+
+//    QRegExp reg2("-");
+//    QString oTimes("20-10;15-48-16");
+//    tailIndex = reg2.indexIn(oTimes,0);
+//    qDebug() << tailIndex;
+//    //oTimes = oTimes.replace(reg2,",");
+//    oTimes = oTimes.replace("-",",");
+//    qDebug() << oTimes;
+
 
 
     MainWindow w;
     w.show();
-
+//    SettingWidget settingWidget;
+//    settingWidget.show();
 
     return a.exec();
 }

@@ -12,7 +12,7 @@ struct  TimeRange
     QDateTime older;
     QDateTime later;
     timeRange_bound bound;
-    explicit TimeRange(QDateTime& t1,QDateTime& t2,timeRange_bound tr_bound) {
+    explicit TimeRange(QDateTime t1,QDateTime t2,timeRange_bound tr_bound) {
         bound = tr_bound;
         if(t1 > t2){
             older = t2;

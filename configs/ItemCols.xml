@@ -308,15 +308,15 @@
 		</Item>	
 		<Item>
 			<name>Weatherphcode</name>
-                        <beginIndex>208</beginIndex>
-                        <endIndex>214</endIndex>
-                        <length>6</length>
+                        <beginIndex>176</beginIndex>
+                        <endIndex>188</endIndex>
+                        <length>12</length>
 		</Item>
 		<Item>
 			<name>DataQuality</name>
-                        <beginIndex>214</beginIndex>
+                        <beginIndex>208</beginIndex>
 			<endIndex>256</endIndex>
-                        <length>42</length>
+                        <length>48</length>
 		</Item>	
 	</factor>
 </factors>
