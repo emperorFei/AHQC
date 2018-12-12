@@ -4,6 +4,9 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
+    fullWidgetLeft(Q_NULLPTR),
+    fullWidgetMiddle(Q_NULLPTR),
+    fullWidgetRight(Q_NULLPTR),
     inRangePages(QList<FullWidegt*>()),
     currentRange(Q_NULLPTR),
     azDatas(Q_NULLPTR),
@@ -16,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
 ////    QTest::qExec(&tReadXml);
 //    QTest::qExec(&simpleTest);
     ui->setupUi(this);
-    issueDatas = new QMap<QDateTime,QPair<QString,MyDoubleLabel::Level> >();
+    issueDatas = new QMap<QDateTime,QPair<QString,QPair<QPair<QString,QString>,AHQC::DataLevel> > >();
     this->setWindowIcon(QIcon(":/ico/qc"));
     initComponents();
     QDateTime beginTime(QDate(2018,12,5),QTime(00,00));
@@ -65,16 +68,6 @@ void MainWindow::reachDataByTimerange(const TimeRange &selectTimeRange){
     if(!database->open()){
         return;
     }
-
-    if(currentRange != Q_NULLPTR){
-        delete currentRange;
-        currentRange = Q_NULLPTR;
-    }
-    issueDatas -> clear();
-    inRangePages.clear();
-    currentRange = new QPair<QDateTime,QDateTime>(selectTimeRange.older,selectTimeRange.later);
-    pageWidget -> range = currentRange;
-
     AWSMinuteDAOMySqlImp awsMinuteDao(database);
     ZDataDAOMysqlImp zDao(database);
     QList<QString> amFileNames4Save = AHQC::FileNameUtil::prepareAMFile4Select(selectTimeRange);
@@ -92,62 +85,61 @@ void MainWindow::reachDataByTimerange(const TimeRange &selectTimeRange){
         azDatas->insert(observeTime,azData);
     }
     database->close();
-
 }
 
 void MainWindow::updatePagesByTimeranng(const TimeRange &selectTimeRange){
-    if(currentRange != Q_NULLPTR){
-        delete currentRange;
-        currentRange = Q_NULLPTR;
-    }
-    issueDatas -> clear();
-    inRangePages.clear();
-    currentRange = new QPair<QDateTime,QDateTime>(selectTimeRange.older,selectTimeRange.later);
-    pageWidget -> range = currentRange;
-    QSqlDatabase * database = DBCenter::getDBByAccountType(DBCenter::AccountType::QIU);
-    database->open();
-    QFont font = ui -> mainWidget->font();
-    AWSMinuteDAOMySqlImp awsMinuteDao(database);
-    ZDataDAOMysqlImp zDao(database);
-    QList<QString> amFileNames4Save = AHQC::FileNameUtil::prepareAMFile4Select(selectTimeRange);
-    QList<QDateTime> focusedHours = AHQC::TimeUtil::getFocusedHours(selectTimeRange);
-    for(const QString &filename: amFileNames4Save){
-        awsMinuteDao.saveAMFile(filename);
-    }
+//    if(currentRange != Q_NULLPTR){
+//        delete currentRange;
+//        currentRange = Q_NULLPTR;
+//    }
+//    issueDatas -> clear();
+//    inRangePages.clear();
+//    currentRange = new QPair<QDateTime,QDateTime>(selectTimeRange.older,selectTimeRange.later);
+//    pageWidget -> range = currentRange;
+//    QSqlDatabase * database = DBCenter::getDBByAccountType(DBCenter::AccountType::QIU);
+//    database->open();
+//    QFont font = ui -> mainWidget->font();
+//    AWSMinuteDAOMySqlImp awsMinuteDao(database);
+//    ZDataDAOMysqlImp zDao(database);
+//    QList<QString> amFileNames4Save = AHQC::FileNameUtil::prepareAMFile4Select(selectTimeRange);
+//    QList<QDateTime> focusedHours = AHQC::TimeUtil::getFocusedHours(selectTimeRange);
+//    for(const QString &filename: amFileNames4Save){
+//        awsMinuteDao.saveAMFile(filename);
+//    }
 
-    qDebug() << "now adding";
+//    qDebug() << "now adding";
 
-    int insertIndex = -1;
-    for(const QDateTime &observeTime : focusedHours){
-        AWSMinuteData amData = awsMinuteDao.findByOT(observeTime);
-        QMap<QString,int> stastictsData = awsMinuteDao.getExtremums(observeTime);
-        stastictsData.unite(awsMinuteDao.getVAndRain(observeTime));
-        AHData ahData(amData,stastictsData);
-        ZData zData(zDao.checkSaveAndFindByOT(observeTime));
-        AZData azData(ahData,zData);
-        FullWidegt * fullWidget = new FullWidegt(azData,ui -> mainWidget);
-        fullWidget->setMouseTracking(true);
-        fullWidget->setDoubleLabelFont(font);
-        int insertedIndex =  ui -> mainWidget->insertWidget(++insertIndex,fullWidget);
-//        pageCount = ui -> mainWidget->count();
-        qDebug() << "insertedIndex: " << insertedIndex;
-//        qDebug() << "count: " << pageCount;
-        if(fullWidget->getMostSeriousIssue().second != 0){
-            issueDatas->insert(fullWidget->getObserveTime(),fullWidget->getMostSeriousIssue());
-        }
-        inRangePages.append(fullWidget);
-    }
-    database->close();
-    int lastInsertIndex = insertIndex;
-    int lastIndex = ui -> mainWidget->count() -1;
-    while(lastIndex > lastInsertIndex){
-        QWidget *widget = ui -> mainWidget->widget(lastIndex);
-        ui -> mainWidget->removeWidget(widget);
-        widget->deleteLater();
-        lastIndex = ui -> mainWidget->count() -1;
-    }
-    qDebug() << ui -> mainWidget->count();
-    emit selectOver(true);
+//    int insertIndex = -1;
+//    for(const QDateTime &observeTime : focusedHours){
+//        AWSMinuteData amData = awsMinuteDao.findByOT(observeTime);
+//        QMap<QString,int> stastictsData = awsMinuteDao.getExtremums(observeTime);
+//        stastictsData.unite(awsMinuteDao.getVAndRain(observeTime));
+//        AHData ahData(amData,stastictsData);
+//        ZData zData(zDao.checkSaveAndFindByOT(observeTime));
+//        AZData azData(ahData,zData);
+//        FullWidegt * fullWidget = new FullWidegt(azData,ui -> mainWidget);
+//        fullWidget->setMouseTracking(true);
+//        fullWidget->setDoubleLabelFont(font);
+//        int insertedIndex =  ui -> mainWidget->insertWidget(++insertIndex,fullWidget);
+////        pageCount = ui -> mainWidget->count();
+//        qDebug() << "insertedIndex: " << insertedIndex;
+////        qDebug() << "count: " << pageCount;
+//        if(fullWidget->getMostSeriousIssue().second != 0){
+//            //issueDatas->insert(fullWidget->getObserveTime(),fullWidget->getMostSeriousIssue());
+//        }
+//        inRangePages.append(fullWidget);
+//    }
+//    database->close();
+//    int lastInsertIndex = insertIndex;
+//    int lastIndex = ui -> mainWidget->count() -1;
+//    while(lastIndex > lastInsertIndex){
+//        QWidget *widget = ui -> mainWidget->widget(lastIndex);
+//        ui -> mainWidget->removeWidget(widget);
+//        widget->deleteLater();
+//        lastIndex = ui -> mainWidget->count() -1;
+//    }
+//    qDebug() << ui -> mainWidget->count();
+//    emit selectOver(true);
 
 }
 void MainWindow::resizeEvent(QResizeEvent *event){
@@ -223,6 +215,21 @@ void MainWindow::initComponents(){
     dateTimeSelectDialog -> hide();
     settingWidget = new SettingWidget(this);
 
+    FullWidegt *fullWidgetLeft = new FullWidegt(ui->mainWidget);
+    FullWidegt *fullWidgetMiddle = new FullWidegt(ui->mainWidget);
+    FullWidegt *fullWidgetRight = new FullWidegt(ui->mainWidget);
+
+    ui->mainWidget->insertWidget(0,fullWidgetLeft);
+    ui->mainWidget->insertWidget(1,fullWidgetMiddle);
+    ui->mainWidget->insertWidget(2,fullWidgetRight);
+
+    int lastIndex = ui -> mainWidget->count() -1;
+    while(lastIndex > 2){
+        QWidget *widget = ui -> mainWidget->widget(lastIndex);
+        ui -> mainWidget->removeWidget(widget);
+        widget->deleteLater();
+        lastIndex = ui -> mainWidget->count() -1;
+    }
 
     settingWidget->hide();
     pageWidget = new DateTimePageNumberWidget(this);
@@ -352,7 +359,26 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event){
     }
     QMainWindow::mouseMoveEvent(event);
 }
-
+void MainWindow::checkAZDatas(){
+//    QMap<QDateTime,AZData>::Iterator it =  (*azDatas).begin();
+//    QMap<QDateTime,AZData>::Iterator end =  (*azDatas).end();
+//    while(it != end){
+//        AZData &theAZData = it.value();
+//        QMap<QString,QPair<QPair<QString,QString>,AHQC::DataLevel> >::Iterator itOfAZData =  it.value().data.begin();
+//        QMap<QString,QPair<QPair<QString,QString>,AHQC::DataLevel> >::Iterator endOfAZData =  it.value().data.end();
+//        while(itOfAZData != endOfAZData){
+//            if((itOfAZData.value().second != AHQC::DataLevel::INFO) &&
+//                    theAZData.mostSeriousIssue.second.second < itOfAZData.value().second){
+//                theAZData.mostSeriousIssue = *itOfAZData;
+//            }
+//        }
+//        if(theAZData.mostSeriousIssue.first == "unchecked"){
+//            theAZData.mostSeriousIssue.first = "noSuspectedData";
+//        }else{
+//           issueDatas->insert(theAZData.observeTime,theAZData.mostSeriousIssue);
+//        }
+//    }
+}
 void MainWindow::region(const QPoint &cursorGlobalPoint)
 {
     // 获取窗体在屏幕上的位置区域，tl为topleft点，rb为rightbottom点
@@ -413,9 +439,22 @@ void MainWindow::sltPreviousBtnClicled(){
 }
 void MainWindow::sltNextBtnClicled(){
     int currectIndex = ui -> mainWidget->currentIndex();
+    FullWidegt * currentWidget = static_cast<FullWidegt *>(ui -> mainWidget->currentWidget());
+    QDateTime currentDateTime = currentWidget->getObserveTime();
+    if(currentDateTime == currentRange->second){
+        return;
+    }else if(currentDateTime == currentRange->second.addSecs(60*60)){
+        fullWidgetRight->initFromAZData(azDatas->value(currentDateTime.addSecs(60*60)));
+        fullWidgetMiddle->initFromAZData(azDatas->value(currentDateTime));
+        if(currentDateTime.addSecs(-60*60) >= currentRange->first){
+            fullWidgetLeft->initFromAZData(azDatas->value(currentDateTime.addSecs(-60*60)));
+        }
+        ui -> mainWidget -> next();
+    }
+
     if(currectIndex < ui -> mainWidget->count() - 1){
         ui -> mainWidget->next();
-        pageWidget->select(static_cast<FullWidegt *>(ui -> mainWidget->currentWidget())->getObserveTime().addSecs(60*60));
+        pageWidget->select(currentWidget->getObserveTime().addSecs(60*60));
         pageWidget->setDisabled(true);
         QTimer::singleShot(1000,[=](){pageWidget->setEnabled(true);});
     }
@@ -581,17 +620,63 @@ void MainWindow::sltSelectRangeAutoChanged(const QPair<QDateTime,QDateTime> &DTP
                                             DTPair.second.toString("yyyy-MM-dd HH"));
 }
 void MainWindow::sltPageNumChanged(const QDateTime &dateTime){
-    int index = -1;
-    for(FullWidegt *fullWidget : inRangePages){
-        if(fullWidget->getObserveTime() == dateTime){
-            index = ui -> mainWidget->indexOf(fullWidget);
-            if(index >=0 && index < ui -> mainWidget->count()){
-                ui -> mainWidget->setCurrentIndex(index);
-            }
+    if(dateTime == currentRange->second){
+        QDateTime observeTime = currentRange->second;
+        fullWidgetRight->initFromAZData(azDatas->value(observeTime));
+        observeTime  = observeTime.addSecs(-60*60);
+        if(observeTime >= currentRange->second){
+            fullWidgetMiddle->initFromAZData(azDatas->value(observeTime));
         }
+        observeTime  = observeTime.addSecs(-60*60);
+        if(observeTime >= currentRange->second){
+            fullWidgetLeft->initFromAZData(azDatas->value(observeTime));
+        }
+        ui->mainWidget->setCurrentIndex(2);
+    }else if(dateTime == currentRange->first){
+        QDateTime observeTime = currentRange -> first;
+        fullWidgetLeft->initFromAZData(azDatas->value(observeTime));
+        observeTime  = observeTime.addSecs(60*60);
+        if(observeTime >= currentRange->second){
+            fullWidgetMiddle->initFromAZData(azDatas->value(observeTime));
+        }
+        observeTime  = observeTime.addSecs(60*60);
+        if(observeTime >= currentRange->second){
+            fullWidgetRight->initFromAZData(azDatas->value(observeTime));
+        }
+        ui->mainWidget->setCurrentIndex(0);
+    }else{
+        QDateTime observeTime = dateTime;
+        fullWidgetMiddle ->initFromAZData(azDatas->value(observeTime));
+        observeTime  = dateTime.addSecs(-60*60);
+        fullWidgetLeft ->initFromAZData(azDatas->value(observeTime));
+        observeTime  = dateTime.addSecs(60*60);
+        fullWidgetRight -> initFromAZData(azDatas->value(observeTime));
+        ui->mainWidget->setCurrentIndex(1);
     }
 }
+void MainWindow::sltReachDataFinish(const TimeRange &timeRange){
+    issueDatas -> clear();
+    checkAZDatas();
+    QDateTime observeTime = timeRange.later;
+    fullWidgetRight->initFromAZData(azDatas->value(observeTime));
+    observeTime  = observeTime.addSecs(-60*60);
+    if(observeTime >= timeRange.older){
+        fullWidgetMiddle->initFromAZData(azDatas->value(observeTime));
+    }
+    observeTime  = observeTime.addSecs(-60*60);
+    if(observeTime >= timeRange.older){
+        fullWidgetLeft->initFromAZData(azDatas->value(observeTime));
+    }
+    ui->mainWidget->setCurrentIndex(2);
+    if(currentRange != Q_NULLPTR){
+        delete currentRange;
+        currentRange = Q_NULLPTR;
+    }
+    currentRange = new QPair<QDateTime,QDateTime> (timeRange.older,timeRange.later);
+    pageWidget -> range = currentRange;
+    pageWidget -> updateAfterPageChange();
 
+}
 
 ReachDataThread::ReachDataThread(TimeRange timerange,MainWindow *mWindow,QObject *parent):
     QThread(parent),
@@ -603,4 +688,5 @@ ReachDataThread::ReachDataThread(TimeRange timerange,MainWindow *mWindow,QObject
 
 void ReachDataThread::run(){
     mainWindow->reachDataByTimerange(timeRange);
+    emit reachDataFinish(timeRange);
 }

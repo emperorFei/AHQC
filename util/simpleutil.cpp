@@ -10,6 +10,41 @@ QString AHQC::AMFileFullNameTemplate = "#{isosPath}\\dataset\\江苏\\#{stationN
 QString AHQC::ZFileFullNameTemplate = "#{isosPath}\\bin\\Awsnet\\#{month}\\Z_SURF_I_#{stationNum}_#{DateTime}_O_AWS_FTM#{ccx}.txt";
 QRegExp AHQC::amFileNameReg("AWS_M_Z_.*[\\.txt|\\.TXT]");
 QRegExp AHQC::zFileNameReg("Z_SURF_I_.*[\\.txt|\\.TXT]");
+QList<QString> AHQC::defaultQCItemNames =
+{
+   "CA","CH","E","ET","ET10","ET15","ET160","ET20","ET320",
+   "ET40","ET5","ET80","ExWD","ExWD12","ExWD6","ExWS","ExWS12",
+   "ExWS6","ExWST","GT",
+   "HRain","HRain12","HRain24",
+   "HRain3","HRain6","LCA",
+   "MaxET","MaxETT","MaxGT","MaxGTT",
+   "MaxP","MaxPT","MaxT","MaxT24","MaxTT",
+   "MaxWD","MaxWS","MaxWST","MinET","MinET12",
+   "MinETT","MinGT","MinGTT","MinP","MinPT","MinRH",
+   "MinRHT","MinT","MinT24","MinTT","MinV",
+   "MinVT","P","RH","SP","SnowD","T",
+   "TD","V1","V10","VP24","VP3","VT24",
+   "WD","WD10","WD2","WP","WS","WS10","WS2",
+   "CCX","CF","CFC","EC","FE1D","FE1U","FE2D","FE2U","GA","HA"
+};
+QList<QString> AHQC::QCItemNames =
+{
+   "CA","CH","E","ET","ET10","ET15","ET160","ET20","ET320",
+   "ET40","ET5","ET80","ExWD","ExWD12","ExWD6","ExWS","ExWS12",
+   "ExWS6","ExWST","GT",
+   "HRain","HRain12","HRain24",
+   "HRain3","HRain6","LCA",
+   "MaxET","MaxETT","MaxGT","MaxGTT",
+   "MaxP","MaxPT","MaxT","MaxT24","MaxTT",
+   "MaxWD","MaxWS","MaxWST","MinET","MinET12",
+   "MinETT","MinGT","MinGTT","MinP","MinPT","MinRH",
+   "MinRHT","MinT","MinT24","MinTT","MinV",
+   "MinVT","P","RH","SP","SnowD","T",
+   "TD","V1","V10","VP24","VP3","VT24",
+   "WD","WD10","WD2","WP","WS","WS10","WS2",
+   "CCX","CF","CFC","EC","FE1D","FE1U","FE2D","FE2U","GA","HA"
+};
+
 
 QString AHQC::TimeUtil::sdf4SMOLocFile("'smo_'yyyyMMdd'_'HHmmss'.loc'");
 QString AHQC::TimeUtil::sdf4AMFile = "'AWS_M_Z_#{stationNum}_'yyyyMMdd'.txt'";

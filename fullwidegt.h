@@ -23,10 +23,9 @@ public:
     void setDoubleLabelFont(const QFont &font);
     QPair<QString, MyDoubleLabel::Level> getMostSeriousIssue() const;
     QDateTime getObserveTime() const;
-
+    void initFromAZData(const AZData &azData);
 private:
     //    void setQCWarn();
-    void initFromAZData(const AZData &azData);
     static const QString doubleLabelNames[];
     QDateTime observeTime;
     Ui::FullWidegt *ui;

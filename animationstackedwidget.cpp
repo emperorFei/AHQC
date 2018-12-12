@@ -139,7 +139,9 @@ void AnimationStackedWidget::animationFinished()
     isAnimation = false;
     isGoingNext = false;
     isGoingPrevoius = false;
-    widget(currentIndex())->show();
+    int currentIndex = this->currentIndex();
+    //this->widget(currentIndex)->show();
     setCurrentIndex(otherIndex);
+    emit animationFinishedSignal(currentIndex,otherIndex);
 }
 

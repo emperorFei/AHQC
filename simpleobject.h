@@ -25,6 +25,11 @@ struct  TimeRange
             bound = timeRange_bound::POINT;
         }
     }
+    TimeRange(const TimeRange& other){
+        this->older = other.older;
+        this->later = other.later;
+        this->bound = other.bound;
+    }
     QString toQString(){
         return older.toString("yyyyMMddHHmmss")+" "+later.toString("yyyyMMddHHmmss");
     }

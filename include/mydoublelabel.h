@@ -5,6 +5,7 @@
 #include <QtUiPlugin/QDesignerCustomWidgetInterface>
 #include <QWidget>
 #include <QLabel>
+#include <QStyleOption>
 #include <QPair>
 #include <QPainter>
 #include <QDebug>

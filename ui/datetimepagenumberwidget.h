@@ -8,6 +8,7 @@
 #include <QVBoxLayout>
 #include <QGridLayout>
 #include <QStyleOption>
+#include "util/simpleutil.h"
 #include "signeddaylabel.h"
 #include "signedhourlabel.h"
 #include "mydoublelabel.h"
@@ -21,7 +22,7 @@ public:
     void updateAfterPageChange();
     void select(const QDateTime &);
 
-    const QMap<QDateTime,QPair<QString,MyDoubleLabel::Level> > * issueDatas;
+    const QMap<QDateTime,QPair<QString,QPair<QPair<QString,QString>,AHQC::DataLevel> > > * issueDatas;
     const QPair<QDateTime,QDateTime> *range;
 signals:
     void selectedDateTimeChanged(QDateTime);
