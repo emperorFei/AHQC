@@ -591,10 +591,11 @@ QPushButton:pressed{
            <string notr="true"/>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>2</number>
           </property>
-          <widget class="QWidget" name="page"/>
-          <widget class="QWidget" name="page_2"/>
+          <widget class="QWidget" name="pageOne"/>
+          <widget class="QWidget" name="pageTwo"/>
+          <widget class="QWidget" name="pageThree"/>
          </widget>
          <widget class="QPushButton" name="previous_btn">
           <property name="geometry">

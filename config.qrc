@@ -1,25 +1,6 @@
 <RCC>
     <qresource prefix="/conf">
         <file alias="createMySqlTableScript">configs/createMySqlTable.sql</file>
-<!--        <file alias="dataSetting">configs/dataSetting.ini</file>
         <file alias="ItemCols">configs/ItemCols.xml</file>
-        <file alias="uiSetting">configs/uiSetting.ini</file>-->
-
-<!--        <file alias="/icons/actionl_close.ico">resource/icons/actionl_close.ico</file>
-        <file alias="/icons/action_anotherSave.ico">resource/icons/action_anotherSave.ico</file>
-        <file alias="/icons/action_copy.ico">resource/icons/action_copy.ico</file>
-        <file alias="/icons/action_copyright.ico">resource/icons/action_copyright.ico</file>
-        <file alias="/icons/action_Cut.ico">resource/icons/action_Cut.ico</file>
-        <file alias="/icons/action_exit.ico">resource/icons/action_exit.ico</file>
-        <file alias="/icons/action_find.ico">resource/icons/action_find.ico</file>
-        <file alias="/icons/action_new.ico">resource/icons/action_new.ico</file>
-        <file alias="/icons/action_open.ico">resource/icons/action_open.ico</file>
-        <file alias="/icons/action_paste.ico">resource/icons/action_paste.ico</file>
-        <file alias="/icons/action_save.ico">resource/icons/action_save.ico</file>
-        <file alias="/icons/action_undo.ico">resource/icons/action_undo.ico</file>
-        <file alias="/icons/action_vesions.ico">resource/icons/action_vesions.ico</file>
-        <file alias="/icons/Blackvariant.ico">resource/icons/Blackvariant.ico</file>
-        <file alias="/icons/if_ball_848741.ico">resource/icons/if_ball_848741.ico</file>
-        <file alias="/icons/QMB_warning.ico">resource/icons/QMB_warning.ico</file>-->
     </qresource>
 </RCC>

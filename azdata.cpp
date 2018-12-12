@@ -14,6 +14,9 @@ AZData::AZData(const AHData &ahData,const ZData &zData):inited(false){
     this->observeTime = ahData.getObserveTime();
     DataFormatUtil::validateAndExport2AZData(data,ahData.data,zData.data);
     MWW = zData.value("MWW");
+    QPair<QString,QString> dataPair("---","---");
+    QPair<QPair<QString,QString>,AHQC::DataLevel> pair(dataPair,AHQC::DataLevel::INFO);
+    mostSeriousIssue = QPair<QString,QPair<QPair<QString,QString>,AHQC::DataLevel> >("unchecked", pair);
     inited = true;
 }
 

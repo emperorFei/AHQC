@@ -26,7 +26,7 @@ void GlobalSetting::init(){
 //    QResource resource(qApp->applicationDirPath()+"/config.qrc");
 //    instance->colInfoFileName = resource.absoluteFilePath()+"/configs/ItemCols";
     //colInfoFileName = resource.absoluteFilePath()+"/conf/ItemCols.xml";
-    this->colInfoFileName = "F:/GitRepository/OFFICE_AHQC/configs/ItemCols.xml";
+    this->colInfoFileName = ":/conf/ItemCols";
     MyXMLProcessor xmlProcessor;
     this -> colInfos = xmlProcessor.readColsXml(this->colInfoFileName);
     this -> dbHostName = "10.126.148.92";

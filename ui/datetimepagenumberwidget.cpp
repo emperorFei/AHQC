@@ -139,9 +139,9 @@ void DateTimePageNumberWidget::updateDayWidget(){
     QDate tempDate(1970,01,01);
     for(int i=0;i<4;i++){
         SignLevel signLevel = SignLevel::SIGNINFO;
-        MyDoubleLabel::Level highestLevel = MyDoubleLabel::Level::INFO;
+        AHQC::DataLevel highestLevel = AHQC::DataLevel::INFO;
         QDate dateOfIssue(1970,1,1);
-        MyDoubleLabel::Level level = MyDoubleLabel::Level::INFO ;
+        AHQC::DataLevel level = AHQC::DataLevel::INFO ;
         tempDate = date.addDays(i);
         dayLabels[i]->setDate(tempDate);
         dayLabels[i]->setText(tempDate.toString("dd"));
@@ -150,38 +150,38 @@ void DateTimePageNumberWidget::updateDayWidget(){
         }else{
             dayLabels[i]->setInErrorRange(false);
         }
-        QMap<QDateTime,QPair<QString,MyDoubleLabel::Level> >::const_iterator it
+        QMap<QDateTime,QPair<QString,QPair<QPair<QString,QString>,AHQC::DataLevel> > >::const_iterator it
                 = issueDatas -> cbegin();
-        QMap<QDateTime,QPair<QString,MyDoubleLabel::Level> >::const_iterator end
+        QMap<QDateTime,QPair<QString,QPair<QPair<QString,QString>,AHQC::DataLevel> > >::const_iterator end
                 = issueDatas -> cend();
         while(it != end){
             dateOfIssue = it.key().date();
-            level = it.value().second;
-            if(dateOfIssue == tempDate && level > highestLevel){
+            level = it.value().second.second;
+            if((dateOfIssue == tempDate) && (level > highestLevel)){
                 highestLevel = level;
             }
             ++it;
         }
         switch(highestLevel){
-            case MyDoubleLabel::Level::INFO :
+            case AHQC::DataLevel::INFO :
                 signLevel = SignLevel::SIGNINFO;
                 break;
-            case MyDoubleLabel::Level::SUSPECTED :
+            case AHQC::DataLevel::SUSPECTED :
                 signLevel = SignLevel::SIGNSUSPECT;
                 break;
-            case MyDoubleLabel::Level::CLASH :
+            case AHQC::DataLevel::CLASH :
                 signLevel = SignLevel::SIGNCLASH ;
                 break;
-            case MyDoubleLabel::Level::MISSING:
+            case AHQC::DataLevel::MISSING:
                 signLevel = SignLevel::SIGNMISSING;
                 break;
-            case MyDoubleLabel::Level::MISSINGZDATA :
+            case AHQC::DataLevel::MISSINGZDATA :
                 signLevel = SignLevel::SIGNMISSINGZDATA;
                 break;
-            case MyDoubleLabel::Level::MISSINGAMDATA :
+            case AHQC::DataLevel::MISSINGAMDATA :
                 signLevel = SignLevel::SIGNMISSINGADATA;
                 break;
-            case MyDoubleLabel::Level::ERROR :
+            case AHQC::DataLevel::ERROR :
                 signLevel = SignLevel::SIGNERROR;
                 break;
         }
@@ -198,7 +198,7 @@ void DateTimePageNumberWidget::updateHourWidget(){
             QDateTime zeroTime = QDateTime(label->getDate(),zeroHour);
             QDateTime tempTime = QDateTime(label->getDate(),zeroHour);
             QDateTime lastTime = QDateTime(label->getDate(),lastHour);
-            MyDoubleLabel::Level level = MyDoubleLabel::Level::INFO;
+            AHQC::DataLevel level = AHQC::DataLevel::INFO;
             SignLevel signLevel = SignLevel::SIGNINFO;
             for(int i=0;i<24;i++){
                 signLevel = SignLevel::SIGNINFO;
@@ -210,27 +210,27 @@ void DateTimePageNumberWidget::updateHourWidget(){
                    hourLabels[i]->setInErrorRange(false);
                 }
                 if(issueDatas->contains(tempTime)){
-                    level = issueDatas->value(tempTime).second;
+                    level = issueDatas->value(tempTime).second.second;
                     switch(level){
-                        case MyDoubleLabel::Level::INFO :
+                        case AHQC::DataLevel::INFO :
                             signLevel = SignLevel::SIGNINFO;
                             break;
-                        case MyDoubleLabel::Level::SUSPECTED :
+                        case AHQC::DataLevel::SUSPECTED :
                             signLevel = SignLevel::SIGNSUSPECT;
                             break;
-                        case MyDoubleLabel::Level::CLASH :
+                        case AHQC::DataLevel::CLASH :
                             signLevel = SignLevel::SIGNCLASH ;
                             break;
-                        case MyDoubleLabel::Level::MISSING:
+                        case AHQC::DataLevel::MISSING:
                             signLevel = SignLevel::SIGNMISSING;
                             break;
-                        case MyDoubleLabel::Level::MISSINGZDATA :
+                        case AHQC::DataLevel::MISSINGZDATA :
                             signLevel = SignLevel::SIGNMISSINGZDATA;
                             break;
-                        case MyDoubleLabel::Level::MISSINGAMDATA :
+                        case AHQC::DataLevel::MISSINGAMDATA :
                             signLevel = SignLevel::SIGNMISSINGADATA;
                             break;
-                        case MyDoubleLabel::Level::ERROR :
+                        case AHQC::DataLevel::ERROR :
                             signLevel = SignLevel::SIGNERROR;
                             break;
                     }

@@ -19,6 +19,8 @@ public:
     ~AnimationStackedWidget();
     void paintEvent(QPaintEvent *);
     void setDuration(int);
+signals:
+    void animationFinishedSignal(int,int);
 public slots:
     void valueChanged_slot(QVariant);
     void animationFinished();

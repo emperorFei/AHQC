@@ -57,6 +57,7 @@ public slots:
     void sltSelectOver(bool);
     void sltSelectRangeAutoChanged(const QPair<QDateTime,QDateTime> &DTPair);
     void sltPageNumChanged(const QDateTime &);
+    void sltReachDataFinish(const TimeRange &);
     void mousePressEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *);
     void mouseMoveEvent(QMouseEvent *event);
@@ -65,7 +66,8 @@ protected :
     void resizeEvent(QResizeEvent *event);
 
 
-private:    
+private:
+    void checkAZDatas();
     void region(const QPoint &cursorGlobalPoint);
     Ui::MainWindow *ui;
     void initComponents();
@@ -82,11 +84,13 @@ private:
     QRect deskRect;
     QRect bestRect;
     int marginPix;
-
+    FullWidegt *fullWidgetLeft;
+    FullWidegt *fullWidgetMiddle;
+    FullWidegt *fullWidgetRight;
     QList<FullWidegt *> inRangePages;
     QPair<QDateTime,QDateTime> *currentRange;
     QMap<QDateTime,AZData> *azDatas;
-    QMap<QDateTime,QPair<QString,MyDoubleLabel::Level> > *issueDatas;
+    QMap<QDateTime,QPair<QString,QPair<QPair<QString,QString>,AHQC::DataLevel> > > *issueDatas;
 };
 
 class ReachDataThread : public QThread
@@ -96,7 +100,7 @@ public:
     explicit ReachDataThread(TimeRange timerange,MainWindow *mWindow = nullptr,QObject *parent = nullptr);
 
 signals:
-
+    void reachDataFinish(TimeRange);
 public slots:
 private slots:
     void run();
