@@ -23,7 +23,7 @@ namespace AHQC {
     extern QRegExp zFileNameReg;
     extern QList<QString> QCItemNames;
     extern QList<QString> defaultQCItemNames;
-
+    extern QList<QString> hideWidget;
 
 
     enum DataLevel{INFO,SUSPECTED,CLASH,MISSING,MISSINGZDATA,MISSINGAMDATA,ERROR};
@@ -39,8 +39,8 @@ namespace AHQC {
         QDate dateTime2AWSDay(const QDateTime &dateTime);
         QDate dateTime2AWSMonth(const QDateTime &dateTime);
         TimeRange getFocusedTimeRange(FocusScheme *focusScheme);
-        QDateTime getPreviousDayBound(QDateTime gaveTime);
-        QList<QDateTime> getFocusedHours(TimeRange focusedTimeRange);
+        QDateTime getPreviousDayBound(const QDateTime &gaveTime);
+        QList<QDateTime> getFocusedHours(const TimeRange &focusedTimeRange);
         QDateTime nextHour(const QDateTime &dateTime);
         inline QDateTime prevoiusOnHour(const QDateTime &dateTime);
         TimeRange getTimeRange(const QDateTime &onTime, int hours);

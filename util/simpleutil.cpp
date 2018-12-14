@@ -45,6 +45,11 @@ QList<QString> AHQC::QCItemNames =
    "CCX","CF","CFC","EC","FE1D","FE1U","FE2D","FE2U","GA","HA"
 };
 
+QList<QString> AHQC::hideWidget =
+{
+   "CF_DL","CF_label"
+};
+
 
 QString AHQC::TimeUtil::sdf4SMOLocFile("'smo_'yyyyMMdd'_'HHmmss'.loc'");
 QString AHQC::TimeUtil::sdf4AMFile = "'AWS_M_Z_#{stationNum}_'yyyyMMdd'.txt'";
@@ -81,7 +86,7 @@ TimeRange AHQC::TimeUtil::getFocusedTimeRange(FocusScheme* focusScheme){
     return focusScheme->getFocusRange();
 }
 
-QDateTime AHQC::TimeUtil::getPreviousDayBound(QDateTime gaveTime){
+QDateTime AHQC::TimeUtil::getPreviousDayBound(const QDateTime &gaveTime){
     QDateTime previousDayBound;
     int seconds = -gaveTime.time().secsTo(QTime::fromString("000000","HHmmss"));
     previousDayBound = gaveTime.addSecs(-seconds);
@@ -103,7 +108,7 @@ inline QDateTime AHQC::TimeUtil::prevoiusOnHour(const QDateTime &dateTime){
 }
 
 
-QList<QDateTime> AHQC::TimeUtil::getFocusedHours(TimeRange focusedTimeRange){
+QList<QDateTime> AHQC::TimeUtil::getFocusedHours(const TimeRange &focusedTimeRange){
     QList<QDateTime> focusedHours ;
     QDateTime lastHour =  AHQC::TimeUtil::prevoiusOnHour(focusedTimeRange.later);
     QDateTime onHour = AHQC::TimeUtil::nextHour(focusedTimeRange.older);

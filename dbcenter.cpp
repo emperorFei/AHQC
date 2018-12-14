@@ -1,4 +1,4 @@
-#include "dbcenter.h"
+﻿#include "dbcenter.h"
 
 QList<QSqlDatabase *> DBCenter::createdDB;
 
@@ -7,9 +7,9 @@ DBCenter::~DBCenter(){}
 QSqlDatabase* DBCenter::getDBByAccountType(AccountType type){
     QSqlDatabase *dbPointer = new QSqlDatabase(QSqlDatabase::addDatabase("QMYSQL"));
     GlobalSetting  *globalSetting = GlobalSetting::getInstance();
-    dbPointer -> setHostName(globalSetting -> getDBHostName());
-    dbPointer -> setPort(globalSetting -> getDBPort());
-    dbPointer -> setDatabaseName(globalSetting -> getDatabaseName());
+    dbPointer -> setHostName(globalSetting -> value("dbHost").toString());
+    dbPointer -> setPort(globalSetting -> value("dbPort").toInt());
+    dbPointer -> setDatabaseName(globalSetting -> value("dbName").toString());
     switch(type){
     case AccountType::QUERY:
         dbPointer -> setUserName("fei");
@@ -27,15 +27,18 @@ QSqlDatabase* DBCenter::getDBByAccountType(AccountType type){
         dbPointer -> setUserName("root");
         dbPointer -> setPassword("tiger");
         break;
+    case AccountType::SETTING:
+        dbPointer -> setUserName(globalSetting -> value("dbAccount").toString());
+        dbPointer -> setPassword(globalSetting -> value("dbPassword").toString());
+        break;
     }
-
     createdDB.append(dbPointer);
     return  dbPointer;
 }
 QString DBCenter::cleanCreatedConns(){
     QString cleanInfo("clean fine");
     for(QSqlDatabase * conn : createdDB){
-        if( conn != Q_NULLPTR &&conn->isOpen()){
+        if( conn != Q_NULLPTR && conn->isOpen()){
             conn -> close();
         }
     }

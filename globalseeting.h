@@ -1,4 +1,4 @@
-#ifndef GLOABLSEETING_H
+﻿#ifndef GLOABLSEETING_H
 #define GLOABLSEETING_H
 
 #include <QObject>
@@ -22,24 +22,16 @@ friend class singleton<GlobalSetting>;
 public:
     ~GlobalSetting();
     QString toString();
+    void sync();
     static GlobalSetting * getInstance();
 
     QList<ColInfo> *getColInfos() const;
     QString getColInfoFileName() const;
-    QString getDBHostName() const;
-    int getDBPort() const;
-    QString getDatabaseName() const;
-    double getPressureHeight() const;
-    int getIntDataNum() const;
-    QString value(const QString &itemName);
+    QVariant value(const QString &itemName);
+    void setValue(const QString &key, const QVariant &value,const QString &categoryName);
 private:
     QList<ColInfo>* colInfos;
     QString colInfoFileName;
-    QString dbHostName;
-    int dbPort = 3306;
-    QString databaseName;
-    double pressureHeight;
-    int intDataNum;
     bool inited;
 
     QSettings *dataSetting;

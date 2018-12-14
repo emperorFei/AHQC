@@ -1,4 +1,4 @@
-#include "globalseeting.h"
+﻿#include "globalseeting.h"
 #include <QResource>
 QDateTime unInitTime(QDateTime::fromString("19700101000000","yyyyMMddHHmmss"));
 GlobalSetting *GlobalSetting::instance = Q_NULLPTR;
@@ -29,11 +29,6 @@ void GlobalSetting::init(){
     this->colInfoFileName = ":/conf/ItemCols";
     MyXMLProcessor xmlProcessor;
     this -> colInfos = xmlProcessor.readColsXml(this->colInfoFileName);
-    this -> dbHostName = "10.126.148.92";
-    this -> dbPort = 3306;
-    this -> databaseName = "tempDB";
-    this -> pressureHeight = 6.4;
-    this -> intDataNum = 47;
     this->dataSetting = new QSettings("configs/dataSetting.ini",QSettings::IniFormat);
     this->uiSetting = new QSettings("configs/uiSetting.ini",QSettings::IniFormat);
     this->inited =true;
@@ -52,42 +47,25 @@ void GlobalSetting::confirmUISettingChanged(){
 
 }
 
-QString GlobalSetting::value(const QString &itemName){
+QVariant GlobalSetting::value(const QString &itemName){
     if(dataSetting->contains(itemName)){
-        return dataSetting->value(itemName).toString();
+        return dataSetting->value(itemName);
     }else if(uiSetting->contains(itemName)){
-        return uiSetting->value(itemName).toString();
+        return uiSetting->value(itemName);
     }
-    return QString();
+    return QVariant();
 }
-
-
-int GlobalSetting::getDBPort() const
-{
-    return dbPort;
-}
-
-QString GlobalSetting::getDatabaseName() const
-{
-    return databaseName;
-}
-
-double GlobalSetting::getPressureHeight() const
-{
-    return pressureHeight;
-}
-
-int GlobalSetting::getIntDataNum() const
-{
-    return intDataNum;
+void GlobalSetting::setValue(const QString &key, const QVariant &value,const QString &categoryName){
+    if(categoryName == "ui"){
+        uiSetting->setValue(key,value);
+    }else if(categoryName == "data"){
+        dataSetting->setValue(key,value);
+    }
 }
 
 
 
-QString GlobalSetting::getDBHostName() const
-{
-    return dbHostName;
-}
+
 
 QString GlobalSetting::getColInfoFileName() const
 {
@@ -128,4 +106,8 @@ GlobalSetting* singleton<GlobalSetting>::GetInstance(){
         mutex.unlock();
     }
     return m_instance;
+}
+void GlobalSetting::sync(){
+    uiSetting->sync();
+    dataSetting->sync();
 }

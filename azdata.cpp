@@ -1,6 +1,6 @@
 ﻿#include "azdata.h"
 
-AZData::AZData():inited(false)
+AZData::AZData():observeTime(QDate(1970,01,01),QTime(00,00)),inited(false)
 {
 
 }

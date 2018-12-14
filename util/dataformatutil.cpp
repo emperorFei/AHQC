@@ -469,13 +469,13 @@ void DataFormatUtil::validateWD(QMap<QString,QPair<QPair<QString,QString>,AHQC::
                 WS_Z_String = zData.value(WSItem);
                 if(!WS_Z_String.isEmpty() && WS_Z_String.at(0) != '/'){
                     WS_Z = std::atoi(WS_Z_String.toStdString().c_str());
-                    if(WS_AH < 2 && WS_Z < 2){
+                    if(WS_AH < 3 && WS_Z < 3){
                         dataLeval = AHQC::DataLevel::INFO;
                     }else{
                         dataLeval = AHQC::DataLevel::ERROR;
                     }
                 }else{
-                    if(WS_AH < 2 ){
+                    if(WS_AH < 3 ){
                        dataLeval = AHQC::DataLevel::INFO;
                     }else{
                        dataLeval = AHQC::DataLevel::CLASH;

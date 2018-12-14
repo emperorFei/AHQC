@@ -3,7 +3,8 @@
 
 MyDoubleLabel::MyDoubleLabel(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::MyDoubleLabel)
+    ui(new Ui::MyDoubleLabel),
+    checked(false)
 {
 
     ui->setupUi(this);
@@ -51,6 +52,16 @@ void MyDoubleLabel::setText(const stringPair& dataPair){
     left->setText(leftText);
     rightText = dataPair.second;
     right->setText(rightText);
+}
+
+bool MyDoubleLabel::getChecked() const
+{
+    return checked;
+}
+
+void MyDoubleLabel::setChecked(bool value)
+{
+    checked = value;
 }
 
 

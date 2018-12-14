@@ -44,21 +44,21 @@
           </property>
           <layout class="QGridLayout" name="gridLayout_3">
            <item row="6" column="0">
-            <widget class="QLabel" name="label_25">
+            <widget class="QLabel" name="MinT_label">
              <property name="text">
               <string>最低</string>
              </property>
             </widget>
            </item>
            <item row="1" column="0">
-            <widget class="QLabel" name="label_23">
+            <widget class="QLabel" name="T_label">
              <property name="text">
               <string>正点</string>
              </property>
             </widget>
            </item>
            <item row="4" column="0">
-            <widget class="QLabel" name="label_30">
+            <widget class="QLabel" name="MinT24_label">
              <property name="text">
               <string>24小时最低</string>
              </property>
@@ -139,21 +139,21 @@
             </widget>
            </item>
            <item row="2" column="0">
-            <widget class="QLabel" name="label_26">
+            <widget class="QLabel" name="VT24_label">
              <property name="text">
               <string>24小时变温</string>
              </property>
             </widget>
            </item>
            <item row="5" column="0">
-            <widget class="QLabel" name="label_24">
+            <widget class="QLabel" name="MaxT_label">
              <property name="text">
               <string>最高</string>
              </property>
             </widget>
            </item>
            <item row="3" column="0">
-            <widget class="QLabel" name="label_27">
+            <widget class="QLabel" name="MaxT24_label">
              <property name="text">
               <string>24小时最高</string>
              </property>
@@ -280,7 +280,7 @@
           </widget>
          </item>
          <item row="8" column="0">
-          <widget class="QLabel" name="label_51">
+          <widget class="QLabel" name="MinET12_label">
            <property name="text">
             <string>过去12小时最低</string>
            </property>
@@ -441,14 +441,14 @@
           </widget>
          </item>
          <item row="6" column="0">
-          <widget class="QLabel" name="label_43">
+          <widget class="QLabel" name="MinET_label">
            <property name="text">
             <string>最小</string>
            </property>
           </widget>
          </item>
          <item row="5" column="0">
-          <widget class="QLabel" name="label_42">
+          <widget class="QLabel" name="ET_label">
            <property name="text">
             <string>正点地面</string>
            </property>
@@ -471,14 +471,14 @@
           </widget>
          </item>
          <item row="7" column="0">
-          <widget class="QLabel" name="label_44">
+          <widget class="QLabel" name="MaxET_label">
            <property name="text">
             <string>最大</string>
            </property>
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QLabel" name="label_31">
+          <widget class="QLabel" name="GT_label">
            <property name="text">
             <string>正点草温</string>
            </property>
@@ -495,14 +495,14 @@
           </widget>
          </item>
          <item row="3" column="0">
-          <widget class="QLabel" name="label_39">
+          <widget class="QLabel" name="MaxGT_label">
            <property name="text">
             <string>最大</string>
            </property>
           </widget>
          </item>
          <item row="2" column="0">
-          <widget class="QLabel" name="label_38">
+          <widget class="QLabel" name="MinGT_label">
            <property name="text">
             <string>最小</string>
            </property>
@@ -574,35 +574,35 @@
             </widget>
            </item>
            <item row="8" column="0">
-            <widget class="QLabel" name="label_54">
+            <widget class="QLabel" name="ET320_label">
              <property name="text">
               <string>320cm</string>
              </property>
             </widget>
            </item>
            <item row="7" column="0">
-            <widget class="QLabel" name="label_53">
+            <widget class="QLabel" name="ET160_label">
              <property name="text">
               <string>160cm</string>
              </property>
             </widget>
            </item>
            <item row="6" column="0">
-            <widget class="QLabel" name="label_52">
+            <widget class="QLabel" name="ET80_label">
              <property name="text">
               <string>80cm</string>
              </property>
             </widget>
            </item>
            <item row="5" column="0">
-            <widget class="QLabel" name="label_46">
+            <widget class="QLabel" name="ET40_label">
              <property name="text">
               <string>40cm</string>
              </property>
             </widget>
            </item>
            <item row="4" column="0">
-            <widget class="QLabel" name="label_50">
+            <widget class="QLabel" name="ET20_label">
              <property name="text">
               <string>20cm</string>
              </property>
@@ -619,21 +619,21 @@
             </widget>
            </item>
            <item row="2" column="0">
-            <widget class="QLabel" name="label_48">
+            <widget class="QLabel" name="ET10_label">
              <property name="text">
               <string>10cm</string>
              </property>
             </widget>
            </item>
            <item row="1" column="0">
-            <widget class="QLabel" name="label_47">
+            <widget class="QLabel" name="ET5_label">
              <property name="text">
               <string>5cm</string>
              </property>
             </widget>
            </item>
            <item row="3" column="0">
-            <widget class="QLabel" name="label_49">
+            <widget class="QLabel" name="ET15_label">
              <property name="text">
               <string>15cm</string>
              </property>
@@ -799,14 +799,14 @@
             </widget>
            </item>
            <item row="1" column="0">
-            <widget class="QLabel" name="label_32">
+            <widget class="QLabel" name="RH_label">
              <property name="text">
               <string>正点湿度</string>
              </property>
             </widget>
            </item>
            <item row="4" column="0">
-            <widget class="QLabel" name="label_37">
+            <widget class="QLabel" name="TD_label">
              <property name="text">
               <string>露点温度</string>
              </property>
@@ -845,7 +845,7 @@
             </widget>
            </item>
            <item row="2" column="0">
-            <widget class="QLabel" name="label_35">
+            <widget class="QLabel" name="MinRH_label">
              <property name="text">
               <string>最小</string>
              </property>
@@ -904,7 +904,7 @@
             </widget>
            </item>
            <item row="3" column="0">
-            <widget class="QLabel" name="label_36">
+            <widget class="QLabel" name="WP_label">
              <property name="text">
               <string>水汽压</string>
              </property>
@@ -997,7 +997,7 @@
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QLabel" name="label_2">
+          <widget class="QLabel" name="wdTitle_label">
            <property name="text">
             <string>风向</string>
            </property>
@@ -1420,21 +1420,21 @@
             </widget>
            </item>
            <item row="6" column="0">
-            <widget class="QLabel" name="label_15">
+            <widget class="QLabel" name="MaxP_label">
              <property name="text">
               <string>最小</string>
              </property>
             </widget>
            </item>
            <item row="5" column="0">
-            <widget class="QLabel" name="label_20">
+            <widget class="QLabel" name="MinP_label">
              <property name="text">
               <string>最大</string>
              </property>
             </widget>
            </item>
            <item row="3" column="0">
-            <widget class="QLabel" name="label_18">
+            <widget class="QLabel" name="VP3_label">
              <property name="text">
               <string>3小时变压</string>
              </property>
@@ -1467,14 +1467,14 @@
             </widget>
            </item>
            <item row="4" column="0">
-            <widget class="QLabel" name="label_19">
+            <widget class="QLabel" name="VP24_label">
              <property name="text">
               <string>24小时变压</string>
              </property>
             </widget>
            </item>
            <item row="2" column="0">
-            <widget class="QLabel" name="label_17">
+            <widget class="QLabel" name="SP_label">
              <property name="text">
               <string>海平面</string>
              </property>
@@ -1491,7 +1491,7 @@
             </widget>
            </item>
            <item row="1" column="0">
-            <widget class="QLabel" name="label_16">
+            <widget class="QLabel" name="P_label">
              <property name="text">
               <string>本站</string>
              </property>
@@ -1562,21 +1562,21 @@
         </property>
         <layout class="QGridLayout" name="gridLayout_7">
          <item row="7" column="0">
-          <widget class="QLabel" name="label_62">
+          <widget class="QLabel" name="RainMT_label">
            <property name="text">
             <string>人工加密周期</string>
            </property>
           </widget>
          </item>
          <item row="6" column="0">
-          <widget class="QLabel" name="label_56">
+          <widget class="QLabel" name="E_label">
            <property name="text">
             <string>小时蒸发</string>
            </property>
           </widget>
          </item>
          <item row="8" column="0">
-          <widget class="QLabel" name="label_63">
+          <widget class="QLabel" name="RainM_label">
            <property name="text">
             <string>人工加密周期降水量</string>
            </property>
@@ -1631,7 +1631,7 @@
           </widget>
          </item>
          <item row="4" column="0">
-          <widget class="QLabel" name="label_60">
+          <widget class="QLabel" name="HRain12_label">
            <property name="text">
             <string>12h降水量</string>
            </property>
@@ -1664,14 +1664,14 @@
           </widget>
          </item>
          <item row="5" column="0">
-          <widget class="QLabel" name="label_61">
+          <widget class="QLabel" name="HRain24_label">
            <property name="text">
             <string>24h降水量</string>
            </property>
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QLabel" name="label_57">
+          <widget class="QLabel" name="HRain_label">
            <property name="styleSheet">
             <string notr="true"/>
            </property>
@@ -1681,14 +1681,14 @@
           </widget>
          </item>
          <item row="3" column="0">
-          <widget class="QLabel" name="label_59">
+          <widget class="QLabel" name="HRain6_label">
            <property name="text">
             <string>6h降水量</string>
            </property>
           </widget>
          </item>
          <item row="2" column="0">
-          <widget class="QLabel" name="label_58">
+          <widget class="QLabel" name="HRain3_label">
            <property name="text">
             <string>3h降水量</string>
            </property>
@@ -1967,63 +1967,63 @@
             </widget>
            </item>
            <item row="9" column="0">
-            <widget class="QLabel" name="label_89">
+            <widget class="QLabel" name="GA_label">
              <property name="text">
               <string>电线积冰直径</string>
              </property>
             </widget>
            </item>
            <item row="2" column="0">
-            <widget class="QLabel" name="label_78">
+            <widget class="QLabel" name="SnowP_label">
              <property name="text">
               <string>雪压</string>
              </property>
             </widget>
            </item>
            <item row="1" column="0">
-            <widget class="QLabel" name="label_77">
+            <widget class="QLabel" name="SnowD_label">
              <property name="text">
               <string>雪深</string>
              </property>
             </widget>
            </item>
            <item row="6" column="0">
-            <widget class="QLabel" name="label_81">
+            <widget class="QLabel" name="FE2U_label">
              <property name="text">
               <string>冻土2上限</string>
              </property>
             </widget>
            </item>
            <item row="7" column="0">
-            <widget class="QLabel" name="label_85">
+            <widget class="QLabel" name="FE2D_label">
              <property name="text">
               <string>冻土2下限</string>
              </property>
             </widget>
            </item>
            <item row="10" column="0">
-            <widget class="QLabel" name="label_86">
+            <widget class="QLabel" name="TRT_label">
              <property name="text">
               <string>龙卷方位编码</string>
              </property>
             </widget>
            </item>
            <item row="11" column="0">
-            <widget class="QLabel" name="label_87">
+            <widget class="QLabel" name="TRD_label">
              <property name="text">
               <string>龙卷距离编码</string>
              </property>
             </widget>
            </item>
            <item row="8" column="0">
-            <widget class="QLabel" name="label_88">
+            <widget class="QLabel" name="HA_label">
              <property name="text">
               <string>最大冰雹直径</string>
              </property>
             </widget>
            </item>
            <item row="3" column="0">
-            <widget class="QLabel" name="label_90">
+            <widget class="QLabel" name="EC_label">
              <property name="text">
               <string>地面状态</string>
              </property>
@@ -2174,7 +2174,7 @@
             </widget>
            </item>
            <item row="4" column="0">
-            <widget class="QLabel" name="label_79">
+            <widget class="QLabel" name="FE1U_label">
              <property name="text">
               <string>冻土1上限</string>
              </property>
@@ -2191,7 +2191,7 @@
             </widget>
            </item>
            <item row="5" column="0">
-            <widget class="QLabel" name="label_80">
+            <widget class="QLabel" name="FE1D_label">
              <property name="text">
               <string>冻土1下限</string>
              </property>
@@ -2264,6 +2264,9 @@
       </property>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
+        <property name="spacing">
+         <number>0</number>
+        </property>
         <item>
          <widget class="QGroupBox" name="Cloud_GB">
           <property name="sizePolicy">
@@ -2277,14 +2280,14 @@
           </property>
           <layout class="QGridLayout" name="gridLayout_9">
            <item row="1" column="0">
-            <widget class="QLabel" name="label_71">
+            <widget class="QLabel" name="CA_label">
              <property name="text">
               <string>总云量</string>
              </property>
             </widget>
            </item>
            <item row="4" column="0">
-            <widget class="QLabel" name="label_74">
+            <widget class="QLabel" name="RCA_label">
              <property name="text">
               <string>编报云量</string>
              </property>
@@ -2301,14 +2304,14 @@
             </widget>
            </item>
            <item row="3" column="0">
-            <widget class="QLabel" name="label_73">
+            <widget class="QLabel" name="CH_label">
              <property name="text">
               <string>云高</string>
              </property>
             </widget>
            </item>
            <item row="2" column="0">
-            <widget class="QLabel" name="label_72">
+            <widget class="QLabel" name="LCA_label">
              <property name="text">
               <string>低云量</string>
              </property>
@@ -2331,7 +2334,7 @@
             </widget>
            </item>
            <item row="6" column="0">
-            <widget class="QLabel" name="label_75">
+            <widget class="QLabel" name="CFC_label">
              <property name="text">
               <string>云状编码</string>
              </property>
@@ -2370,7 +2373,7 @@
             </widget>
            </item>
            <item row="5" column="0">
-            <widget class="QLabel" name="label_92">
+            <widget class="QLabel" name="CF_label">
              <property name="text">
               <string>云状</string>
              </property>
@@ -2445,7 +2448,7 @@
       <item>
        <widget class="QTableWidget" name="tableWidget">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -2533,7 +2536,7 @@
           </property>
           <layout class="QGridLayout" name="gridLayout_10">
            <item row="2" column="0">
-            <widget class="QLabel" name="label_93">
+            <widget class="QLabel" name="awsMode_label">
              <property name="text">
               <string>观测方式</string>
              </property>
@@ -2572,14 +2575,14 @@
             </widget>
            </item>
            <item row="3" column="0">
-            <widget class="QLabel" name="label_82">
+            <widget class="QLabel" name="WT_label">
              <property name="text">
               <string>周期</string>
              </property>
             </widget>
            </item>
            <item row="0" column="0">
-            <widget class="QLabel" name="label_91">
+            <widget class="QLabel" name="CCX_label">
              <property name="text">
               <string>更正码</string>
              </property>
@@ -2602,7 +2605,7 @@
             </widget>
            </item>
            <item row="4" column="0">
-            <widget class="QLabel" name="label_83">
+            <widget class="QLabel" name="wwWW_label">
              <property name="text">
               <string>wwW1W2</string>
              </property>
@@ -2625,7 +2628,7 @@
             </widget>
            </item>
            <item row="1" column="0">
-            <widget class="QLabel" name="label_84">
+            <widget class="QLabel" name="QCCode_label">
              <property name="text">
               <string>编报质控码</string>
              </property>
@@ -2676,6 +2679,9 @@
        <spacer name="verticalSpacer_3">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Minimum</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>

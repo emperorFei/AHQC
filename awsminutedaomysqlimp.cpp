@@ -338,7 +338,7 @@ AWSMinuteData AWSMinuteDAOMySqlImp::findByOT(const QDateTime &observeTime){
         index += 2;
         QList<int> &intData = ad.data;
         int tempValue = 99999;
-        int intDataNum = GlobalSetting::getInstance()->getIntDataNum()+5;
+        int intDataNum = GlobalSetting::getInstance()->value("intDataNum").toInt()+5;
         for(++index; index < intDataNum;++index) {
             tempValue = query.value(index).toInt();
             intData.append(tempValue);
@@ -671,7 +671,7 @@ int AWSMinuteDAOMySqlImp::getSP(const QDateTime &onTimeDate) {
         t0 -= 1000;
         double dt12 = t12/10;
         double dt0 = t0/10;
-        double ph = GlobalSetting::getInstance() -> getPressureHeight();
+        double ph = GlobalSetting::getInstance() -> value("presureHeight").toDouble();
         temp = qRound(pressure * qPow(10, (ph/(18400*(1+(((dt0+dt12)/2+(ph/400))/273))))));
     }
     query.finish();

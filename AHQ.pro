@@ -7,22 +7,20 @@
 QT       += core gui
 QT  += sql
 QT  += xml
-QT  += testlib
 
-
+RC_ICONS += qc_128.ico
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = AHQ
 TEMPLATE = app
-#CONFIG += qt release warn_off
-CONFIG += qt debug  warn_off
+CONFIG += qt warn_off release
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
-
+DEFINES+= QT_NO_DEBUG_OUTPUT
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
@@ -33,9 +31,7 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     tinyXml2/tinyxml2.cpp \
-    test/testreadxmldata.cpp \
     xmlProcessor/myxmlprocessor.cpp \
-    test/simpletest.cpp \
     util/simpleutil.cpp \
     focusScheme/shiftsscheme.cpp \
     focusScheme/focusscheme.cpp \
@@ -51,8 +47,6 @@ SOURCES += \
     ahdata.cpp \
     zdata.cpp \
     util/dataformatutil.cpp \
-    test/qtfeaturetest.cpp \
-    settingwidget.cpp \
     nofocusframedelegate.cpp \
     ahqlistwidgetitem.cpp \
     zdatadaomysqlimp.cpp \
@@ -69,14 +63,12 @@ SOURCES += \
     ui/datetimerangeselectdialog.cpp \
     ui/datetimepagenumberwidget.cpp \
     ui/signeddaylabel.cpp \
-    ui/signedhourlabel.cpp
+    ui/signedhourlabel.cpp \
+    settingdialog.cpp
 
 
 HEADERS += \
         mainwindow.h \
-    test/testreadxmldata.h \
-    test/simpletest.h \
-    test/qtfeaturetest.h \
     xmlProcessor/myxmlprocessor.h \    
     tinyXml2/tinyxml2.h \
     util/dataformatutil.h \
@@ -96,7 +88,6 @@ HEADERS += \
     awsminutedbserver.h \
     ahdata.h \
     zdata.h \
-    settingwidget.h \
     nofocusframedelegate.h \
     ahqlistwidgetitem.h \
     zdatadaomysqlimp.h \
@@ -114,7 +105,8 @@ HEADERS += \
     ui/datetimepagenumberwidget.h \
     enums.h \
     ui/signeddaylabel.h \
-    ui/signedhourlabel.h
+    ui/signedhourlabel.h \
+    settingdialog.h
 
 
 
@@ -129,15 +121,18 @@ FORMS += \
 RESOURCES += \
     config.qrc \
     ico.qrc
-DEPENDPATH += $$PWD/lib
+#DEPENDPATH += $$PWD/lib
+
 DISTFILES += \
     configs/ItemCols.xml \
     configs/dataSetting.ini \
     configs/uiSetting.ini
 
-#LIBS += $$PWD/lib/libmydoublelabelplugin.a
-LIBS += $$PWD/lib/libmydoublelabelplugind.a
-#LIBS += $$PWD/lib/mydoublelabelplugin.lib
+
+
+#LIBS += $$PWD/lib/libmydoublelabelplugind.a
+LIBS += $$PWD/lib/libmydoublelabelplugin.a
 INCLUDEPATH += $$PWD/include
+
 
 

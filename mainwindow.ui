@@ -521,48 +521,7 @@ QPushButton:pressed{
           </sizepolicy>
          </property>
          <property name="styleSheet">
-          <string notr="true">.MyDoubleLabel{
-	border-style:solid;
-	border-width:2;
-	border-color:lightgrey;
-	border-radius:6
-}
-/*
-.MyDoubleLabel[level = INFO]{
-	border-color:red;
-}
-
-.MyDoubleLabel[level = 'INFO']{
-	border-color:red;
-}
-
-.MyDoubleLabel[level = &quot;INFO&quot;]{
-	border-color:red;
-}
-*/
-
-.MyDoubleLabel[level = '0']{
-	border-color:lightgrey;
-}
-.MyDoubleLabel[level = '1']{
-	border-color:yellow;
-}
-.MyDoubleLabel[level = '2']{
-	border-color:orange;
-}
-.MyDoubleLabel[level = '3']{
-	border-color:red;
-}
-.MyDoubleLabel[level = '4']{
-	border-color:#FF05FF;
-}
-.MyDoubleLabel[level = '5']{
-	border-color:#0F0F0F;
-}
-.MyDoubleLabel[level = '6']{
-	border-color:darkred;
-}
-
+          <string notr="true">
 
 </string>
          </property>

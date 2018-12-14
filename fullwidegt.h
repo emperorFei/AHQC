@@ -24,6 +24,10 @@ public:
     QPair<QString, MyDoubleLabel::Level> getMostSeriousIssue() const;
     QDateTime getObserveTime() const;
     void initFromAZData(const AZData &azData);
+    void hideItems(const QList<QString> &itemNames);
+    void setItemsChecked(const QList<QString> &itemNames);
+    void showItems(const QList<QString> &itemNames);
+    void setItemsUnChecked(const QList<QString> &itemNames);
 private:
     //    void setQCWarn();
     static const QString doubleLabelNames[];

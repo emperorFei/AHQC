@@ -8,11 +8,9 @@
 #include <QRegExp>
 #include <QDesktopWidget>
 #include <QIcon>
+#include <QThread>
 //#include <QVBoxLayout>
 #include "ui/clickablelabel.h"
-#include "test/testreadxmldata.h"
-#include "test/simpletest.h"
-#include "test/qtfeaturetest.h"
 #include "awsminutedaomysqlimp.h"
 #include "zdatadaomysqlimp.h"
 #include "dbcenter.h"
@@ -21,14 +19,14 @@
 #include "horizontaltree.h"
 #include "simpleobject.h"
 #include "animationstackedwidget.h"
-#include "settingwidget.h"
+#include "settingdialog.h"
 #include "ui/datetimedialog.h"
 #include "ui/datetimepagenumberwidget.h"
 
 namespace Ui {
 class MainWindow;
 }
-
+class ReachDataThread;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -37,12 +35,14 @@ enum Direction { UP=0, DOWN=1, LEFT, RIGHT, LEFTTOP, LEFTBOTTOM, RIGHTBOTTOM, RI
 public:
     explicit MainWindow(QWidget *parent = Q_NULLPTR);
     ~MainWindow();
+    void startReachDataByTimerange(const TimeRange &selectTimeRange);
     void reachDataByTimerange(const TimeRange &selectTimeRange);
-    void updatePagesByTimeranng(const TimeRange &selectTimeRange);
     void reOrientateTurnPageBtn();
 signals:
-    void selectRangeAutoChanged(QPair<QDateTime,QDateTime>);
+    void selectRangeAutoChanged(QDateTime older,QDateTime later);
     void selectOver(bool);
+    void dbOpenFailed(bool);
+    void reachDataFinish(QDateTime older,QDateTime later);
 public slots:
     void sltPreviousBtnClicled();
     void sltNextBtnClicled();
@@ -50,29 +50,35 @@ public slots:
     void sltMinBtnClicked(bool);
     void sltMaxBtnClicked(bool);
     void sltShowMoreBtnClicked(bool);
-    void sltQCColorChanged(QColor,QString);
+    void sltDBOpenFailedWhenRefreach(bool);
+    void sltQCColorChanged(const QString&,const QString&,const QString&);
     void sltSelectedDateTimeRangeLabelClicked(ClickableLabel *);
     void sltSelectDateTimeRangeChanged(QString);
     void sltRefreshBtnClicked(bool);
     void sltSelectOver(bool);
-    void sltSelectRangeAutoChanged(const QPair<QDateTime,QDateTime> &DTPair);
+    void sltSelectRangeAutoChanged(const QDateTime &older,const QDateTime &later);
     void sltPageNumChanged(const QDateTime &);
-    void sltReachDataFinish(const TimeRange &);
+    void sltReachDataFinish(const QDateTime &older,const QDateTime &later);
+    void sltMainWidgetAnimationFinished(int,int);
+    void sltQCItemsChanged();
+
+    void refreshMainWidgetStyleSheet();
+
+protected :
     void mousePressEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *);
     void mouseMoveEvent(QMouseEvent *event);
     void mouseDoubleClickEvent(QMouseEvent *ev);
-protected :
     void resizeEvent(QResizeEvent *event);
-
+    void closeEvent(QCloseEvent *event);
 
 private:
     void checkAZDatas();
     void region(const QPoint &cursorGlobalPoint);
     Ui::MainWindow *ui;
     void initComponents();
-    void initStyleSheet();
-    SettingWidget *settingWidget = Q_NULLPTR;
+
+    SettingDialog *settingWidget = Q_NULLPTR;
     DateTimePageNumberWidget *pageWidget;
     bool isLeftPressDown;  // 判断左键是否按下
     QPoint dragPosition;   // 窗口移动拖动时需要记住的点
@@ -84,13 +90,15 @@ private:
     QRect deskRect;
     QRect bestRect;
     int marginPix;
+    bool mainWidgetChanging;
     FullWidegt *fullWidgetLeft;
     FullWidegt *fullWidgetMiddle;
     FullWidegt *fullWidgetRight;
-    QList<FullWidegt *> inRangePages;
     QPair<QDateTime,QDateTime> *currentRange;
     QMap<QDateTime,AZData> *azDatas;
     QMap<QDateTime,QPair<QString,QPair<QPair<QString,QString>,AHQC::DataLevel> > > *issueDatas;
+    ReachDataThread *reachDataThreadInstance;
+    static QString mainWidgetStyleTemplate;
 };
 
 class ReachDataThread : public QThread
@@ -99,8 +107,11 @@ class ReachDataThread : public QThread
 public:
     explicit ReachDataThread(TimeRange timerange,MainWindow *mWindow = nullptr,QObject *parent = nullptr);
 
+    TimeRange getTimeRange() const;
+    void setTimeRange(const TimeRange &value);
+
 signals:
-    void reachDataFinish(TimeRange);
+
 public slots:
 private slots:
     void run();

@@ -294,7 +294,7 @@ QFrame{
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">QToolButton{
+            <string notr="true">QPushButton{
 	border:none;
 	background:rgb(248,248,248);
 }</string>
@@ -329,9 +329,18 @@ QFrame{
              </spacer>
             </item>
             <item>
-             <widget class="QToolButton" name="minButton">
-              <property name="styleSheet">
-               <string notr="true">image:SP_TitleBarCloseButton;</string>
+             <widget class="QPushButton" name="minButton">
+              <property name="minimumSize">
+               <size>
+                <width>25</width>
+                <height>25</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>25</width>
+                <height>25</height>
+               </size>
               </property>
               <property name="text">
                <string/>
@@ -339,7 +348,19 @@ QFrame{
              </widget>
             </item>
             <item>
-             <widget class="QToolButton" name="closeButton">
+             <widget class="QPushButton" name="closeButton">
+              <property name="minimumSize">
+               <size>
+                <width>25</width>
+                <height>25</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>25</width>
+                <height>25</height>
+               </size>
+              </property>
               <property name="text">
                <string/>
               </property>
@@ -424,6 +445,10 @@ QLineEdit[echoMode=&quot;3&quot;]{
 	lineedit-password-character:9766;
 }
 */
+QTimeEidt{
+	border: 1 solid lightgrey;
+	border-radius: 5px; 
+}
 #main_stackedWidget #isospath_lineEdit{
 	max-width:500
 }
@@ -798,6 +823,48 @@ QLabel:hover{
                 <property name="bottomMargin">
                  <number>0</number>
                 </property>
+                <item row="0" column="0" colspan="2">
+                 <layout class="QHBoxLayout" name="station_height_label_layout_2">
+                  <item>
+                   <widget class="QLabel" name="QCColor_label">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>80</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>80</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>质控颜色设置</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="station_height_label_horizontalSpacer_2">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </item>
                 <item row="1" column="0" colspan="2">
                  <layout class="QHBoxLayout" name="height_edit_layout_2">
                   <property name="spacing">
@@ -849,7 +916,7 @@ QLabel:hover{
                      </size>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">background-color: rgb(255, 0, 127);</string>
+                     <string notr="true">background-color: rgb(221,160,221);</string>
                     </property>
                     <property name="text">
                      <string/>
@@ -918,7 +985,7 @@ QLabel:hover{
                      </size>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">background-color: rgb(170, 170, 255);</string>
+                     <string notr="true">background-color: rgb(147,147,255);</string>
                     </property>
                     <property name="text">
                      <string/>
@@ -987,7 +1054,7 @@ QLabel:hover{
                      </size>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">background-color: rgb(255, 170, 255);</string>
+                     <string notr="true">background-color: rgb(255,124,128);</string>
                     </property>
                     <property name="text">
                      <string/>
@@ -1009,7 +1076,7 @@ QLabel:hover{
                   </item>
                  </layout>
                 </item>
-                <item row="2" column="0">
+                <item row="3" column="0">
                  <layout class="QHBoxLayout" name="observeTimes_layout_2">
                   <item>
                    <widget class="QLabel" name="observeTimes_label_2">
@@ -1032,7 +1099,7 @@ QLabel:hover{
                      </size>
                     </property>
                     <property name="text">
-                     <string>观测时次</string>
+                     <string>无观测项目</string>
                     </property>
                    </widget>
                   </item>
@@ -1051,30 +1118,62 @@ QLabel:hover{
                   </item>
                  </layout>
                 </item>
-                <item row="3" column="0">
+                <item row="4" column="0">
                  <layout class="QHBoxLayout" name="sendDelay_label_layout_2">
                   <item>
-                   <widget class="QLabel" name="sendDelay_label_label_2">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
+                   <widget class="QCheckBox" name="shallowTemperature_cb">
                     <property name="minimumSize">
                      <size>
-                      <width>60</width>
+                      <width>0</width>
                       <height>25</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>60</width>
+                      <width>16777215</width>
                       <height>25</height>
                      </size>
                     </property>
                     <property name="text">
-                     <string>发报延迟</string>
+                     <string>浅层地温</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QCheckBox" name="e_cb">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>蒸发</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QCheckBox" name="cloud_cb">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>云</string>
                     </property>
                    </widget>
                   </item>
@@ -1093,7 +1192,7 @@ QLabel:hover{
                   </item>
                  </layout>
                 </item>
-                <item row="4" column="0" colspan="2">
+                <item row="6" column="0" colspan="2">
                  <layout class="QHBoxLayout" name="sendDelay_edit_layout_2">
                   <item>
                    <widget class="QLabel" name="onTime_sendDelay_label_2">
@@ -1116,76 +1215,7 @@ QLabel:hover{
                      </size>
                     </property>
                     <property name="text">
-                     <string>正点报</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLineEdit" name="onTime_sendDelay_edit_2">
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>102</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true"/>
-                    </property>
-                    <property name="placeholderText">
-                     <string>fgelG</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="observeTime_sendDelay_edit_label_2">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="minimumSize">
-                     <size>
-                      <width>60</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>60</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string>观测时</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLineEdit" name="observeTime_sendDelay_edit_2">
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>102</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true"/>
-                    </property>
-                    <property name="placeholderText">
-                     <string>3306</string>
+                     <string>忽略项</string>
                     </property>
                    </widget>
                   </item>
@@ -1204,35 +1234,10 @@ QLabel:hover{
                   </item>
                  </layout>
                 </item>
-                <item row="5" column="0">
+                <item row="7" column="0">
                  <layout class="QHBoxLayout" name="shiftTime_layout_2">
                   <item>
-                   <widget class="QLabel" name="shiftTime_label_2">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="minimumSize">
-                     <size>
-                      <width>60</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>60</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string>换班时间</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLineEdit" name="shiftTime_edit_2">
+                   <widget class="QCheckBox" name="wd_cb">
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
@@ -1241,49 +1246,17 @@ QLabel:hover{
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>102</width>
+                      <width>16777215</width>
                       <height>25</height>
                      </size>
                     </property>
                     <property name="text">
-                     <string/>
-                    </property>
-                    <property name="placeholderText">
-                     <string>password</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item row="5" column="1">
-                 <layout class="QHBoxLayout" name="shiftTime_layout_3">
-                  <item>
-                   <widget class="QLabel" name="shiftTime_label_3">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="minimumSize">
-                     <size>
-                      <width>60</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>60</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string>换班时间</string>
+                     <string>风向</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="shiftTime_edit_3">
+                   <widget class="QCheckBox" name="extremum12_cb">
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
@@ -1292,149 +1265,18 @@ QLabel:hover{
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>102</width>
+                      <width>16777215</width>
                       <height>25</height>
                      </size>
                     </property>
                     <property name="text">
-                     <string/>
-                    </property>
-                    <property name="placeholderText">
-                     <string>password</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <spacer name="shiftTime_layout_horizontalSpacer_3">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                 </layout>
-                </item>
-                <item row="6" column="0">
-                 <layout class="QHBoxLayout" name="shiftTime_layout_4">
-                  <item>
-                   <widget class="QLabel" name="shiftTime_label_4">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="minimumSize">
-                     <size>
-                      <width>60</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>60</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string>换班时间</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLineEdit" name="shiftTime_edit_4">
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>102</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string/>
-                    </property>
-                    <property name="placeholderText">
-                     <string>password</string>
+                     <string>12/24小时极值</string>
                     </property>
                    </widget>
                   </item>
                  </layout>
                 </item>
-                <item row="6" column="1">
-                 <layout class="QHBoxLayout" name="shiftTime_layout_5">
-                  <item>
-                   <widget class="QLabel" name="shiftTime_label_5">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="minimumSize">
-                     <size>
-                      <width>60</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>60</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string>换班时间</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLineEdit" name="shiftTime_edit_5">
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>102</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string/>
-                    </property>
-                    <property name="placeholderText">
-                     <string>password</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <spacer name="shiftTime_layout_horizontalSpacer_5">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                 </layout>
-                </item>
-                <item row="7" column="0">
+                <item row="8" column="0">
                  <spacer name="stationSetting_verticalSpacer_2">
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -1447,47 +1289,37 @@ QLabel:hover{
                   </property>
                  </spacer>
                 </item>
-                <item row="0" column="0" colspan="2">
-                 <layout class="QHBoxLayout" name="station_height_label_layout_2">
-                  <item>
-                   <widget class="QLabel" name="QCColor_label">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="minimumSize">
-                     <size>
-                      <width>80</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>80</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string>质控颜色设置</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <spacer name="station_height_label_horizontalSpacer_2">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                 </layout>
+                <item row="5" column="0">
+                 <spacer name="verticalSpacer">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeType">
+                   <enum>QSizePolicy::Fixed</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>5</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="2" column="0">
+                 <spacer name="verticalSpacer_2">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeType">
+                   <enum>QSizePolicy::Fixed</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>5</height>
+                   </size>
+                  </property>
+                 </spacer>
                 </item>
                </layout>
               </widget>
@@ -1935,7 +1767,7 @@ QLabel:hover{
                      <string notr="true"/>
                     </property>
                     <property name="placeholderText">
-                     <string>username</string>
+                     <string>一位小数</string>
                     </property>
                    </widget>
                   </item>
@@ -1986,7 +1818,7 @@ QLabel:hover{
                      <string notr="true"/>
                     </property>
                     <property name="placeholderText">
-                     <string>3306</string>
+                     <string>一位小数</string>
                     </property>
                    </widget>
                   </item>
@@ -2092,7 +1924,7 @@ QLabel:hover{
                      <string notr="true"/>
                     </property>
                     <property name="placeholderText">
-                     <string>username</string>
+                     <string>秒为单位的整数</string>
                     </property>
                    </widget>
                   </item>
@@ -2143,7 +1975,7 @@ QLabel:hover{
                      <string/>
                     </property>
                     <property name="placeholderText">
-                     <string>password</string>
+                     <string>...</string>
                     </property>
                    </widget>
                   </item>
@@ -2177,7 +2009,7 @@ QLabel:hover{
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="shiftTime_edit">
+                   <widget class="QTimeEdit" name="shiftTime_timeEdit">
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
@@ -2186,15 +2018,9 @@ QLabel:hover{
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>102</width>
+                      <width>16777215</width>
                       <height>25</height>
                      </size>
-                    </property>
-                    <property name="text">
-                     <string/>
-                    </property>
-                    <property name="placeholderText">
-                     <string>password</string>
                     </property>
                    </widget>
                   </item>
@@ -2245,7 +2071,7 @@ QLabel:hover{
                      <string notr="true"/>
                     </property>
                     <property name="placeholderText">
-                     <string>3306</string>
+                     <string>秒为单位的整数</string>
                     </property>
                    </widget>
                   </item>
@@ -3406,20 +3232,20 @@ QLabel:hover{
                   <item>
                    <widget class="QLabel" name="db_address_label">
                     <property name="sizePolicy">
-                     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                       <horstretch>0</horstretch>
                       <verstretch>0</verstretch>
                      </sizepolicy>
                     </property>
                     <property name="minimumSize">
                      <size>
-                      <width>0</width>
+                      <width>70</width>
                       <height>25</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>16777215</width>
+                      <width>70</width>
                       <height>25</height>
                      </size>
                     </property>
@@ -3428,23 +3254,6 @@ QLabel:hover{
                     </property>
                    </widget>
                   </item>
-                  <item>
-                   <spacer name="b_address_label_horizontalSpacer">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="db_address_layout">
                   <item>
                    <widget class="QLineEdit" name="db_address_edit">
                     <property name="minimumSize">
@@ -3468,7 +3277,7 @@ QLabel:hover{
                    </widget>
                   </item>
                   <item>
-                   <spacer name="db_address_edit_horizontalSpacer">
+                   <spacer name="b_address_label_horizontalSpacer">
                     <property name="orientation">
                      <enum>Qt::Horizontal</enum>
                     </property>
@@ -3494,13 +3303,13 @@ QLabel:hover{
                     </property>
                     <property name="minimumSize">
                      <size>
-                      <width>0</width>
+                      <width>70</width>
                       <height>25</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>16777215</width>
+                      <width>70</width>
                       <height>25</height>
                      </size>
                     </property>
@@ -3509,23 +3318,6 @@ QLabel:hover{
                     </property>
                    </widget>
                   </item>
-                  <item>
-                   <spacer name="db_port_label_horizontalSpacer">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="db_port_layout">
                   <item>
                    <widget class="QLineEdit" name="db_port_edit">
                     <property name="minimumSize">
@@ -3549,7 +3341,62 @@ QLabel:hover{
                    </widget>
                   </item>
                   <item>
-                   <spacer name="db_port_edit_horizontalSpacer">
+                   <spacer name="db_port_label_horizontalSpacer">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="db_password_layout">
+                  <item>
+                   <widget class="QLabel" name="db_databaseName_label">
+                    <property name="minimumSize">
+                     <size>
+                      <width>70</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>70</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>数据库名</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="db_databaseName_edit">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>102</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="placeholderText">
+                     <string>databaseName</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="db_password_edit_horizontalSpacer">
                     <property name="orientation">
                      <enum>Qt::Horizontal</enum>
                     </property>
@@ -3575,13 +3422,13 @@ QLabel:hover{
                     </property>
                     <property name="minimumSize">
                      <size>
-                      <width>0</width>
+                      <width>70</width>
                       <height>25</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>16777215</width>
+                      <width>70</width>
                       <height>25</height>
                      </size>
                     </property>
@@ -3590,23 +3437,6 @@ QLabel:hover{
                     </property>
                    </widget>
                   </item>
-                  <item>
-                   <spacer name="db_account_label_horizontalSpacer">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="db_account_layout">
                   <item>
                    <widget class="QLineEdit" name="db_account_edit">
                     <property name="minimumSize">
@@ -3630,7 +3460,7 @@ QLabel:hover{
                    </widget>
                   </item>
                   <item>
-                   <spacer name="db_account_edit_horizontalSpacer">
+                   <spacer name="db_account_label_horizontalSpacer">
                     <property name="orientation">
                      <enum>Qt::Horizontal</enum>
                     </property>
@@ -3656,13 +3486,13 @@ QLabel:hover{
                     </property>
                     <property name="minimumSize">
                      <size>
-                      <width>0</width>
+                      <width>70</width>
                       <height>25</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>16777215</width>
+                      <width>70</width>
                       <height>25</height>
                      </size>
                     </property>
@@ -3671,23 +3501,6 @@ QLabel:hover{
                     </property>
                    </widget>
                   </item>
-                  <item>
-                   <spacer name="db_password_label_horizontalSpacer">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="db_password_layout">
                   <item>
                    <widget class="QLineEdit" name="db_password_edit">
                     <property name="minimumSize">
@@ -3714,7 +3527,7 @@ QLabel:hover{
                    </widget>
                   </item>
                   <item>
-                   <spacer name="db_password_edit_horizontalSpacer">
+                   <spacer name="db_password_label_horizontalSpacer">
                     <property name="orientation">
                      <enum>Qt::Horizontal</enum>
                     </property>
@@ -3899,7 +3712,7 @@ QLabel:hover{
                      </size>
                     </property>
                     <property name="text">
-                     <string>数据库地址</string>
+                     <string>清除缓存</string>
                     </property>
                    </widget>
                   </item>
@@ -3919,274 +3732,28 @@ QLabel:hover{
                  </layout>
                 </item>
                 <item>
-                 <layout class="QHBoxLayout" name="db_address_layout_2">
-                  <item>
-                   <widget class="QLineEdit" name="db_address_edit_2">
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>102</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true"/>
-                    </property>
-                    <property name="placeholderText">
-                     <string>localhost</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <spacer name="db_address_edit_horizontalSpacer_2">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="db_port_label_layout_2">
-                  <item>
-                   <widget class="QLabel" name="db_port_label_2">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>16777215</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string>数据库端口</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <spacer name="db_port_label_horizontalSpacer_2">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="db_port_layout_2">
-                  <item>
-                   <widget class="QLineEdit" name="db_port_edit_2">
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>102</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true"/>
-                    </property>
-                    <property name="placeholderText">
-                     <string>3306</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <spacer name="db_port_edit_horizontalSpacer_2">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="db_account_label_layout_2">
-                  <item>
-                   <widget class="QLabel" name="db_account_label_2">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>16777215</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string>用户名</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <spacer name="db_account_label_horizontalSpacer_2">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                 </layout>
-                </item>
-                <item>
                  <layout class="QHBoxLayout" name="db_account_layout_2">
                   <item>
-                   <widget class="QLineEdit" name="db_account_edit_2">
+                   <widget class="QPushButton" name="pushButton">
                     <property name="minimumSize">
                      <size>
-                      <width>0</width>
+                      <width>50</width>
                       <height>25</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>102</width>
+                      <width>50</width>
                       <height>25</height>
                      </size>
                     </property>
-                    <property name="styleSheet">
-                     <string notr="true"/>
-                    </property>
-                    <property name="placeholderText">
-                     <string>username</string>
+                    <property name="text">
+                     <string>清除</string>
                     </property>
                    </widget>
                   </item>
                   <item>
                    <spacer name="db_account_edit_horizontalSpacer_2">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="db_password__label_layout_2">
-                  <item>
-                   <widget class="QLabel" name="db_password_label_2">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>16777215</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string>密码</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <spacer name="db_password_label_horizontalSpacer_2">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="db_password_layout_2">
-                  <item>
-                   <widget class="QLineEdit" name="db_password_edit_2">
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>102</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string/>
-                    </property>
-                    <property name="placeholderText">
-                     <string>password</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <spacer name="db_password_edit_horizontalSpacer_2">
                     <property name="orientation">
                      <enum>Qt::Horizontal</enum>
                     </property>

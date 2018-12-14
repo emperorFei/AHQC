@@ -29,5 +29,6 @@
         <file alias="refresh_normal">resource/icons/refresh_normal.png</file>
         <file alias="refresh_hover">resource/icons/refresh_hover.png</file>
         <file alias="qc">resource/icons/qc.png</file>
+        <file alias="setting">resource/icons/settingIcon.png</file>
     </qresource>
 </RCC>

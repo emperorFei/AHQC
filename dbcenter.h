@@ -1,4 +1,4 @@
-#ifndef DBCENTER_H
+﻿#ifndef DBCENTER_H
 #define DBCENTER_H
 
 #include <QObject>
@@ -11,7 +11,7 @@ class DBCenter : public QObject
     Q_OBJECT
 public:
     ~DBCenter();
-    enum AccountType{ROOT,ADMIN,QUERY,QIU};
+    enum AccountType{ROOT,ADMIN,QUERY,QIU,SETTING};
     static QSqlDatabase* getDBByAccountType(AccountType type);
     static QString cleanCreatedConns();
 private:

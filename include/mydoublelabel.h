@@ -5,7 +5,6 @@
 #include <QtUiPlugin/QDesignerCustomWidgetInterface>
 #include <QWidget>
 #include <QLabel>
-#include <QStyleOption>
 #include <QPair>
 #include <QPainter>
 #include <QDebug>
@@ -26,6 +25,7 @@ class  QDESIGNER_WIDGET_EXPORT MyDoubleLabel : public QWidget
     Q_ENUMS(Level)
     Q_PROPERTY(QString rightText READ getRightText WRITE setRightText)
     Q_PROPERTY(QString leftText READ getLeftText WRITE setLeftText)
+    Q_PROPERTY(bool checked READ getChecked WRITE setChecked)
     Q_PROPERTY(TextAlignment alignment READ getAlignment WRITE setAlignment)
     Q_PROPERTY(Level level READ getLevel WRITE setLevel)
 
@@ -53,6 +53,9 @@ public:
     void setDataName(const QString &value);
     const QFont & font() const;
     void setFont(const QFont &font);
+    bool getChecked() const;
+    void setChecked(bool value);
+
 protected:
     void paintEvent(QPaintEvent*);
 
@@ -62,7 +65,9 @@ public slots:
 private:
     QString dataName;
     TextAlignment alignment;
+
     Ui::MyDoubleLabel *ui;
+    bool checked;
     QLabel *left;
     QLabel *right;
     Level leval;

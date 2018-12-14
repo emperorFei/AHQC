@@ -187,6 +187,7 @@ void DateTimePageNumberWidget::updateDayWidget(){
         }
         dayLabels[i]->setSignLevel(signLevel);
     }
+
 }
 void DateTimePageNumberWidget::updateHourWidget(){
     if(range == Q_NULLPTR){
@@ -237,9 +238,11 @@ void DateTimePageNumberWidget::updateHourWidget(){
                 }
                 hourLabels[i]->setSignLevel(signLevel);
             }
-
         }
     }
+
+    dayWidget->style()->unpolish(dayWidget);
+    dayWidget->style()->polish(dayWidget);
 
 }
 

@@ -19,9 +19,12 @@ const QString FullWidegt::doubleLabelNames[] =
 };
 FullWidegt::FullWidegt(QWidget *parent) :
     QWidget(parent),
+    observeTime(QDate(1970,01,01),QTime(00,00)),
     ui(new Ui::FullWidegt)
 {
     ui->setupUi(this);
+    ui->CF_DL->hide();
+    ui->CF_label->hide();
 }
 FullWidegt::FullWidegt(const AZData &azData,QWidget *parent) :
     QWidget(parent),
@@ -35,10 +38,8 @@ FullWidegt::FullWidegt(const AZData &azData,QWidget *parent) :
     font.setPointSize(30);
     setDoubleLabelFont(font);
     this->setFont(font);
-
-
-//    this->setStyleSheet(styleSheet()+QString("\n font: '宋体',16pt"));
-
+    ui->CF_DL->hide();
+    ui->CF_label->hide();
 }
 
 FullWidegt::~FullWidegt()
@@ -71,11 +72,11 @@ void FullWidegt::initFromAZData(const AZData &azData)
                 break;
             case AHQC::DataLevel::CLASH :
                 level = MyDoubleLabel::Level::CLASH ;
-                qDebug() << observeTime.toString("yyyyMMddHH") << " " << doubleLabel->getDataName() << " CLASH.";
+                //qDebug() << observeTime.toString("yyyyMMddHH") << " " << doubleLabel->getDataName() << " CLASH.";
                 break;
             case AHQC::DataLevel::MISSING:
                 level = MyDoubleLabel::Level::MISSING;
-                qDebug() << observeTime.toString("yyyyMMddHH") << " " << doubleLabel->getDataName() << " MISSING.";
+                //qDebug() << observeTime.toString("yyyyMMddHH") << " " << doubleLabel->getDataName() << " MISSING.";
 
                 break;
             case AHQC::DataLevel::MISSINGZDATA :
@@ -94,8 +95,10 @@ void FullWidegt::initFromAZData(const AZData &azData)
         }
         doubleLabel->setProperty("level",level);
         doubleLabel->setLevel(level);
-
+        doubleLabel->style()->unpolish(doubleLabel);
+        doubleLabel->style()->polish(doubleLabel);
     }
+
 }
 
 const QFont &FullWidegt::doubleLabelfont() const{
@@ -118,80 +121,29 @@ QDateTime FullWidegt::getObserveTime() const
     return observeTime;
 }
 
+void FullWidegt::hideItems(const QList<QString> &itemNames){
+    for(const QString &itemName : itemNames){
+        QWidget *widget =  this->findChild<QWidget *>(itemName);
+        widget->hide();
+    }
+}
+void FullWidegt::setItemsChecked(const QList<QString> &itemNames){
+    for(const QString &itemName : itemNames){
+        MyDoubleLabel *dl =  this->findChild<MyDoubleLabel *>(itemName);
+        dl->setChecked(true);
+    }
+}
+void FullWidegt::showItems(const QList<QString> &itemNames){
+    for(const QString &itemName : itemNames){
+        QWidget *widget =  this->findChild<QWidget *>(itemName);
+        widget->show();
+    }
+}
+void FullWidegt::setItemsUnChecked(const QList<QString> &itemNames){
+    for(const QString &itemName : itemNames){
+        MyDoubleLabel *dl =  this->findChild<MyDoubleLabel *>(itemName);
+        dl->setChecked(false);
+    }
+}
 
-//void FullWidegt::setQCWarn(){
-//    this->setStyleSheet(styleSheet()+QString(
-//                            ".DoubleLabel{"
-//                                "background-color:rgb(59,110,158);"
-//                            "}"
-//                            ));
-//    for(const QString &dlName :doubleLabelNames){
-//        MyDoubleLabel * doubleLabel = this->findChild<MyDoubleLabel *>(dlName);
-//        MyDoubleLabel::Level level = doubleLabel->getLevel();
-//        switch(level){
-//        case MyDoubleLabel::Level::MISSING:
-//            doubleLabel->setStyleSheet(doubleLabel->styleSheet()+
-//                                       "#"+doubleLabel->objectName()+"{"
-//                                       "border-style:solid;"
-//                                       "border-width:2;"
-//                                       "border-color:red;"
-//                                       "border-radius:6;"
-//                                       "}");
-//            break;
-//        case MyDoubleLabel::Level::CLASH:
-//            doubleLabel->setStyleSheet(doubleLabel->styleSheet()+
-//                                       "#"+doubleLabel->objectName()+"{"
-//                                       "border-style:solid;"
-//                                       "border-width:2;"
-//                                       "border-color:orange;"
-//                                       "border-radius:6;"
-//                                       "}");
-//            break;
-//        case MyDoubleLabel::Level::MISSINGAMDATA:
-//            doubleLabel->setStyleSheet(doubleLabel->styleSheet()+
-//                                       "#"+doubleLabel->objectName()+"{"
-//                                       "border-style:solid;"
-//                                       "border-width:2;"
-//                                       "border-color:#0F0F0F;"
-//                                       "border-radius:6;"
-//                                       "}");
-//            break;
-//        case MyDoubleLabel::Level::MISSINGZDATA:
-//            doubleLabel->setStyleSheet(doubleLabel->styleSheet()+
-//                                       "#"+doubleLabel->objectName()+"{"
-//                                       "border-style:solid;"
-//                                       "border-width:2;"
-//                                       "border-color:#FF05FF;"
-//                                       "border-radius:6;"
-//                                       "}");
-//            break;
-//        case MyDoubleLabel::Level::ERROR:
-//            doubleLabel->setStyleSheet(doubleLabel->styleSheet()+
-//                                       "#"+doubleLabel->objectName()+"{"
-//                                       "border-style:solid;"
-//                                       "border-width:2;"
-//                                       "border-color:darkred;"
-//                                       "border-radius:6;"
-//                                       "}");
-//            break;
-//        case MyDoubleLabel::Level::SUSPECTED:
-//            doubleLabel->setStyleSheet(doubleLabel->styleSheet()+
-//                                       "#"+doubleLabel->objectName()+"{"
-//                                       "border-style:solid;"
-//                                       "border-width:2;"
-//                                       "border-color:yellow;"
-//                                       "border-radius:6;"
-//                                       "}");
-//            break;
-//        case MyDoubleLabel::Level::INFO:
-////            doubleLabel->setStyleSheet(doubleLabel->styleSheet()+
-////                                       "#"+doubleLabel->objectName()+"{"
-////                                       "border-style:solid;"
-////                                       "border-width:2;"
-////                                       "border-color:lightgrey;"
-////                                       "border-radius:6;"
-////                                       "}");
-//            break;
-//        }
-//    }
-//}
+

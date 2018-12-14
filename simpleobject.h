@@ -1,4 +1,4 @@
-#ifndef SIMPLEOBJECT_H
+﻿#ifndef SIMPLEOBJECT_H
 #define SIMPLEOBJECT_H
 #include "QString"
 #include "QDateTime"
@@ -12,7 +12,12 @@ struct  TimeRange
     QDateTime older;
     QDateTime later;
     timeRange_bound bound;
-    explicit TimeRange(QDateTime t1,QDateTime t2,timeRange_bound tr_bound) {
+    explicit TimeRange(){
+        older = QDateTime(QDate(1970,01,01),QTime(00,00));
+        later = QDateTime(QDate(1970,01,01),QTime(23,00));
+        bound = timeRange_bound::BEGINEND;
+    }
+    explicit TimeRange(const QDateTime &t1,QDateTime t2,timeRange_bound tr_bound) {
         bound = tr_bound;
         if(t1 > t2){
             older = t2;
